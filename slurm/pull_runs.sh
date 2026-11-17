@@ -6,10 +6,10 @@
 #   bash slurm/pull_runs.sh "product_hgp-625_* product_hgp-asym_* qecct_hgp-400_* crossqecct_hgp-400_* qecct_toric-L10_depolarizing_*"
 #
 # Set NIBI=user@host if your Nibi user name differs or the alliancecan.ca alias does not resolve
-# (alternatives: elabass@nibi.sharcnet.ca).
+# (alternatives: <user>@nibi.sharcnet.ca).
 cd "$(dirname "$0")/.." || exit 1
 set -f   # no shell globbing: patterns are rsync patterns, not local file names
-NIBI=${NIBI:-elabass@nibi.alliancecan.ca}   # source cluster (user@host); set NIBI=user@narval.alliancecan.ca etc.
+NIBI=${NIBI:-<user>@nibi.alliancecan.ca}   # source cluster (user@host); set NIBI=user@narval.alliancecan.ca etc.
 PAT=${1:?"patterns of run names under runs/, e.g. 'product_hgp-625_* qecct_hgp-400_*'"}
 mkdir -p runs results
 # result files of finished runs (small; needed by report.py on this cluster)

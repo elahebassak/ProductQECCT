@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --account=def-esousa
+#SBATCH --account=<your-allocation>
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=32G
 #SBATCH --time=24:00:00
 #SBATCH --job-name=cl_bp_hgp-400_independent_x
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
-#SBATCH --mail-user=e.bassak@mail.utoronto.ca
+#SBATCH --mail-user=<your-email>
 #SBATCH --mail-type=END,FAIL
 
 module load python/3.11

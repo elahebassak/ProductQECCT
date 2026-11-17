@@ -12,8 +12,8 @@ import os
 import textwrap
 
 # ----------------------------------------------------------------------------- CONFIG
-ACCOUNT = "def-esousa"
-MAIL = "e.bassak@mail.utoronto.ca"
+ACCOUNT = "<your-allocation>"
+MAIL = "<your-email>"
 PROJECT_DIR = "~/ProductQECCT"
 VENV = "~/pqecct_env"
 GRES_SMALL = "gpu:h100_3g.40gb:1"     # MIG slice: toric codes, hgp-400/625/asym for the product model

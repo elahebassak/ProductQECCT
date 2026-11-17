@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=def-esousa
+#SBATCH --account=<your-allocation>
 #SBATCH --gres=gpu:h100_3g.40gb:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
@@ -7,7 +7,7 @@
 #SBATCH --job-name=tr_crossqecct_toric-L4_independent_x
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
-#SBATCH --mail-user=e.bassak@mail.utoronto.ca
+#SBATCH --mail-user=<your-email>
 #SBATCH --mail-type=END,FAIL
 
 module load python/3.11

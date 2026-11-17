@@ -5,7 +5,7 @@
 # name, e.g. "bposd[ms1.0-serial]", so report.py lists them side by side.
 cd ~/ProductQECCT
 mkdir -p logs results slurm/jobs_classical
-ACCOUNT=def-esousa
+ACCOUNT=<your-allocation>
 CODES=${CODES:-"toric-L4 toric-L6 toric-L8 toric-L10 hgp-400 hgp-asym hgp-625"}
 for code in $CODES; do
   case $code in toric*) PD="0.05:0.2:18"; PI="0.01:0.2:18";; *) PD="0.01:0.10:18"; PI="0.01:0.10:18";; esac
