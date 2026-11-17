@@ -1,0 +1,221 @@
+{
+  "model": "product",
+  "code": "hgp-625",
+  "noise": "independent",
+  "err_types": "x",
+  "params": 1218536,
+  "n": 625,
+  "k": 25,
+  "results": {
+    "0.010000": {
+      "ler_x": 0.00102,
+      "ler_x_strict": 0.002094,
+      "synd_mismatch_x": 0.002006,
+      "ler": 0.00102,
+      "ler_strict": 0.002094,
+      "ber": 1.1008e-05,
+      "samples": 500000
+    },
+    "0.015294": {
+      "ler_x": 0.003846,
+      "ler_x_strict": 0.008236,
+      "synd_mismatch_x": 0.007862,
+      "ler": 0.003846,
+      "ler_strict": 0.008236,
+      "ber": 4.67136e-05,
+      "samples": 500000
+    },
+    "0.020588": {
+      "ler_x": 0.009712,
+      "ler_x_strict": 0.021822,
+      "synd_mismatch_x": 0.020872,
+      "ler": 0.009712,
+      "ler_strict": 0.021822,
+      "ber": 0.0001345536,
+      "samples": 500000
+    },
+    "0.025882": {
+      "ler_x": 0.01973,
+      "ler_x_strict": 0.04769,
+      "synd_mismatch_x": 0.045802,
+      "ler": 0.01973,
+      "ler_strict": 0.04769,
+      "ber": 0.000309776,
+      "samples": 500000
+    },
+    "0.031176": {
+      "ler_x": 0.037446,
+      "ler_x_strict": 0.091976,
+      "synd_mismatch_x": 0.088526,
+      "ler": 0.037446,
+      "ler_strict": 0.091976,
+      "ber": 0.0006467648,
+      "samples": 500000
+    },
+    "0.036471": {
+      "ler_x": 0.06739,
+      "ler_x_strict": 0.1616,
+      "synd_mismatch_x": 0.156328,
+      "ler": 0.06739,
+      "ler_strict": 0.1616,
+      "ber": 0.0012607648,
+      "samples": 500000
+    },
+    "0.041765": {
+      "ler_x": 0.113924,
+      "ler_x_strict": 0.260958,
+      "synd_mismatch_x": 0.253646,
+      "ler": 0.113924,
+      "ler_strict": 0.260958,
+      "ber": 0.002339984,
+      "samples": 500000
+    },
+    "0.047059": {
+      "ler_x": 0.184366,
+      "ler_x_strict": 0.386166,
+      "synd_mismatch_x": 0.37749,
+      "ler": 0.184366,
+      "ler_strict": 0.386166,
+      "ber": 0.00411792,
+      "samples": 500000
+    },
+    "0.052353": {
+      "ler_x": 0.285532,
+      "ler_x_strict": 0.530212,
+      "synd_mismatch_x": 0.52116,
+      "ler": 0.285532,
+      "ler_strict": 0.530212,
+      "ber": 0.0070386976,
+      "samples": 500000
+    },
+    "0.057647": {
+      "ler_x": 0.409608,
+      "ler_x_strict": 0.669598,
+      "synd_mismatch_x": 0.661258,
+      "ler": 0.409608,
+      "ler_strict": 0.669598,
+      "ber": 0.011376544,
+      "samples": 500000
+    },
+    "0.062941": {
+      "ler_x": 0.54713,
+      "ler_x_strict": 0.790602,
+      "synd_mismatch_x": 0.783918,
+      "ler": 0.54713,
+      "ler_strict": 0.790602,
+      "ber": 0.0175033312,
+      "samples": 500000
+    },
+    "0.068235": {
+      "ler_x": 0.681808,
+      "ler_x_strict": 0.88169,
+      "synd_mismatch_x": 0.876884,
+      "ler": 0.681808,
+      "ler_strict": 0.88169,
+      "ber": 0.0253781664,
+      "samples": 500000
+    },
+    "0.073529": {
+      "ler_x": 0.795696,
+      "ler_x_strict": 0.940404,
+      "synd_mismatch_x": 0.937388,
+      "ler": 0.795696,
+      "ler_strict": 0.940404,
+      "ber": 0.0350139904,
+      "samples": 500000
+    },
+    "0.078824": {
+      "ler_x": 0.879474,
+      "ler_x_strict": 0.972652,
+      "synd_mismatch_x": 0.971162,
+      "ler": 0.879474,
+      "ler_strict": 0.972652,
+      "ber": 0.045537024,
+      "samples": 500000
+    },
+    "0.084118": {
+      "ler_x": 0.935582,
+      "ler_x_strict": 0.988838,
+      "synd_mismatch_x": 0.98811,
+      "ler": 0.935582,
+      "ler_strict": 0.988838,
+      "ber": 0.0567310336,
+      "samples": 500000
+    },
+    "0.089412": {
+      "ler_x": 0.967738,
+      "ler_x_strict": 0.995682,
+      "synd_mismatch_x": 0.995366,
+      "ler": 0.967738,
+      "ler_strict": 0.995682,
+      "ber": 0.0676779584,
+      "samples": 500000
+    },
+    "0.094706": {
+      "ler_x": 0.985502,
+      "ler_x_strict": 0.998702,
+      "synd_mismatch_x": 0.99859,
+      "ler": 0.985502,
+      "ler_strict": 0.998702,
+      "ber": 0.07832816,
+      "samples": 500000
+    },
+    "0.100000": {
+      "ler_x": 0.993694,
+      "ler_x_strict": 0.999564,
+      "synd_mismatch_x": 0.999506,
+      "ler": 0.993694,
+      "ler_strict": 0.999564,
+      "ber": 0.0881740512,
+      "samples": 500000
+    }
+  },
+  "args": {
+    "model": "product",
+    "code": "hgp-625",
+    "noise": "independent",
+    "err_types": "x",
+    "out_root": "runs",
+    "run_name": null,
+    "seed": 42,
+    "gpus": "0",
+    "d_model": 128,
+    "h": 8,
+    "N_dec": 6,
+    "dropout": 0.0,
+    "d_g": 32,
+    "N_g": 1,
+    "no_share": false,
+    "no_out_mix": false,
+    "g_hidden_mult": 5,
+    "no_g": 0,
+    "no_mask": 0,
+    "epochs": 300,
+    "batches_per_epoch": 1000,
+    "batch_size": 128,
+    "lr": 0.0005,
+    "lr_min": 1e-06,
+    "grad_clip": 1.0,
+    "weight_decay": 0.0,
+    "accum_steps": 1,
+    "warmup_steps": 1000,
+    "max_skipped": 50,
+    "amp": false,
+    "lam_ber": 0.5,
+    "lam_ler": 1.0,
+    "lam_g": 0.5,
+    "ler_warmup_epochs": 0,
+    "p_test": "0.01:0.10:9",
+    "p_train": null,
+    "p_sampling": "discrete",
+    "test_every": 20,
+    "test_samples": 20000,
+    "final_samples": 500000,
+    "final_p_test": "0.01:0.10:18",
+    "test_batch_size": 512,
+    "resume": "auto",
+    "max_hours": 22.0,
+    "final_on_timeout": 0,
+    "workers": 0
+  }
+}

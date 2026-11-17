@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the paper below."
+title: "ProductQECCT: Product-Structured Transformer Decoding of Hypergraph-Product Quantum Codes"
+type: software
+authors:
+  - family-names: Bassak
+    given-names: Elaheh
+    affiliation: "The Edward S. Rogers Sr. Department of Electrical and Computer Engineering, University of Toronto"
+  - family-names: Sousa
+    given-names: Elvino S.
+    affiliation: "The Edward S. Rogers Sr. Department of Electrical and Computer Engineering, University of Toronto"
+repository-code: "https://github.com/elahebassak/ProductQECCT"
+license: MIT
+preferred-citation:
+  type: article
+  title: "ProductQECCT: Product-Structured Transformer Decoding of Hypergraph-Product Quantum Codes"
+  authors:
+    - family-names: Bassak
+      given-names: Elaheh
+    - family-names: Sousa
+      given-names: Elvino S.
+  notes: "manuscript under review"
+  year: 2026

@@ -1,0 +1,83 @@
+{
+  "0.010000": {
+    "ler_x": 0.0009,
+    "ler_x_strict": 0.27325,
+    "synd_mismatch_x": 0.27325,
+    "ler": 0.0009,
+    "ler_strict": 0.27325,
+    "ber": 0.0012661,
+    "samples": 20000
+  },
+  "0.021250": {
+    "ler_x": 0.0155,
+    "ler_x_strict": 0.5147,
+    "synd_mismatch_x": 0.5145,
+    "ler": 0.0155,
+    "ler_strict": 0.5147,
+    "ber": 0.002963,
+    "samples": 20000
+  },
+  "0.032500": {
+    "ler_x": 0.08705,
+    "ler_x_strict": 0.7225,
+    "synd_mismatch_x": 0.72205,
+    "ler": 0.08705,
+    "ler_strict": 0.7225,
+    "ber": 0.0058337,
+    "samples": 20000
+  },
+  "0.043750": {
+    "ler_x": 0.27005,
+    "ler_x_strict": 0.86965,
+    "synd_mismatch_x": 0.86925,
+    "ler": 0.27005,
+    "ler_strict": 0.86965,
+    "ber": 0.0116953,
+    "samples": 20000
+  },
+  "0.055000": {
+    "ler_x": 0.53615,
+    "ler_x_strict": 0.96085,
+    "synd_mismatch_x": 0.96055,
+    "ler": 0.53615,
+    "ler_strict": 0.96085,
+    "ber": 0.0222415,
+    "samples": 20000
+  },
+  "0.066250": {
+    "ler_x": 0.784,
+    "ler_x_strict": 0.99055,
+    "synd_mismatch_x": 0.9905,
+    "ler": 0.784,
+    "ler_strict": 0.99055,
+    "ber": 0.0383137,
+    "samples": 20000
+  },
+  "0.077500": {
+    "ler_x": 0.9229,
+    "ler_x_strict": 0.99905,
+    "synd_mismatch_x": 0.99905,
+    "ler": 0.9229,
+    "ler_strict": 0.99905,
+    "ber": 0.0569896,
+    "samples": 20000
+  },
+  "0.088750": {
+    "ler_x": 0.9769,
+    "ler_x_strict": 0.99985,
+    "synd_mismatch_x": 0.99985,
+    "ler": 0.9769,
+    "ler_strict": 0.99985,
+    "ber": 0.0760353,
+    "samples": 20000
+  },
+  "0.100000": {
+    "ler_x": 0.99505,
+    "ler_x_strict": 0.99995,
+    "synd_mismatch_x": 0.99995,
+    "ler": 0.99505,
+    "ler_strict": 0.99995,
+    "ber": 0.093749,
+    "samples": 20000
+  }
+}

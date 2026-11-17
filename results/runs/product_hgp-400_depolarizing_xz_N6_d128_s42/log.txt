@@ -1,0 +1,592 @@
+2026-10-14 12:07:36,141 args: {"model": "product", "code": "hgp-400", "noise": "depolarizing", "err_types": "xz", "out_root": "runs", "run_name": null, "seed": 42, "gpus": "0", "d_model": 128, "h": 8, "N_dec": 6, "dropout": 0.0, "d_g": 32, "N_g": 1, "no_share": false, "no_out_mix": false, "g_hidden_mult": 5, "no_g": 0, "no_mask": 0, "epochs": 300, "batches_per_epoch": 1000, "batch_size": 128, "lr": 0.0005, "lr_min": 1e-06, "grad_clip": 1.0, "weight_decay": 0.0, "warmup_steps": 1000, "max_skipped": 50, "amp": false, "lam_ber": 0.5, "lam_ler": 1.0, "lam_g": 0.5, "ler_warmup_epochs": 0, "p_test": "0.01:0.10:9", "p_train": null, "p_sampling": "discrete", "test_every": 20, "test_samples": 20000, "final_samples": 500000, "final_p_test": "0.01:0.10:18", "test_batch_size": 512, "resume": "auto", "max_hours": 22.0, "final_on_timeout": 0, "workers": 0}
+2026-10-14 12:07:36,953 CSSCode(hgp-400: [[400,16]], rx=192, rz=192, grid rows=16+12 cols=16+12), d <= min(8,8) (randomized upper bound)
+2026-10-14 12:07:37,267 model=product params=1,214,532 device=cuda
+2026-10-14 12:07:43,590 p_test=['0.0100', '0.0213', '0.0325', '0.0438', '0.0550', '0.0663', '0.0775', '0.0888', '0.1000']  p_train=['0.0100', '0.0213', '0.0325', '0.0438', '0.0550', '0.0663', '0.0775', '0.0888', '0.1000'] (discrete)
+2026-10-14 12:11:17,601 Epoch 1/300 lr=5.00e-04 loss=3.3062e-01 (ber 5.190e-02 ler 2.327e-01 g 1.439e-01) train LER=5.382e-01 LER_strict=7.210e-01 BER=1.516e-02 time=214.0s
+2026-10-14 12:11:17,812 best model saved
+2026-10-14 12:11:28,908 Test[ep1] p=0.0100: LER=2.800e-03 LER_strict=7.350e-03 BER=2.025e-05 (n=20000)
+2026-10-14 12:11:40,001 Test[ep1] p=0.0213: LER=2.165e-02 LER_strict=5.825e-02 BER=1.694e-04 (n=20000)
+2026-10-14 12:11:51,094 Test[ep1] p=0.0325: LER=6.780e-02 LER_strict=1.861e-01 BER=6.005e-04 (n=20000)
+2026-10-14 12:12:02,189 Test[ep1] p=0.0438: LER=1.659e-01 LER_strict=4.061e-01 BER=1.662e-03 (n=20000)
+2026-10-14 12:12:13,283 Test[ep1] p=0.0550: LER=3.106e-01 LER_strict=6.454e-01 BER=3.800e-03 (n=20000)
+2026-10-14 12:12:24,376 Test[ep1] p=0.0663: LER=5.002e-01 LER_strict=8.319e-01 BER=7.611e-03 (n=20000)
+2026-10-14 12:12:35,469 Test[ep1] p=0.0775: LER=6.906e-01 LER_strict=9.428e-01 BER=1.373e-02 (n=20000)
+2026-10-14 12:12:46,566 Test[ep1] p=0.0888: LER=8.340e-01 LER_strict=9.846e-01 BER=2.247e-02 (n=20000)
+2026-10-14 12:12:57,664 Test[ep1] p=0.1000: LER=9.238e-01 LER_strict=9.967e-01 BER=3.333e-02 (n=20000)
+2026-10-14 12:12:57,665 Test[ep1] time 99.9s
+2026-10-14 12:16:32,221 Epoch 2/300 lr=5.00e-04 loss=1.7058e-01 (ber 2.337e-02 ler 1.262e-01 g 6.531e-02) train LER=3.519e-01 LER_strict=5.125e-01 BER=7.665e-03 time=214.5s
+2026-10-14 12:16:32,407 best model saved
+2026-10-14 12:20:06,744 Epoch 3/300 lr=5.00e-04 loss=1.4722e-01 (ber 1.960e-02 ler 1.065e-01 g 6.179e-02) train LER=3.072e-01 LER_strict=4.630e-01 BER=6.507e-03 time=214.3s
+2026-10-14 12:20:06,959 best model saved
+2026-10-14 12:23:41,254 Epoch 4/300 lr=5.00e-04 loss=1.3607e-01 (ber 1.789e-02 ler 9.720e-02 g 5.984e-02) train LER=2.854e-01 LER_strict=4.410e-01 BER=5.963e-03 time=214.3s
+2026-10-14 12:23:41,473 best model saved
+2026-10-14 12:27:15,739 Epoch 5/300 lr=5.00e-04 loss=1.3148e-01 (ber 1.719e-02 ler 9.324e-02 g 5.930e-02) train LER=2.771e-01 LER_strict=4.317e-01 BER=5.765e-03 time=214.2s
+2026-10-14 12:27:15,906 best model saved
+2026-10-14 12:30:51,327 Epoch 6/300 lr=5.00e-04 loss=1.2576e-01 (ber 1.651e-02 ler 8.840e-02 g 5.822e-02) train LER=2.659e-01 LER_strict=4.211e-01 BER=5.562e-03 time=215.4s
+2026-10-14 12:30:51,635 best model saved
+2026-10-14 12:34:27,312 Epoch 7/300 lr=5.00e-04 loss=1.2159e-01 (ber 1.598e-02 ler 8.486e-02 g 5.748e-02) train LER=2.555e-01 LER_strict=4.122e-01 BER=5.375e-03 time=215.7s
+2026-10-14 12:34:27,476 best model saved
+2026-10-14 12:38:02,972 Epoch 8/300 lr=4.99e-04 loss=1.1985e-01 (ber 1.567e-02 ler 8.338e-02 g 5.727e-02) train LER=2.520e-01 LER_strict=4.102e-01 BER=5.294e-03 time=215.5s
+2026-10-14 12:38:03,150 best model saved
+2026-10-14 12:41:38,413 Epoch 9/300 lr=4.99e-04 loss=1.1595e-01 (ber 1.510e-02 ler 8.022e-02 g 5.637e-02) train LER=2.454e-01 LER_strict=4.003e-01 BER=5.119e-03 time=215.0s
+2026-10-14 12:41:38,717 best model saved
+2026-10-14 12:45:13,876 Epoch 10/300 lr=4.99e-04 loss=1.1301e-01 (ber 1.459e-02 ler 7.796e-02 g 5.552e-02) train LER=2.399e-01 LER_strict=3.936e-01 BER=4.951e-03 time=215.1s
+2026-10-14 12:45:14,217 best model saved
+2026-10-14 12:48:49,845 Epoch 11/300 lr=4.99e-04 loss=1.1009e-01 (ber 1.439e-02 ler 7.536e-02 g 5.507e-02) train LER=2.325e-01 LER_strict=3.867e-01 BER=4.888e-03 time=215.6s
+2026-10-14 12:48:50,018 best model saved
+2026-10-14 12:52:26,643 Epoch 12/300 lr=4.98e-04 loss=1.0953e-01 (ber 1.434e-02 ler 7.475e-02 g 5.524e-02) train LER=2.321e-01 LER_strict=3.871e-01 BER=4.881e-03 time=216.6s
+2026-10-14 12:52:26,835 best model saved
+2026-10-14 12:56:02,074 Epoch 13/300 lr=4.98e-04 loss=1.0826e-01 (ber 1.407e-02 ler 7.374e-02 g 5.496e-02) train LER=2.301e-01 LER_strict=3.842e-01 BER=4.797e-03 time=215.2s
+2026-10-14 12:56:02,238 best model saved
+2026-10-14 12:59:37,072 Epoch 14/300 lr=4.98e-04 loss=1.0616e-01 (ber 1.383e-02 ler 7.206e-02 g 5.438e-02) train LER=2.240e-01 LER_strict=3.799e-01 BER=4.711e-03 time=214.8s
+2026-10-14 12:59:37,244 best model saved
+2026-10-14 13:03:12,795 Epoch 15/300 lr=4.97e-04 loss=1.0451e-01 (ber 1.354e-02 ler 7.064e-02 g 5.420e-02) train LER=2.225e-01 LER_strict=3.747e-01 BER=4.606e-03 time=215.5s
+2026-10-14 13:03:13,007 best model saved
+2026-10-14 13:06:47,995 Epoch 16/300 lr=4.97e-04 loss=1.0387e-01 (ber 1.343e-02 ler 7.012e-02 g 5.407e-02) train LER=2.193e-01 LER_strict=3.730e-01 BER=4.582e-03 time=215.0s
+2026-10-14 13:06:48,159 best model saved
+2026-10-14 13:10:21,956 Epoch 17/300 lr=4.97e-04 loss=1.0331e-01 (ber 1.331e-02 ler 6.959e-02 g 5.413e-02) train LER=2.195e-01 LER_strict=3.720e-01 BER=4.552e-03 time=213.8s
+2026-10-14 13:10:22,128 best model saved
+2026-10-14 13:13:57,663 Epoch 18/300 lr=4.96e-04 loss=1.0138e-01 (ber 1.305e-02 ler 6.802e-02 g 5.366e-02) train LER=2.133e-01 LER_strict=3.651e-01 BER=4.477e-03 time=215.5s
+2026-10-14 13:13:57,861 best model saved
+2026-10-14 13:17:33,191 Epoch 19/300 lr=4.96e-04 loss=1.0086e-01 (ber 1.300e-02 ler 6.749e-02 g 5.373e-02) train LER=2.130e-01 LER_strict=3.660e-01 BER=4.451e-03 time=215.3s
+2026-10-14 13:17:33,383 best model saved
+2026-10-14 13:21:08,552 Epoch 20/300 lr=4.95e-04 loss=9.9376e-02 (ber 1.274e-02 ler 6.620e-02 g 5.361e-02) train LER=2.103e-01 LER_strict=3.613e-01 BER=4.383e-03 time=215.2s
+2026-10-14 13:21:08,776 best model saved
+2026-10-14 13:21:19,869 Test[ep20] p=0.0100: LER=2.000e-04 LER_strict=1.500e-03 BER=3.250e-06 (n=20000)
+2026-10-14 13:21:30,965 Test[ep20] p=0.0213: LER=2.500e-03 LER_strict=1.325e-02 BER=3.812e-05 (n=20000)
+2026-10-14 13:21:42,061 Test[ep20] p=0.0325: LER=1.075e-02 LER_strict=4.730e-02 BER=1.596e-04 (n=20000)
+2026-10-14 13:21:53,156 Test[ep20] p=0.0438: LER=3.490e-02 LER_strict=1.170e-01 BER=4.514e-04 (n=20000)
+2026-10-14 13:22:04,250 Test[ep20] p=0.0550: LER=8.670e-02 LER_strict=2.430e-01 BER=1.136e-03 (n=20000)
+2026-10-14 13:22:15,345 Test[ep20] p=0.0663: LER=1.802e-01 LER_strict=4.220e-01 BER=2.563e-03 (n=20000)
+2026-10-14 13:22:26,439 Test[ep20] p=0.0775: LER=3.301e-01 LER_strict=6.261e-01 BER=5.341e-03 (n=20000)
+2026-10-14 13:22:37,529 Test[ep20] p=0.0888: LER=5.176e-01 LER_strict=8.041e-01 BER=1.033e-02 (n=20000)
+2026-10-14 13:22:48,619 Test[ep20] p=0.1000: LER=7.007e-01 LER_strict=9.163e-01 BER=1.831e-02 (n=20000)
+2026-10-14 13:22:48,620 Test[ep20] time 99.8s
+2026-10-14 13:26:22,463 Epoch 21/300 lr=4.95e-04 loss=9.8272e-02 (ber 1.267e-02 ler 6.535e-02 g 5.317e-02) train LER=2.069e-01 LER_strict=3.573e-01 BER=4.352e-03 time=213.8s
+2026-10-14 13:26:22,657 best model saved
+2026-10-14 13:29:58,095 Epoch 22/300 lr=4.94e-04 loss=9.7870e-02 (ber 1.260e-02 ler 6.494e-02 g 5.325e-02) train LER=2.062e-01 LER_strict=3.558e-01 BER=4.331e-03 time=215.4s
+2026-10-14 13:29:58,266 best model saved
+2026-10-14 13:33:33,812 Epoch 23/300 lr=4.93e-04 loss=9.7407e-02 (ber 1.247e-02 ler 6.449e-02 g 5.336e-02) train LER=2.043e-01 LER_strict=3.556e-01 BER=4.287e-03 time=215.5s
+2026-10-14 13:33:33,965 best model saved
+2026-10-14 13:37:08,571 Epoch 24/300 lr=4.93e-04 loss=9.6373e-02 (ber 1.237e-02 ler 6.361e-02 g 5.316e-02) train LER=2.025e-01 LER_strict=3.520e-01 BER=4.242e-03 time=214.5s
+2026-10-14 13:37:08,742 best model saved
+2026-10-14 13:40:43,189 Epoch 25/300 lr=4.92e-04 loss=9.5940e-02 (ber 1.221e-02 ler 6.330e-02 g 5.307e-02) train LER=2.009e-01 LER_strict=3.512e-01 BER=4.204e-03 time=214.4s
+2026-10-14 13:40:43,309 best model saved
+2026-10-14 13:44:17,643 Epoch 26/300 lr=4.91e-04 loss=9.5643e-02 (ber 1.224e-02 ler 6.284e-02 g 5.338e-02) train LER=1.999e-01 LER_strict=3.515e-01 BER=4.216e-03 time=214.3s
+2026-10-14 13:44:17,778 best model saved
+2026-10-14 13:47:52,360 Epoch 27/300 lr=4.91e-04 loss=9.4686e-02 (ber 1.214e-02 ler 6.203e-02 g 5.317e-02) train LER=1.974e-01 LER_strict=3.503e-01 BER=4.162e-03 time=214.6s
+2026-10-14 13:47:52,498 best model saved
+2026-10-14 13:51:28,044 Epoch 28/300 lr=4.90e-04 loss=9.4679e-02 (ber 1.211e-02 ler 6.199e-02 g 5.326e-02) train LER=1.962e-01 LER_strict=3.475e-01 BER=4.165e-03 time=215.5s
+2026-10-14 13:51:28,190 best model saved
+2026-10-14 13:55:03,810 Epoch 29/300 lr=4.89e-04 loss=9.3124e-02 (ber 1.191e-02 ler 6.071e-02 g 5.291e-02) train LER=1.932e-01 LER_strict=3.418e-01 BER=4.093e-03 time=215.6s
+2026-10-14 13:55:03,993 best model saved
+2026-10-14 13:58:38,777 Epoch 30/300 lr=4.89e-04 loss=9.2981e-02 (ber 1.186e-02 ler 6.059e-02 g 5.292e-02) train LER=1.948e-01 LER_strict=3.448e-01 BER=4.095e-03 time=214.8s
+2026-10-14 13:58:38,943 best model saved
+2026-10-14 14:02:13,914 Epoch 31/300 lr=4.88e-04 loss=9.3303e-02 (ber 1.191e-02 ler 6.074e-02 g 5.322e-02) train LER=1.935e-01 LER_strict=3.435e-01 BER=4.113e-03 time=215.0s
+2026-10-14 14:05:49,231 Epoch 32/300 lr=4.87e-04 loss=9.1729e-02 (ber 1.166e-02 ler 5.949e-02 g 5.281e-02) train LER=1.913e-01 LER_strict=3.402e-01 BER=4.025e-03 time=215.2s
+2026-10-14 14:05:49,407 best model saved
+2026-10-14 14:09:23,233 Epoch 33/300 lr=4.86e-04 loss=9.1995e-02 (ber 1.173e-02 ler 5.954e-02 g 5.318e-02) train LER=1.913e-01 LER_strict=3.399e-01 BER=4.051e-03 time=213.8s
+2026-10-14 14:12:57,109 Epoch 34/300 lr=4.85e-04 loss=8.9967e-02 (ber 1.145e-02 ler 5.797e-02 g 5.255e-02) train LER=1.874e-01 LER_strict=3.375e-01 BER=3.954e-03 time=213.8s
+2026-10-14 14:12:57,267 best model saved
+2026-10-14 14:16:31,303 Epoch 35/300 lr=4.84e-04 loss=9.0694e-02 (ber 1.144e-02 ler 5.858e-02 g 5.279e-02) train LER=1.864e-01 LER_strict=3.354e-01 BER=3.950e-03 time=214.0s
+2026-10-14 14:20:06,048 Epoch 36/300 lr=4.83e-04 loss=9.0002e-02 (ber 1.145e-02 ler 5.793e-02 g 5.269e-02) train LER=1.859e-01 LER_strict=3.360e-01 BER=3.965e-03 time=214.7s
+2026-10-14 14:23:42,146 Epoch 37/300 lr=4.82e-04 loss=8.9615e-02 (ber 1.136e-02 ler 5.760e-02 g 5.267e-02) train LER=1.850e-01 LER_strict=3.345e-01 BER=3.925e-03 time=216.0s
+2026-10-14 14:23:42,295 best model saved
+2026-10-14 14:27:18,307 Epoch 38/300 lr=4.82e-04 loss=8.9693e-02 (ber 1.142e-02 ler 5.757e-02 g 5.282e-02) train LER=1.850e-01 LER_strict=3.356e-01 BER=3.946e-03 time=216.0s
+2026-10-14 14:30:54,363 Epoch 39/300 lr=4.81e-04 loss=8.7958e-02 (ber 1.116e-02 ler 5.618e-02 g 5.239e-02) train LER=1.820e-01 LER_strict=3.309e-01 BER=3.857e-03 time=215.9s
+2026-10-14 14:30:54,533 best model saved
+2026-10-14 14:34:29,931 Epoch 40/300 lr=4.79e-04 loss=8.8734e-02 (ber 1.119e-02 ler 5.671e-02 g 5.286e-02) train LER=1.831e-01 LER_strict=3.317e-01 BER=3.867e-03 time=215.4s
+2026-10-14 14:34:41,102 Test[ep40] p=0.0100: LER=1.000e-04 LER_strict=1.300e-03 BER=2.563e-06 (n=20000)
+2026-10-14 14:34:52,203 Test[ep40] p=0.0213: LER=1.750e-03 LER_strict=1.165e-02 BER=3.281e-05 (n=20000)
+2026-10-14 14:35:03,305 Test[ep40] p=0.0325: LER=7.750e-03 LER_strict=3.985e-02 BER=1.373e-04 (n=20000)
+2026-10-14 14:35:14,406 Test[ep40] p=0.0438: LER=2.290e-02 LER_strict=1.003e-01 BER=3.811e-04 (n=20000)
+2026-10-14 14:35:25,506 Test[ep40] p=0.0550: LER=6.275e-02 LER_strict=2.162e-01 BER=9.825e-04 (n=20000)
+2026-10-14 14:35:36,607 Test[ep40] p=0.0663: LER=1.403e-01 LER_strict=3.789e-01 BER=2.211e-03 (n=20000)
+2026-10-14 14:35:47,706 Test[ep40] p=0.0775: LER=2.762e-01 LER_strict=5.715e-01 BER=4.614e-03 (n=20000)
+2026-10-14 14:35:58,806 Test[ep40] p=0.0888: LER=4.620e-01 LER_strict=7.666e-01 BER=9.233e-03 (n=20000)
+2026-10-14 14:36:09,907 Test[ep40] p=0.1000: LER=6.639e-01 LER_strict=8.938e-01 BER=1.690e-02 (n=20000)
+2026-10-14 14:36:09,908 Test[ep40] time 99.9s
+2026-10-14 14:39:45,781 Epoch 41/300 lr=4.78e-04 loss=8.8609e-02 (ber 1.123e-02 ler 5.668e-02 g 5.263e-02) train LER=1.816e-01 LER_strict=3.300e-01 BER=3.887e-03 time=215.8s
+2026-10-14 14:43:21,650 Epoch 42/300 lr=4.77e-04 loss=8.8475e-02 (ber 1.124e-02 ler 5.647e-02 g 5.278e-02) train LER=1.818e-01 LER_strict=3.313e-01 BER=3.893e-03 time=215.8s
+2026-10-14 14:46:57,652 Epoch 43/300 lr=4.76e-04 loss=8.7874e-02 (ber 1.113e-02 ler 5.593e-02 g 5.276e-02) train LER=1.787e-01 LER_strict=3.286e-01 BER=3.850e-03 time=215.9s
+2026-10-14 14:46:57,833 best model saved
+2026-10-14 14:50:33,939 Epoch 44/300 lr=4.75e-04 loss=8.6372e-02 (ber 1.089e-02 ler 5.476e-02 g 5.233e-02) train LER=1.775e-01 LER_strict=3.244e-01 BER=3.766e-03 time=216.1s
+2026-10-14 14:50:34,127 best model saved
+2026-10-14 14:54:09,744 Epoch 45/300 lr=4.74e-04 loss=8.6693e-02 (ber 1.090e-02 ler 5.509e-02 g 5.230e-02) train LER=1.777e-01 LER_strict=3.244e-01 BER=3.769e-03 time=215.6s
+2026-10-14 14:57:45,470 Epoch 46/300 lr=4.73e-04 loss=8.6416e-02 (ber 1.098e-02 ler 5.458e-02 g 5.268e-02) train LER=1.758e-01 LER_strict=3.252e-01 BER=3.798e-03 time=215.6s
+2026-10-14 15:01:20,762 Epoch 47/300 lr=4.72e-04 loss=8.6093e-02 (ber 1.087e-02 ler 5.436e-02 g 5.260e-02) train LER=1.755e-01 LER_strict=3.269e-01 BER=3.768e-03 time=215.2s
+2026-10-14 15:01:20,925 best model saved
+2026-10-14 15:04:55,788 Epoch 48/300 lr=4.70e-04 loss=8.6642e-02 (ber 1.091e-02 ler 5.482e-02 g 5.273e-02) train LER=1.759e-01 LER_strict=3.248e-01 BER=3.782e-03 time=214.9s
+2026-10-14 15:08:30,754 Epoch 49/300 lr=4.69e-04 loss=8.4331e-02 (ber 1.066e-02 ler 5.300e-02 g 5.199e-02) train LER=1.710e-01 LER_strict=3.210e-01 BER=3.695e-03 time=214.9s
+2026-10-14 15:08:30,935 best model saved
+2026-10-14 15:12:06,101 Epoch 50/300 lr=4.68e-04 loss=8.5001e-02 (ber 1.068e-02 ler 5.344e-02 g 5.244e-02) train LER=1.725e-01 LER_strict=3.194e-01 BER=3.716e-03 time=215.2s
+2026-10-14 15:15:42,211 Epoch 51/300 lr=4.67e-04 loss=8.4503e-02 (ber 1.067e-02 ler 5.301e-02 g 5.231e-02) train LER=1.717e-01 LER_strict=3.200e-01 BER=3.696e-03 time=216.0s
+2026-10-14 15:19:18,100 Epoch 52/300 lr=4.65e-04 loss=8.5048e-02 (ber 1.078e-02 ler 5.339e-02 g 5.254e-02) train LER=1.714e-01 LER_strict=3.193e-01 BER=3.750e-03 time=215.8s
+2026-10-14 15:22:54,012 Epoch 53/300 lr=4.64e-04 loss=8.3865e-02 (ber 1.045e-02 ler 5.251e-02 g 5.226e-02) train LER=1.705e-01 LER_strict=3.187e-01 BER=3.623e-03 time=215.8s
+2026-10-14 15:22:54,327 best model saved
+2026-10-14 15:26:30,044 Epoch 54/300 lr=4.63e-04 loss=8.3609e-02 (ber 1.052e-02 ler 5.226e-02 g 5.218e-02) train LER=1.695e-01 LER_strict=3.171e-01 BER=3.646e-03 time=215.7s
+2026-10-14 15:26:30,234 best model saved
+2026-10-14 15:30:05,184 Epoch 55/300 lr=4.61e-04 loss=8.3547e-02 (ber 1.053e-02 ler 5.206e-02 g 5.245e-02) train LER=1.691e-01 LER_strict=3.182e-01 BER=3.646e-03 time=214.9s
+2026-10-14 15:30:05,425 best model saved
+2026-10-14 15:33:40,304 Epoch 56/300 lr=4.60e-04 loss=8.3801e-02 (ber 1.050e-02 ler 5.244e-02 g 5.222e-02) train LER=1.683e-01 LER_strict=3.155e-01 BER=3.657e-03 time=214.9s
+2026-10-14 15:37:15,081 Epoch 57/300 lr=4.58e-04 loss=8.2861e-02 (ber 1.040e-02 ler 5.166e-02 g 5.200e-02) train LER=1.680e-01 LER_strict=3.138e-01 BER=3.614e-03 time=214.7s
+2026-10-14 15:37:15,219 best model saved
+2026-10-14 15:40:49,861 Epoch 58/300 lr=4.57e-04 loss=8.1865e-02 (ber 1.026e-02 ler 5.066e-02 g 5.215e-02) train LER=1.654e-01 LER_strict=3.124e-01 BER=3.564e-03 time=214.6s
+2026-10-14 15:40:50,022 best model saved
+2026-10-14 15:44:24,663 Epoch 59/300 lr=4.55e-04 loss=8.2728e-02 (ber 1.038e-02 ler 5.141e-02 g 5.225e-02) train LER=1.674e-01 LER_strict=3.148e-01 BER=3.612e-03 time=214.6s
+2026-10-14 15:47:59,379 Epoch 60/300 lr=4.54e-04 loss=8.2058e-02 (ber 1.028e-02 ler 5.073e-02 g 5.236e-02) train LER=1.663e-01 LER_strict=3.136e-01 BER=3.564e-03 time=214.6s
+2026-10-14 15:48:10,542 Test[ep60] p=0.0100: LER=0.000e+00 LER_strict=8.500e-04 BER=1.875e-06 (n=20000)
+2026-10-14 15:48:21,637 Test[ep60] p=0.0213: LER=1.050e-03 LER_strict=8.800e-03 BER=2.700e-05 (n=20000)
+2026-10-14 15:48:32,730 Test[ep60] p=0.0325: LER=6.050e-03 LER_strict=3.235e-02 BER=1.029e-04 (n=20000)
+2026-10-14 15:48:43,824 Test[ep60] p=0.0438: LER=1.945e-02 LER_strict=9.005e-02 BER=3.305e-04 (n=20000)
+2026-10-14 15:48:54,918 Test[ep60] p=0.0550: LER=5.060e-02 LER_strict=1.898e-01 BER=8.132e-04 (n=20000)
+2026-10-14 15:49:06,011 Test[ep60] p=0.0663: LER=1.200e-01 LER_strict=3.513e-01 BER=1.907e-03 (n=20000)
+2026-10-14 15:49:17,104 Test[ep60] p=0.0775: LER=2.469e-01 LER_strict=5.503e-01 BER=4.174e-03 (n=20000)
+2026-10-14 15:49:28,196 Test[ep60] p=0.0888: LER=4.217e-01 LER_strict=7.406e-01 BER=8.629e-03 (n=20000)
+2026-10-14 15:49:39,289 Test[ep60] p=0.1000: LER=6.179e-01 LER_strict=8.790e-01 BER=1.587e-02 (n=20000)
+2026-10-14 15:49:39,290 Test[ep60] time 99.8s
+2026-10-14 15:53:13,970 Epoch 61/300 lr=4.52e-04 loss=8.2456e-02 (ber 1.031e-02 ler 5.117e-02 g 5.225e-02) train LER=1.664e-01 LER_strict=3.153e-01 BER=3.582e-03 time=214.6s
+2026-10-14 15:56:48,679 Epoch 62/300 lr=4.51e-04 loss=8.1803e-02 (ber 1.024e-02 ler 5.060e-02 g 5.217e-02) train LER=1.640e-01 LER_strict=3.125e-01 BER=3.558e-03 time=214.6s
+2026-10-14 15:56:48,867 best model saved
+2026-10-14 16:00:23,544 Epoch 63/300 lr=4.49e-04 loss=8.1894e-02 (ber 1.025e-02 ler 5.065e-02 g 5.224e-02) train LER=1.639e-01 LER_strict=3.113e-01 BER=3.564e-03 time=214.7s
+2026-10-14 16:03:58,261 Epoch 64/300 lr=4.48e-04 loss=8.2460e-02 (ber 1.031e-02 ler 5.111e-02 g 5.239e-02) train LER=1.648e-01 LER_strict=3.112e-01 BER=3.587e-03 time=214.6s
+2026-10-14 16:07:33,092 Epoch 65/300 lr=4.46e-04 loss=8.0527e-02 (ber 1.002e-02 ler 4.960e-02 g 5.183e-02) train LER=1.618e-01 LER_strict=3.086e-01 BER=3.484e-03 time=214.7s
+2026-10-14 16:07:33,251 best model saved
+2026-10-14 16:11:07,951 Epoch 66/300 lr=4.44e-04 loss=8.0545e-02 (ber 1.010e-02 ler 4.954e-02 g 5.191e-02) train LER=1.602e-01 LER_strict=3.052e-01 BER=3.515e-03 time=214.7s
+2026-10-14 16:14:42,874 Epoch 67/300 lr=4.43e-04 loss=8.1451e-02 (ber 1.021e-02 ler 5.012e-02 g 5.246e-02) train LER=1.636e-01 LER_strict=3.108e-01 BER=3.548e-03 time=214.7s
+2026-10-14 16:18:17,674 Epoch 68/300 lr=4.41e-04 loss=8.0168e-02 (ber 1.002e-02 ler 4.911e-02 g 5.209e-02) train LER=1.594e-01 LER_strict=3.072e-01 BER=3.475e-03 time=214.7s
+2026-10-14 16:18:17,842 best model saved
+2026-10-14 16:21:52,607 Epoch 69/300 lr=4.39e-04 loss=8.0280e-02 (ber 1.001e-02 ler 4.924e-02 g 5.208e-02) train LER=1.599e-01 LER_strict=3.087e-01 BER=3.479e-03 time=214.8s
+2026-10-14 16:25:27,493 Epoch 70/300 lr=4.38e-04 loss=7.9586e-02 (ber 9.936e-03 ler 4.865e-02 g 5.194e-02) train LER=1.583e-01 LER_strict=3.057e-01 BER=3.460e-03 time=214.8s
+2026-10-14 16:25:27,657 best model saved
+2026-10-14 16:29:02,417 Epoch 71/300 lr=4.36e-04 loss=7.9989e-02 (ber 9.928e-03 ler 4.901e-02 g 5.203e-02) train LER=1.597e-01 LER_strict=3.058e-01 BER=3.460e-03 time=214.7s
+2026-10-14 16:32:37,229 Epoch 72/300 lr=4.34e-04 loss=7.9284e-02 (ber 9.911e-03 ler 4.831e-02 g 5.204e-02) train LER=1.568e-01 LER_strict=3.045e-01 BER=3.446e-03 time=214.7s
+2026-10-14 16:32:37,504 best model saved
+2026-10-14 16:36:12,414 Epoch 73/300 lr=4.32e-04 loss=7.8978e-02 (ber 9.873e-03 ler 4.808e-02 g 5.192e-02) train LER=1.573e-01 LER_strict=3.050e-01 BER=3.432e-03 time=214.9s
+2026-10-14 16:36:12,570 best model saved
+2026-10-14 16:39:47,451 Epoch 74/300 lr=4.31e-04 loss=7.9836e-02 (ber 9.929e-03 ler 4.887e-02 g 5.199e-02) train LER=1.585e-01 LER_strict=3.056e-01 BER=3.470e-03 time=214.9s
+2026-10-14 16:43:22,282 Epoch 75/300 lr=4.29e-04 loss=7.9441e-02 (ber 9.884e-03 ler 4.854e-02 g 5.192e-02) train LER=1.563e-01 LER_strict=3.027e-01 BER=3.439e-03 time=214.7s
+2026-10-14 16:46:57,095 Epoch 76/300 lr=4.27e-04 loss=7.9053e-02 (ber 9.822e-03 ler 4.816e-02 g 5.196e-02) train LER=1.574e-01 LER_strict=3.031e-01 BER=3.416e-03 time=214.7s
+2026-10-14 16:50:31,901 Epoch 77/300 lr=4.25e-04 loss=7.8750e-02 (ber 9.805e-03 ler 4.778e-02 g 5.214e-02) train LER=1.574e-01 LER_strict=3.027e-01 BER=3.428e-03 time=214.7s
+2026-10-14 16:50:32,042 best model saved
+2026-10-14 16:54:06,778 Epoch 78/300 lr=4.23e-04 loss=7.8953e-02 (ber 9.824e-03 ler 4.798e-02 g 5.212e-02) train LER=1.558e-01 LER_strict=3.038e-01 BER=3.423e-03 time=214.7s
+2026-10-14 16:57:41,582 Epoch 79/300 lr=4.21e-04 loss=7.8934e-02 (ber 9.868e-03 ler 4.792e-02 g 5.215e-02) train LER=1.560e-01 LER_strict=3.033e-01 BER=3.450e-03 time=214.7s
+2026-10-14 17:01:16,412 Epoch 80/300 lr=4.19e-04 loss=7.8861e-02 (ber 9.785e-03 ler 4.779e-02 g 5.236e-02) train LER=1.549e-01 LER_strict=3.021e-01 BER=3.400e-03 time=214.7s
+2026-10-14 17:01:27,597 Test[ep80] p=0.0100: LER=5.000e-05 LER_strict=5.500e-04 BER=1.375e-06 (n=20000)
+2026-10-14 17:01:38,696 Test[ep80] p=0.0213: LER=7.500e-04 LER_strict=7.700e-03 BER=2.200e-05 (n=20000)
+2026-10-14 17:01:49,792 Test[ep80] p=0.0325: LER=4.500e-03 LER_strict=2.800e-02 BER=9.056e-05 (n=20000)
+2026-10-14 17:02:00,890 Test[ep80] p=0.0438: LER=1.780e-02 LER_strict=8.275e-02 BER=3.031e-04 (n=20000)
+2026-10-14 17:02:11,986 Test[ep80] p=0.0550: LER=4.315e-02 LER_strict=1.817e-01 BER=7.696e-04 (n=20000)
+2026-10-14 17:02:23,084 Test[ep80] p=0.0663: LER=1.095e-01 LER_strict=3.351e-01 BER=1.803e-03 (n=20000)
+2026-10-14 17:02:34,181 Test[ep80] p=0.0775: LER=2.253e-01 LER_strict=5.326e-01 BER=4.015e-03 (n=20000)
+2026-10-14 17:02:45,278 Test[ep80] p=0.0888: LER=4.039e-01 LER_strict=7.225e-01 BER=8.216e-03 (n=20000)
+2026-10-14 17:02:56,374 Test[ep80] p=0.1000: LER=5.940e-01 LER_strict=8.635e-01 BER=1.535e-02 (n=20000)
+2026-10-14 17:02:56,375 Test[ep80] time 99.9s
+2026-10-14 17:06:31,118 Epoch 81/300 lr=4.17e-04 loss=7.8224e-02 (ber 9.708e-03 ler 4.738e-02 g 5.198e-02) train LER=1.551e-01 LER_strict=2.992e-01 BER=3.398e-03 time=214.7s
+2026-10-14 17:06:31,251 best model saved
+2026-10-14 17:10:05,975 Epoch 82/300 lr=4.15e-04 loss=7.8980e-02 (ber 9.816e-03 ler 4.792e-02 g 5.230e-02) train LER=1.557e-01 LER_strict=3.035e-01 BER=3.427e-03 time=214.7s
+2026-10-14 17:13:40,775 Epoch 83/300 lr=4.14e-04 loss=7.7982e-02 (ber 9.669e-03 ler 4.709e-02 g 5.211e-02) train LER=1.540e-01 LER_strict=3.005e-01 BER=3.378e-03 time=214.7s
+2026-10-14 17:13:40,947 best model saved
+2026-10-14 17:17:15,651 Epoch 84/300 lr=4.12e-04 loss=7.7054e-02 (ber 9.534e-03 ler 4.641e-02 g 5.176e-02) train LER=1.523e-01 LER_strict=2.993e-01 BER=3.339e-03 time=214.7s
+2026-10-14 17:17:15,947 best model saved
+2026-10-14 17:20:50,654 Epoch 85/300 lr=4.10e-04 loss=7.7179e-02 (ber 9.579e-03 ler 4.639e-02 g 5.200e-02) train LER=1.512e-01 LER_strict=2.992e-01 BER=3.339e-03 time=214.7s
+2026-10-14 17:24:25,483 Epoch 86/300 lr=4.08e-04 loss=7.7440e-02 (ber 9.589e-03 ler 4.663e-02 g 5.203e-02) train LER=1.509e-01 LER_strict=2.995e-01 BER=3.344e-03 time=214.7s
+2026-10-14 17:28:00,241 Epoch 87/300 lr=4.05e-04 loss=7.7053e-02 (ber 9.536e-03 ler 4.632e-02 g 5.193e-02) train LER=1.531e-01 LER_strict=2.986e-01 BER=3.339e-03 time=214.7s
+2026-10-14 17:28:00,486 best model saved
+2026-10-14 17:31:35,182 Epoch 88/300 lr=4.03e-04 loss=7.6963e-02 (ber 9.458e-03 ler 4.627e-02 g 5.192e-02) train LER=1.505e-01 LER_strict=2.966e-01 BER=3.306e-03 time=214.7s
+2026-10-14 17:31:35,487 best model saved
+2026-10-14 17:35:10,137 Epoch 89/300 lr=4.01e-04 loss=7.6656e-02 (ber 9.428e-03 ler 4.601e-02 g 5.186e-02) train LER=1.501e-01 LER_strict=2.966e-01 BER=3.296e-03 time=214.6s
+2026-10-14 17:35:10,306 best model saved
+2026-10-14 17:38:44,037 Epoch 90/300 lr=3.99e-04 loss=7.5773e-02 (ber 9.350e-03 ler 4.530e-02 g 5.159e-02) train LER=1.488e-01 LER_strict=2.964e-01 BER=3.266e-03 time=213.7s
+2026-10-14 17:38:44,367 best model saved
+2026-10-14 17:42:18,267 Epoch 91/300 lr=3.97e-04 loss=7.6800e-02 (ber 9.488e-03 ler 4.607e-02 g 5.198e-02) train LER=1.495e-01 LER_strict=2.967e-01 BER=3.310e-03 time=213.9s
+2026-10-14 17:45:52,084 Epoch 92/300 lr=3.95e-04 loss=7.6641e-02 (ber 9.457e-03 ler 4.597e-02 g 5.189e-02) train LER=1.493e-01 LER_strict=2.958e-01 BER=3.294e-03 time=213.6s
+2026-10-14 17:49:23,665 Epoch 93/300 lr=3.93e-04 loss=7.6369e-02 (ber 9.456e-03 ler 4.576e-02 g 5.176e-02) train LER=1.483e-01 LER_strict=2.944e-01 BER=3.309e-03 time=211.4s
+2026-10-14 17:52:55,342 Epoch 94/300 lr=3.91e-04 loss=7.6836e-02 (ber 9.516e-03 ler 4.610e-02 g 5.196e-02) train LER=1.502e-01 LER_strict=2.933e-01 BER=3.326e-03 time=211.6s
+2026-10-14 17:56:27,198 Epoch 95/300 lr=3.89e-04 loss=7.5807e-02 (ber 9.312e-03 ler 4.529e-02 g 5.172e-02) train LER=1.486e-01 LER_strict=2.941e-01 BER=3.254e-03 time=211.7s
+2026-10-14 17:59:58,974 Epoch 96/300 lr=3.86e-04 loss=7.5931e-02 (ber 9.377e-03 ler 4.532e-02 g 5.184e-02) train LER=1.480e-01 LER_strict=2.942e-01 BER=3.284e-03 time=211.7s
+2026-10-14 18:03:30,943 Epoch 97/300 lr=3.84e-04 loss=7.5181e-02 (ber 9.253e-03 ler 4.464e-02 g 5.183e-02) train LER=1.479e-01 LER_strict=2.927e-01 BER=3.240e-03 time=211.8s
+2026-10-14 18:03:31,226 best model saved
+2026-10-14 18:07:02,938 Epoch 98/300 lr=3.82e-04 loss=7.4671e-02 (ber 9.215e-03 ler 4.426e-02 g 5.161e-02) train LER=1.458e-01 LER_strict=2.907e-01 BER=3.224e-03 time=211.7s
+2026-10-14 18:07:03,159 best model saved
+2026-10-14 18:10:34,833 Epoch 99/300 lr=3.80e-04 loss=7.4907e-02 (ber 9.199e-03 ler 4.452e-02 g 5.157e-02) train LER=1.444e-01 LER_strict=2.897e-01 BER=3.223e-03 time=211.7s
+2026-10-14 18:14:06,396 Epoch 100/300 lr=3.78e-04 loss=7.5322e-02 (ber 9.328e-03 ler 4.471e-02 g 5.190e-02) train LER=1.468e-01 LER_strict=2.917e-01 BER=3.276e-03 time=211.5s
+2026-10-14 18:14:17,419 Test[ep100] p=0.0100: LER=5.000e-05 LER_strict=3.500e-04 BER=7.500e-07 (n=20000)
+2026-10-14 18:14:28,347 Test[ep100] p=0.0213: LER=8.500e-04 LER_strict=6.300e-03 BER=1.850e-05 (n=20000)
+2026-10-14 18:14:39,272 Test[ep100] p=0.0325: LER=4.950e-03 LER_strict=2.665e-02 BER=8.931e-05 (n=20000)
+2026-10-14 18:14:50,197 Test[ep100] p=0.0438: LER=1.440e-02 LER_strict=7.170e-02 BER=2.743e-04 (n=20000)
+2026-10-14 18:15:01,120 Test[ep100] p=0.0550: LER=3.935e-02 LER_strict=1.608e-01 BER=6.899e-04 (n=20000)
+2026-10-14 18:15:12,048 Test[ep100] p=0.0663: LER=9.955e-02 LER_strict=3.068e-01 BER=1.669e-03 (n=20000)
+2026-10-14 18:15:22,975 Test[ep100] p=0.0775: LER=2.110e-01 LER_strict=5.038e-01 BER=3.762e-03 (n=20000)
+2026-10-14 18:15:33,901 Test[ep100] p=0.0888: LER=3.775e-01 LER_strict=6.971e-01 BER=7.883e-03 (n=20000)
+2026-10-14 18:15:44,824 Test[ep100] p=0.1000: LER=5.807e-01 LER_strict=8.499e-01 BER=1.498e-02 (n=20000)
+2026-10-14 18:15:44,825 Test[ep100] time 98.3s
+2026-10-14 18:19:16,216 Epoch 101/300 lr=3.75e-04 loss=7.5180e-02 (ber 9.286e-03 ler 4.463e-02 g 5.182e-02) train LER=1.456e-01 LER_strict=2.890e-01 BER=3.243e-03 time=211.3s
+2026-10-14 18:22:47,598 Epoch 102/300 lr=3.73e-04 loss=7.4964e-02 (ber 9.269e-03 ler 4.444e-02 g 5.178e-02) train LER=1.446e-01 LER_strict=2.905e-01 BER=3.242e-03 time=211.1s
+2026-10-14 18:26:19,129 Epoch 103/300 lr=3.71e-04 loss=7.4572e-02 (ber 9.177e-03 ler 4.419e-02 g 5.159e-02) train LER=1.454e-01 LER_strict=2.894e-01 BER=3.208e-03 time=211.4s
+2026-10-14 18:26:19,427 best model saved
+2026-10-14 18:29:51,491 Epoch 104/300 lr=3.68e-04 loss=7.5452e-02 (ber 9.320e-03 ler 4.486e-02 g 5.186e-02) train LER=1.461e-01 LER_strict=2.907e-01 BER=3.264e-03 time=212.1s
+2026-10-14 18:33:24,474 Epoch 105/300 lr=3.66e-04 loss=7.4676e-02 (ber 9.221e-03 ler 4.413e-02 g 5.186e-02) train LER=1.437e-01 LER_strict=2.885e-01 BER=3.220e-03 time=212.9s
+2026-10-14 18:36:57,577 Epoch 106/300 lr=3.64e-04 loss=7.3470e-02 (ber 8.957e-03 ler 4.332e-02 g 5.135e-02) train LER=1.419e-01 LER_strict=2.869e-01 BER=3.130e-03 time=212.9s
+2026-10-14 18:36:57,870 best model saved
+2026-10-14 18:40:30,113 Epoch 107/300 lr=3.61e-04 loss=7.4564e-02 (ber 9.235e-03 ler 4.408e-02 g 5.172e-02) train LER=1.437e-01 LER_strict=2.887e-01 BER=3.236e-03 time=212.2s
+2026-10-14 18:44:04,101 Epoch 108/300 lr=3.59e-04 loss=7.3996e-02 (ber 9.151e-03 ler 4.352e-02 g 5.180e-02) train LER=1.431e-01 LER_strict=2.875e-01 BER=3.201e-03 time=213.9s
+2026-10-14 18:47:39,170 Epoch 109/300 lr=3.57e-04 loss=7.4082e-02 (ber 9.184e-03 ler 4.364e-02 g 5.170e-02) train LER=1.421e-01 LER_strict=2.881e-01 BER=3.214e-03 time=215.0s
+2026-10-14 18:51:14,275 Epoch 110/300 lr=3.54e-04 loss=7.3643e-02 (ber 9.067e-03 ler 4.329e-02 g 5.164e-02) train LER=1.421e-01 LER_strict=2.875e-01 BER=3.181e-03 time=215.0s
+2026-10-14 18:54:49,644 Epoch 111/300 lr=3.52e-04 loss=7.4029e-02 (ber 9.109e-03 ler 4.361e-02 g 5.172e-02) train LER=1.420e-01 LER_strict=2.876e-01 BER=3.189e-03 time=215.1s
+2026-10-14 18:58:25,272 Epoch 112/300 lr=3.50e-04 loss=7.3835e-02 (ber 9.067e-03 ler 4.345e-02 g 5.170e-02) train LER=1.423e-01 LER_strict=2.848e-01 BER=3.185e-03 time=215.5s
+2026-10-14 19:02:00,706 Epoch 113/300 lr=3.47e-04 loss=7.3673e-02 (ber 9.011e-03 ler 4.331e-02 g 5.172e-02) train LER=1.422e-01 LER_strict=2.865e-01 BER=3.153e-03 time=215.3s
+2026-10-14 19:05:35,947 Epoch 114/300 lr=3.45e-04 loss=7.2856e-02 (ber 8.991e-03 ler 4.266e-02 g 5.140e-02) train LER=1.402e-01 LER_strict=2.840e-01 BER=3.150e-03 time=215.1s
+2026-10-14 19:05:36,139 best model saved
+2026-10-14 19:09:11,383 Epoch 115/300 lr=3.42e-04 loss=7.3101e-02 (ber 8.895e-03 ler 4.285e-02 g 5.161e-02) train LER=1.408e-01 LER_strict=2.842e-01 BER=3.119e-03 time=215.2s
+2026-10-14 19:12:46,736 Epoch 116/300 lr=3.40e-04 loss=7.3972e-02 (ber 9.064e-03 ler 4.344e-02 g 5.200e-02) train LER=1.429e-01 LER_strict=2.876e-01 BER=3.172e-03 time=215.2s
+2026-10-14 19:16:22,279 Epoch 117/300 lr=3.37e-04 loss=7.2639e-02 (ber 8.885e-03 ler 4.238e-02 g 5.163e-02) train LER=1.392e-01 LER_strict=2.848e-01 BER=3.110e-03 time=215.4s
+2026-10-14 19:16:22,502 best model saved
+2026-10-14 19:19:57,687 Epoch 118/300 lr=3.35e-04 loss=7.2850e-02 (ber 8.947e-03 ler 4.266e-02 g 5.143e-02) train LER=1.395e-01 LER_strict=2.829e-01 BER=3.127e-03 time=215.2s
+2026-10-14 19:23:33,108 Epoch 119/300 lr=3.33e-04 loss=7.2382e-02 (ber 8.908e-03 ler 4.219e-02 g 5.148e-02) train LER=1.379e-01 LER_strict=2.831e-01 BER=3.123e-03 time=215.3s
+2026-10-14 19:23:33,331 best model saved
+2026-10-14 19:27:08,625 Epoch 120/300 lr=3.30e-04 loss=7.2653e-02 (ber 8.904e-03 ler 4.244e-02 g 5.153e-02) train LER=1.382e-01 LER_strict=2.818e-01 BER=3.114e-03 time=215.3s
+2026-10-14 19:27:19,798 Test[ep120] p=0.0100: LER=0.000e+00 LER_strict=4.500e-04 BER=7.500e-07 (n=20000)
+2026-10-14 19:27:30,892 Test[ep120] p=0.0213: LER=7.500e-04 LER_strict=6.450e-03 BER=1.856e-05 (n=20000)
+2026-10-14 19:27:41,984 Test[ep120] p=0.0325: LER=3.600e-03 LER_strict=2.595e-02 BER=7.875e-05 (n=20000)
+2026-10-14 19:27:53,079 Test[ep120] p=0.0438: LER=1.280e-02 LER_strict=7.530e-02 BER=2.882e-04 (n=20000)
+2026-10-14 19:28:04,173 Test[ep120] p=0.0550: LER=3.630e-02 LER_strict=1.624e-01 BER=6.603e-04 (n=20000)
+2026-10-14 19:28:15,269 Test[ep120] p=0.0663: LER=8.700e-02 LER_strict=3.009e-01 BER=1.588e-03 (n=20000)
+2026-10-14 19:28:26,364 Test[ep120] p=0.0775: LER=2.000e-01 LER_strict=4.938e-01 BER=3.632e-03 (n=20000)
+2026-10-14 19:28:37,458 Test[ep120] p=0.0888: LER=3.634e-01 LER_strict=6.871e-01 BER=7.611e-03 (n=20000)
+2026-10-14 19:28:48,551 Test[ep120] p=0.1000: LER=5.614e-01 LER_strict=8.414e-01 BER=1.455e-02 (n=20000)
+2026-10-14 19:28:48,552 Test[ep120] time 99.8s
+2026-10-14 19:32:23,778 Epoch 121/300 lr=3.28e-04 loss=7.2538e-02 (ber 8.939e-03 ler 4.228e-02 g 5.157e-02) train LER=1.398e-01 LER_strict=2.827e-01 BER=3.128e-03 time=215.2s
+2026-10-14 19:35:59,094 Epoch 122/300 lr=3.25e-04 loss=7.1891e-02 (ber 8.830e-03 ler 4.176e-02 g 5.142e-02) train LER=1.369e-01 LER_strict=2.815e-01 BER=3.107e-03 time=215.2s
+2026-10-14 19:35:59,269 best model saved
+2026-10-14 19:39:34,619 Epoch 123/300 lr=3.23e-04 loss=7.2208e-02 (ber 8.865e-03 ler 4.202e-02 g 5.151e-02) train LER=1.394e-01 LER_strict=2.817e-01 BER=3.100e-03 time=215.3s
+2026-10-14 19:43:09,975 Epoch 124/300 lr=3.20e-04 loss=7.2034e-02 (ber 8.715e-03 ler 4.200e-02 g 5.135e-02) train LER=1.387e-01 LER_strict=2.802e-01 BER=3.052e-03 time=215.3s
+2026-10-14 19:46:45,341 Epoch 125/300 lr=3.18e-04 loss=7.2529e-02 (ber 8.910e-03 ler 4.216e-02 g 5.183e-02) train LER=1.379e-01 LER_strict=2.819e-01 BER=3.119e-03 time=215.3s
+2026-10-14 19:50:20,582 Epoch 126/300 lr=3.15e-04 loss=7.2036e-02 (ber 8.804e-03 ler 4.188e-02 g 5.150e-02) train LER=1.374e-01 LER_strict=2.793e-01 BER=3.089e-03 time=215.1s
+2026-10-14 19:53:55,811 Epoch 127/300 lr=3.13e-04 loss=7.2540e-02 (ber 8.904e-03 ler 4.228e-02 g 5.162e-02) train LER=1.393e-01 LER_strict=2.806e-01 BER=3.126e-03 time=215.1s
+2026-10-14 19:57:31,199 Epoch 128/300 lr=3.10e-04 loss=7.2051e-02 (ber 8.807e-03 ler 4.180e-02 g 5.169e-02) train LER=1.370e-01 LER_strict=2.808e-01 BER=3.093e-03 time=215.3s
+2026-10-14 20:01:06,326 Epoch 129/300 lr=3.07e-04 loss=7.1486e-02 (ber 8.764e-03 ler 4.131e-02 g 5.158e-02) train LER=1.367e-01 LER_strict=2.800e-01 BER=3.073e-03 time=215.0s
+2026-10-14 20:01:06,650 best model saved
+2026-10-14 20:04:41,758 Epoch 130/300 lr=3.05e-04 loss=7.1202e-02 (ber 8.691e-03 ler 4.120e-02 g 5.130e-02) train LER=1.354e-01 LER_strict=2.803e-01 BER=3.046e-03 time=215.1s
+2026-10-14 20:04:41,947 best model saved
+2026-10-14 20:08:17,129 Epoch 131/300 lr=3.02e-04 loss=7.1574e-02 (ber 8.744e-03 ler 4.150e-02 g 5.140e-02) train LER=1.363e-01 LER_strict=2.787e-01 BER=3.068e-03 time=215.2s
+2026-10-14 20:11:52,542 Epoch 132/300 lr=3.00e-04 loss=7.1460e-02 (ber 8.749e-03 ler 4.139e-02 g 5.138e-02) train LER=1.359e-01 LER_strict=2.786e-01 BER=3.067e-03 time=215.3s
+2026-10-14 20:15:28,103 Epoch 133/300 lr=2.97e-04 loss=7.1066e-02 (ber 8.701e-03 ler 4.101e-02 g 5.141e-02) train LER=1.350e-01 LER_strict=2.762e-01 BER=3.053e-03 time=215.4s
+2026-10-14 20:15:28,262 best model saved
+2026-10-14 20:19:03,658 Epoch 134/300 lr=2.95e-04 loss=7.0632e-02 (ber 8.643e-03 ler 4.063e-02 g 5.136e-02) train LER=1.345e-01 LER_strict=2.781e-01 BER=3.033e-03 time=215.4s
+2026-10-14 20:19:03,847 best model saved
+2026-10-14 20:22:39,000 Epoch 135/300 lr=2.92e-04 loss=7.1206e-02 (ber 8.763e-03 ler 4.101e-02 g 5.162e-02) train LER=1.349e-01 LER_strict=2.794e-01 BER=3.075e-03 time=215.1s
+2026-10-14 20:26:14,356 Epoch 136/300 lr=2.90e-04 loss=7.0595e-02 (ber 8.627e-03 ler 4.053e-02 g 5.151e-02) train LER=1.336e-01 LER_strict=2.764e-01 BER=3.024e-03 time=215.2s
+2026-10-14 20:26:14,558 best model saved
+2026-10-14 20:29:49,779 Epoch 137/300 lr=2.87e-04 loss=7.0775e-02 (ber 8.634e-03 ler 4.072e-02 g 5.147e-02) train LER=1.341e-01 LER_strict=2.757e-01 BER=3.034e-03 time=215.2s
+2026-10-14 20:33:25,146 Epoch 138/300 lr=2.84e-04 loss=7.0768e-02 (ber 8.676e-03 ler 4.057e-02 g 5.171e-02) train LER=1.345e-01 LER_strict=2.781e-01 BER=3.042e-03 time=215.3s
+2026-10-14 20:37:00,404 Epoch 139/300 lr=2.82e-04 loss=7.0921e-02 (ber 8.683e-03 ler 4.090e-02 g 5.135e-02) train LER=1.343e-01 LER_strict=2.768e-01 BER=3.049e-03 time=215.2s
+2026-10-14 20:40:35,754 Epoch 140/300 lr=2.79e-04 loss=7.0258e-02 (ber 8.564e-03 ler 4.035e-02 g 5.126e-02) train LER=1.323e-01 LER_strict=2.754e-01 BER=3.013e-03 time=215.3s
+2026-10-14 20:40:36,300 best model saved
+2026-10-14 20:40:47,393 Test[ep140] p=0.0100: LER=5.000e-05 LER_strict=6.000e-04 BER=1.312e-06 (n=20000)
+2026-10-14 20:40:58,487 Test[ep140] p=0.0213: LER=5.500e-04 LER_strict=4.900e-03 BER=1.275e-05 (n=20000)
+2026-10-14 20:41:09,583 Test[ep140] p=0.0325: LER=2.950e-03 LER_strict=2.155e-02 BER=7.050e-05 (n=20000)
+2026-10-14 20:41:20,678 Test[ep140] p=0.0438: LER=1.135e-02 LER_strict=6.470e-02 BER=2.341e-04 (n=20000)
+2026-10-14 20:41:31,770 Test[ep140] p=0.0550: LER=3.420e-02 LER_strict=1.532e-01 BER=6.413e-04 (n=20000)
+2026-10-14 20:41:42,863 Test[ep140] p=0.0663: LER=8.095e-02 LER_strict=2.885e-01 BER=1.540e-03 (n=20000)
+2026-10-14 20:41:53,956 Test[ep140] p=0.0775: LER=1.815e-01 LER_strict=4.719e-01 BER=3.284e-03 (n=20000)
+2026-10-14 20:42:05,046 Test[ep140] p=0.0888: LER=3.348e-01 LER_strict=6.599e-01 BER=7.098e-03 (n=20000)
+2026-10-14 20:42:16,136 Test[ep140] p=0.1000: LER=5.390e-01 LER_strict=8.313e-01 BER=1.384e-02 (n=20000)
+2026-10-14 20:42:16,136 Test[ep140] time 99.8s
+2026-10-14 20:45:51,339 Epoch 141/300 lr=2.77e-04 loss=6.9821e-02 (ber 8.468e-03 ler 3.996e-02 g 5.126e-02) train LER=1.331e-01 LER_strict=2.749e-01 BER=2.981e-03 time=215.2s
+2026-10-14 20:45:51,638 best model saved
+2026-10-14 20:49:26,999 Epoch 142/300 lr=2.74e-04 loss=7.0368e-02 (ber 8.620e-03 ler 4.022e-02 g 5.168e-02) train LER=1.326e-01 LER_strict=2.767e-01 BER=3.034e-03 time=215.3s
+2026-10-14 20:53:02,427 Epoch 143/300 lr=2.71e-04 loss=7.0418e-02 (ber 8.575e-03 ler 4.048e-02 g 5.130e-02) train LER=1.330e-01 LER_strict=2.736e-01 BER=3.004e-03 time=215.3s
+2026-10-14 20:56:37,764 Epoch 144/300 lr=2.69e-04 loss=6.9940e-02 (ber 8.548e-03 ler 3.997e-02 g 5.138e-02) train LER=1.319e-01 LER_strict=2.748e-01 BER=3.009e-03 time=215.2s
+2026-10-14 21:00:13,118 Epoch 145/300 lr=2.66e-04 loss=7.0114e-02 (ber 8.577e-03 ler 4.020e-02 g 5.125e-02) train LER=1.315e-01 LER_strict=2.741e-01 BER=3.008e-03 time=215.3s
+2026-10-14 21:03:48,469 Epoch 146/300 lr=2.64e-04 loss=7.0330e-02 (ber 8.579e-03 ler 4.022e-02 g 5.165e-02) train LER=1.323e-01 LER_strict=2.751e-01 BER=3.013e-03 time=215.2s
+2026-10-14 21:07:23,928 Epoch 147/300 lr=2.61e-04 loss=7.0020e-02 (ber 8.615e-03 ler 3.998e-02 g 5.147e-02) train LER=1.331e-01 LER_strict=2.758e-01 BER=3.031e-03 time=215.4s
+2026-10-14 21:10:59,247 Epoch 148/300 lr=2.58e-04 loss=6.9431e-02 (ber 8.495e-03 ler 3.943e-02 g 5.150e-02) train LER=1.306e-01 LER_strict=2.741e-01 BER=2.978e-03 time=215.2s
+2026-10-14 21:10:59,419 best model saved
+2026-10-14 21:14:34,724 Epoch 149/300 lr=2.56e-04 loss=6.9502e-02 (ber 8.459e-03 ler 3.969e-02 g 5.116e-02) train LER=1.317e-01 LER_strict=2.725e-01 BER=2.981e-03 time=215.3s
+2026-10-14 21:18:10,008 Epoch 150/300 lr=2.53e-04 loss=6.9546e-02 (ber 8.515e-03 ler 3.955e-02 g 5.149e-02) train LER=1.313e-01 LER_strict=2.745e-01 BER=2.999e-03 time=215.2s
+2026-10-14 21:21:45,527 Epoch 151/300 lr=2.51e-04 loss=6.9172e-02 (ber 8.431e-03 ler 3.931e-02 g 5.130e-02) train LER=1.297e-01 LER_strict=2.717e-01 BER=2.965e-03 time=215.4s
+2026-10-14 21:21:45,687 best model saved
+2026-10-14 21:25:21,012 Epoch 152/300 lr=2.48e-04 loss=6.9281e-02 (ber 8.445e-03 ler 3.938e-02 g 5.136e-02) train LER=1.298e-01 LER_strict=2.736e-01 BER=2.970e-03 time=215.3s
+2026-10-14 21:28:56,242 Epoch 153/300 lr=2.45e-04 loss=6.8824e-02 (ber 8.393e-03 ler 3.893e-02 g 5.139e-02) train LER=1.296e-01 LER_strict=2.724e-01 BER=2.954e-03 time=215.1s
+2026-10-14 21:28:56,435 best model saved
+2026-10-14 21:32:30,655 Epoch 154/300 lr=2.43e-04 loss=6.8638e-02 (ber 8.372e-03 ler 3.883e-02 g 5.124e-02) train LER=1.281e-01 LER_strict=2.700e-01 BER=2.946e-03 time=214.2s
+2026-10-14 21:32:30,825 best model saved
+2026-10-14 21:36:03,601 Epoch 155/300 lr=2.40e-04 loss=6.9254e-02 (ber 8.437e-03 ler 3.928e-02 g 5.151e-02) train LER=1.299e-01 LER_strict=2.706e-01 BER=2.959e-03 time=212.8s
+2026-10-14 21:39:36,532 Epoch 156/300 lr=2.37e-04 loss=6.9158e-02 (ber 8.428e-03 ler 3.924e-02 g 5.142e-02) train LER=1.295e-01 LER_strict=2.690e-01 BER=2.962e-03 time=212.8s
+2026-10-14 21:43:09,234 Epoch 157/300 lr=2.35e-04 loss=6.8823e-02 (ber 8.345e-03 ler 3.902e-02 g 5.126e-02) train LER=1.293e-01 LER_strict=2.698e-01 BER=2.930e-03 time=212.6s
+2026-10-14 21:46:41,964 Epoch 158/300 lr=2.32e-04 loss=6.8212e-02 (ber 8.280e-03 ler 3.849e-02 g 5.116e-02) train LER=1.279e-01 LER_strict=2.686e-01 BER=2.906e-03 time=212.6s
+2026-10-14 21:46:42,183 best model saved
+2026-10-14 21:50:15,880 Epoch 159/300 lr=2.30e-04 loss=6.8092e-02 (ber 8.300e-03 ler 3.834e-02 g 5.120e-02) train LER=1.270e-01 LER_strict=2.681e-01 BER=2.919e-03 time=213.7s
+2026-10-14 21:50:16,045 best model saved
+2026-10-14 21:53:49,039 Epoch 160/300 lr=2.27e-04 loss=6.8145e-02 (ber 8.297e-03 ler 3.835e-02 g 5.129e-02) train LER=1.266e-01 LER_strict=2.703e-01 BER=2.923e-03 time=213.0s
+2026-10-14 21:54:00,190 Test[ep160] p=0.0100: LER=5.000e-05 LER_strict=3.000e-04 BER=9.375e-07 (n=20000)
+2026-10-14 21:54:11,115 Test[ep160] p=0.0213: LER=4.500e-04 LER_strict=4.500e-03 BER=1.388e-05 (n=20000)
+2026-10-14 21:54:22,040 Test[ep160] p=0.0325: LER=3.000e-03 LER_strict=2.115e-02 BER=7.406e-05 (n=20000)
+2026-10-14 21:54:32,966 Test[ep160] p=0.0438: LER=9.900e-03 LER_strict=5.970e-02 BER=2.272e-04 (n=20000)
+2026-10-14 21:54:43,890 Test[ep160] p=0.0550: LER=3.240e-02 LER_strict=1.335e-01 BER=5.957e-04 (n=20000)
+2026-10-14 21:54:54,815 Test[ep160] p=0.0663: LER=7.840e-02 LER_strict=2.709e-01 BER=1.481e-03 (n=20000)
+2026-10-14 21:55:05,740 Test[ep160] p=0.0775: LER=1.699e-01 LER_strict=4.499e-01 BER=3.283e-03 (n=20000)
+2026-10-14 21:55:16,700 Test[ep160] p=0.0888: LER=3.248e-01 LER_strict=6.480e-01 BER=7.062e-03 (n=20000)
+2026-10-14 21:55:27,626 Test[ep160] p=0.1000: LER=5.332e-01 LER_strict=8.175e-01 BER=1.381e-02 (n=20000)
+2026-10-14 21:55:27,627 Test[ep160] time 98.4s
+2026-10-14 21:59:00,497 Epoch 161/300 lr=2.24e-04 loss=6.8370e-02 (ber 8.343e-03 ler 3.858e-02 g 5.123e-02) train LER=1.270e-01 LER_strict=2.707e-01 BER=2.931e-03 time=212.8s
+2026-10-14 22:02:33,299 Epoch 162/300 lr=2.22e-04 loss=6.8910e-02 (ber 8.389e-03 ler 3.895e-02 g 5.153e-02) train LER=1.283e-01 LER_strict=2.690e-01 BER=2.950e-03 time=212.7s
+2026-10-14 22:06:07,436 Epoch 163/300 lr=2.19e-04 loss=6.7184e-02 (ber 8.192e-03 ler 3.758e-02 g 5.101e-02) train LER=1.250e-01 LER_strict=2.665e-01 BER=2.870e-03 time=214.0s
+2026-10-14 22:06:07,653 best model saved
+2026-10-14 22:09:40,448 Epoch 164/300 lr=2.17e-04 loss=6.7939e-02 (ber 8.337e-03 ler 3.821e-02 g 5.112e-02) train LER=1.276e-01 LER_strict=2.687e-01 BER=2.930e-03 time=212.8s
+2026-10-14 22:13:13,619 Epoch 165/300 lr=2.14e-04 loss=6.7452e-02 (ber 8.178e-03 ler 3.782e-02 g 5.109e-02) train LER=1.257e-01 LER_strict=2.669e-01 BER=2.869e-03 time=213.0s
+2026-10-14 22:16:46,541 Epoch 166/300 lr=2.11e-04 loss=6.7517e-02 (ber 8.170e-03 ler 3.798e-02 g 5.090e-02) train LER=1.259e-01 LER_strict=2.657e-01 BER=2.876e-03 time=212.8s
+2026-10-14 22:20:19,160 Epoch 167/300 lr=2.09e-04 loss=6.7918e-02 (ber 8.258e-03 ler 3.802e-02 g 5.153e-02) train LER=1.266e-01 LER_strict=2.694e-01 BER=2.908e-03 time=212.5s
+2026-10-14 22:23:52,818 Epoch 168/300 lr=2.06e-04 loss=6.8071e-02 (ber 8.235e-03 ler 3.833e-02 g 5.125e-02) train LER=1.261e-01 LER_strict=2.678e-01 BER=2.893e-03 time=213.5s
+2026-10-14 22:27:25,778 Epoch 169/300 lr=2.04e-04 loss=6.7704e-02 (ber 8.253e-03 ler 3.800e-02 g 5.116e-02) train LER=1.249e-01 LER_strict=2.674e-01 BER=2.901e-03 time=212.9s
+2026-10-14 22:30:58,900 Epoch 170/300 lr=2.01e-04 loss=6.7789e-02 (ber 8.180e-03 ler 3.815e-02 g 5.111e-02) train LER=1.255e-01 LER_strict=2.657e-01 BER=2.880e-03 time=213.0s
+2026-10-14 22:34:32,027 Epoch 171/300 lr=1.99e-04 loss=6.7411e-02 (ber 8.188e-03 ler 3.776e-02 g 5.111e-02) train LER=1.254e-01 LER_strict=2.666e-01 BER=2.884e-03 time=213.0s
+2026-10-14 22:38:05,111 Epoch 172/300 lr=1.96e-04 loss=6.7803e-02 (ber 8.226e-03 ler 3.803e-02 g 5.133e-02) train LER=1.263e-01 LER_strict=2.677e-01 BER=2.897e-03 time=213.0s
+2026-10-14 22:41:38,031 Epoch 173/300 lr=1.94e-04 loss=6.6820e-02 (ber 8.132e-03 ler 3.725e-02 g 5.100e-02) train LER=1.235e-01 LER_strict=2.637e-01 BER=2.865e-03 time=212.8s
+2026-10-14 22:41:38,190 best model saved
+2026-10-14 22:45:12,105 Epoch 174/300 lr=1.91e-04 loss=6.7452e-02 (ber 8.191e-03 ler 3.772e-02 g 5.127e-02) train LER=1.250e-01 LER_strict=2.668e-01 BER=2.878e-03 time=213.9s
+2026-10-14 22:48:45,265 Epoch 175/300 lr=1.88e-04 loss=6.6764e-02 (ber 8.131e-03 ler 3.713e-02 g 5.113e-02) train LER=1.231e-01 LER_strict=2.655e-01 BER=2.866e-03 time=213.0s
+2026-10-14 22:48:45,649 best model saved
+2026-10-14 22:52:18,490 Epoch 176/300 lr=1.86e-04 loss=6.7148e-02 (ber 8.105e-03 ler 3.755e-02 g 5.109e-02) train LER=1.249e-01 LER_strict=2.648e-01 BER=2.858e-03 time=212.8s
+2026-10-14 22:55:51,802 Epoch 177/300 lr=1.83e-04 loss=6.6788e-02 (ber 8.091e-03 ler 3.721e-02 g 5.106e-02) train LER=1.235e-01 LER_strict=2.638e-01 BER=2.842e-03 time=213.2s
+2026-10-14 22:59:24,621 Epoch 178/300 lr=1.81e-04 loss=6.6750e-02 (ber 8.089e-03 ler 3.716e-02 g 5.110e-02) train LER=1.235e-01 LER_strict=2.622e-01 BER=2.848e-03 time=212.7s
+2026-10-14 22:59:25,064 best model saved
+2026-10-14 23:02:58,660 Epoch 179/300 lr=1.78e-04 loss=6.6113e-02 (ber 7.982e-03 ler 3.673e-02 g 5.079e-02) train LER=1.220e-01 LER_strict=2.622e-01 BER=2.807e-03 time=213.6s
+2026-10-14 23:02:59,284 best model saved
+2026-10-14 23:06:32,880 Epoch 180/300 lr=1.76e-04 loss=6.5876e-02 (ber 7.944e-03 ler 3.649e-02 g 5.082e-02) train LER=1.213e-01 LER_strict=2.601e-01 BER=2.797e-03 time=213.5s
+2026-10-14 23:06:33,366 best model saved
+2026-10-14 23:06:44,291 Test[ep180] p=0.0100: LER=0.000e+00 LER_strict=2.500e-04 BER=4.375e-07 (n=20000)
+2026-10-14 23:06:55,216 Test[ep180] p=0.0213: LER=4.500e-04 LER_strict=4.100e-03 BER=1.237e-05 (n=20000)
+2026-10-14 23:07:06,141 Test[ep180] p=0.0325: LER=2.800e-03 LER_strict=1.925e-02 BER=6.419e-05 (n=20000)
+2026-10-14 23:07:17,066 Test[ep180] p=0.0438: LER=9.200e-03 LER_strict=5.505e-02 BER=2.106e-04 (n=20000)
+2026-10-14 23:07:27,991 Test[ep180] p=0.0550: LER=2.930e-02 LER_strict=1.340e-01 BER=5.984e-04 (n=20000)
+2026-10-14 23:07:38,916 Test[ep180] p=0.0663: LER=7.385e-02 LER_strict=2.577e-01 BER=1.411e-03 (n=20000)
+2026-10-14 23:07:49,876 Test[ep180] p=0.0775: LER=1.616e-01 LER_strict=4.304e-01 BER=3.201e-03 (n=20000)
+2026-10-14 23:08:00,817 Test[ep180] p=0.0888: LER=3.132e-01 LER_strict=6.363e-01 BER=6.738e-03 (n=20000)
+2026-10-14 23:08:11,798 Test[ep180] p=0.1000: LER=5.159e-01 LER_strict=8.065e-01 BER=1.351e-02 (n=20000)
+2026-10-14 23:08:11,798 Test[ep180] time 98.4s
+2026-10-14 23:11:44,778 Epoch 181/300 lr=1.73e-04 loss=6.6637e-02 (ber 8.042e-03 ler 3.708e-02 g 5.107e-02) train LER=1.237e-01 LER_strict=2.616e-01 BER=2.831e-03 time=212.9s
+2026-10-14 23:15:18,087 Epoch 182/300 lr=1.71e-04 loss=6.5972e-02 (ber 7.924e-03 ler 3.650e-02 g 5.102e-02) train LER=1.211e-01 LER_strict=2.614e-01 BER=2.790e-03 time=213.1s
+2026-10-14 23:18:51,005 Epoch 183/300 lr=1.68e-04 loss=6.6255e-02 (ber 8.043e-03 ler 3.664e-02 g 5.119e-02) train LER=1.224e-01 LER_strict=2.632e-01 BER=2.825e-03 time=212.8s
+2026-10-14 23:22:23,813 Epoch 184/300 lr=1.66e-04 loss=6.6344e-02 (ber 7.984e-03 ler 3.677e-02 g 5.116e-02) train LER=1.221e-01 LER_strict=2.618e-01 BER=2.811e-03 time=212.6s
+2026-10-14 23:25:58,680 Epoch 185/300 lr=1.64e-04 loss=6.7147e-02 (ber 8.095e-03 ler 3.752e-02 g 5.115e-02) train LER=1.243e-01 LER_strict=2.633e-01 BER=2.850e-03 time=214.8s
+2026-10-14 23:29:31,669 Epoch 186/300 lr=1.61e-04 loss=6.6422e-02 (ber 7.974e-03 ler 3.691e-02 g 5.105e-02) train LER=1.219e-01 LER_strict=2.607e-01 BER=2.805e-03 time=212.7s
+2026-10-14 23:33:04,632 Epoch 187/300 lr=1.59e-04 loss=6.5660e-02 (ber 7.869e-03 ler 3.632e-02 g 5.080e-02) train LER=1.208e-01 LER_strict=2.591e-01 BER=2.765e-03 time=212.9s
+2026-10-14 23:33:05,484 best model saved
+2026-10-14 23:36:39,041 Epoch 188/300 lr=1.56e-04 loss=6.5664e-02 (ber 7.960e-03 ler 3.617e-02 g 5.103e-02) train LER=1.196e-01 LER_strict=2.615e-01 BER=2.793e-03 time=213.5s
+2026-10-14 23:40:12,066 Epoch 189/300 lr=1.54e-04 loss=6.5895e-02 (ber 7.933e-03 ler 3.645e-02 g 5.095e-02) train LER=1.222e-01 LER_strict=2.607e-01 BER=2.799e-03 time=212.9s
+2026-10-14 23:43:44,523 Epoch 190/300 lr=1.51e-04 loss=6.5852e-02 (ber 7.917e-03 ler 3.635e-02 g 5.109e-02) train LER=1.200e-01 LER_strict=2.600e-01 BER=2.788e-03 time=212.3s
+2026-10-14 23:47:19,002 Epoch 191/300 lr=1.49e-04 loss=6.6339e-02 (ber 8.019e-03 ler 3.675e-02 g 5.115e-02) train LER=1.222e-01 LER_strict=2.617e-01 BER=2.822e-03 time=214.4s
+2026-10-14 23:50:51,866 Epoch 192/300 lr=1.47e-04 loss=6.5793e-02 (ber 7.978e-03 ler 3.627e-02 g 5.107e-02) train LER=1.204e-01 LER_strict=2.617e-01 BER=2.815e-03 time=212.7s
+2026-10-14 23:54:24,711 Epoch 193/300 lr=1.44e-04 loss=6.5751e-02 (ber 7.968e-03 ler 3.620e-02 g 5.114e-02) train LER=1.214e-01 LER_strict=2.600e-01 BER=2.807e-03 time=212.8s
+2026-10-14 23:57:58,018 Epoch 194/300 lr=1.42e-04 loss=6.5811e-02 (ber 7.950e-03 ler 3.634e-02 g 5.100e-02) train LER=1.204e-01 LER_strict=2.613e-01 BER=2.799e-03 time=213.2s
+2026-10-15 00:01:32,335 Epoch 195/300 lr=1.40e-04 loss=6.5429e-02 (ber 7.897e-03 ler 3.600e-02 g 5.095e-02) train LER=1.199e-01 LER_strict=2.589e-01 BER=2.781e-03 time=214.2s
+2026-10-15 00:01:32,593 best model saved
+2026-10-15 00:05:08,817 Epoch 196/300 lr=1.37e-04 loss=6.4487e-02 (ber 7.774e-03 ler 3.523e-02 g 5.075e-02) train LER=1.173e-01 LER_strict=2.578e-01 BER=2.728e-03 time=216.2s
+2026-10-15 00:05:09,190 best model saved
+2026-10-15 00:08:40,063 Epoch 197/300 lr=1.35e-04 loss=6.5639e-02 (ber 7.921e-03 ler 3.620e-02 g 5.096e-02) train LER=1.202e-01 LER_strict=2.596e-01 BER=2.789e-03 time=210.9s
+2026-10-15 00:12:14,100 Epoch 198/300 lr=1.33e-04 loss=6.5232e-02 (ber 7.816e-03 ler 3.580e-02 g 5.104e-02) train LER=1.189e-01 LER_strict=2.575e-01 BER=2.756e-03 time=213.9s
+2026-10-15 00:15:49,668 Epoch 199/300 lr=1.30e-04 loss=6.5179e-02 (ber 7.851e-03 ler 3.579e-02 g 5.093e-02) train LER=1.192e-01 LER_strict=2.574e-01 BER=2.766e-03 time=215.5s
+2026-10-15 00:19:25,163 Epoch 200/300 lr=1.28e-04 loss=6.5457e-02 (ber 7.867e-03 ler 3.601e-02 g 5.103e-02) train LER=1.192e-01 LER_strict=2.570e-01 BER=2.771e-03 time=215.3s
+2026-10-15 00:19:36,344 Test[ep200] p=0.0100: LER=1.000e-04 LER_strict=4.000e-04 BER=1.250e-06 (n=20000)
+2026-10-15 00:19:47,438 Test[ep200] p=0.0213: LER=6.500e-04 LER_strict=3.750e-03 BER=1.319e-05 (n=20000)
+2026-10-15 00:19:58,532 Test[ep200] p=0.0325: LER=3.350e-03 LER_strict=2.050e-02 BER=6.588e-05 (n=20000)
+2026-10-15 00:20:09,627 Test[ep200] p=0.0438: LER=8.750e-03 LER_strict=5.305e-02 BER=1.988e-04 (n=20000)
+2026-10-15 00:20:20,721 Test[ep200] p=0.0550: LER=2.685e-02 LER_strict=1.260e-01 BER=5.413e-04 (n=20000)
+2026-10-15 00:20:31,815 Test[ep200] p=0.0663: LER=6.710e-02 LER_strict=2.474e-01 BER=1.346e-03 (n=20000)
+2026-10-15 00:20:42,909 Test[ep200] p=0.0775: LER=1.567e-01 LER_strict=4.304e-01 BER=3.028e-03 (n=20000)
+2026-10-15 00:20:54,003 Test[ep200] p=0.0888: LER=3.089e-01 LER_strict=6.290e-01 BER=6.698e-03 (n=20000)
+2026-10-15 00:21:05,097 Test[ep200] p=0.1000: LER=4.961e-01 LER_strict=8.066e-01 BER=1.313e-02 (n=20000)
+2026-10-15 00:21:05,098 Test[ep200] time 99.8s
+2026-10-15 00:24:40,356 Epoch 201/300 lr=1.26e-04 loss=6.5073e-02 (ber 7.893e-03 ler 3.561e-02 g 5.103e-02) train LER=1.194e-01 LER_strict=2.602e-01 BER=2.779e-03 time=215.2s
+2026-10-15 00:28:15,722 Epoch 202/300 lr=1.23e-04 loss=6.5449e-02 (ber 7.900e-03 ler 3.603e-02 g 5.093e-02) train LER=1.198e-01 LER_strict=2.590e-01 BER=2.786e-03 time=215.3s
+2026-10-15 00:31:51,135 Epoch 203/300 lr=1.21e-04 loss=6.4518e-02 (ber 7.790e-03 ler 3.524e-02 g 5.076e-02) train LER=1.177e-01 LER_strict=2.556e-01 BER=2.735e-03 time=215.3s
+2026-10-15 00:35:26,659 Epoch 204/300 lr=1.19e-04 loss=6.4424e-02 (ber 7.751e-03 ler 3.508e-02 g 5.093e-02) train LER=1.172e-01 LER_strict=2.570e-01 BER=2.731e-03 time=215.4s
+2026-10-15 00:35:26,961 best model saved
+2026-10-15 00:39:02,411 Epoch 205/300 lr=1.17e-04 loss=6.5374e-02 (ber 7.944e-03 ler 3.578e-02 g 5.125e-02) train LER=1.178e-01 LER_strict=2.573e-01 BER=2.798e-03 time=215.4s
+2026-10-15 00:42:38,016 Epoch 206/300 lr=1.15e-04 loss=6.3786e-02 (ber 7.663e-03 ler 3.456e-02 g 5.078e-02) train LER=1.154e-01 LER_strict=2.556e-01 BER=2.689e-03 time=215.5s
+2026-10-15 00:42:38,413 best model saved
+2026-10-15 00:46:13,194 Epoch 207/300 lr=1.12e-04 loss=6.4792e-02 (ber 7.800e-03 ler 3.542e-02 g 5.094e-02) train LER=1.177e-01 LER_strict=2.564e-01 BER=2.736e-03 time=214.7s
+2026-10-15 00:49:47,619 Epoch 208/300 lr=1.10e-04 loss=6.4811e-02 (ber 7.765e-03 ler 3.546e-02 g 5.094e-02) train LER=1.190e-01 LER_strict=2.569e-01 BER=2.738e-03 time=214.2s
+2026-10-15 00:53:22,233 Epoch 209/300 lr=1.08e-04 loss=6.3833e-02 (ber 7.687e-03 ler 3.450e-02 g 5.098e-02) train LER=1.160e-01 LER_strict=2.573e-01 BER=2.707e-03 time=214.5s
+2026-10-15 00:56:56,790 Epoch 210/300 lr=1.06e-04 loss=6.4357e-02 (ber 7.695e-03 ler 3.504e-02 g 5.094e-02) train LER=1.173e-01 LER_strict=2.566e-01 BER=2.719e-03 time=214.5s
+2026-10-15 01:00:31,413 Epoch 211/300 lr=1.04e-04 loss=6.4657e-02 (ber 7.821e-03 ler 3.520e-02 g 5.109e-02) train LER=1.178e-01 LER_strict=2.573e-01 BER=2.758e-03 time=214.5s
+2026-10-15 01:04:05,900 Epoch 212/300 lr=1.02e-04 loss=6.3777e-02 (ber 7.615e-03 ler 3.468e-02 g 5.059e-02) train LER=1.162e-01 LER_strict=2.532e-01 BER=2.683e-03 time=214.4s
+2026-10-15 01:04:06,308 best model saved
+2026-10-15 01:07:40,818 Epoch 213/300 lr=9.97e-05 loss=6.4012e-02 (ber 7.679e-03 ler 3.486e-02 g 5.063e-02) train LER=1.179e-01 LER_strict=2.532e-01 BER=2.713e-03 time=214.5s
+2026-10-15 01:11:15,441 Epoch 214/300 lr=9.76e-05 loss=6.4716e-02 (ber 7.775e-03 ler 3.523e-02 g 5.119e-02) train LER=1.179e-01 LER_strict=2.571e-01 BER=2.743e-03 time=214.5s
+2026-10-15 01:14:50,802 Epoch 215/300 lr=9.55e-05 loss=6.3641e-02 (ber 7.633e-03 ler 3.448e-02 g 5.069e-02) train LER=1.148e-01 LER_strict=2.519e-01 BER=2.691e-03 time=215.2s
+2026-10-15 01:14:50,932 best model saved
+2026-10-15 01:18:26,102 Epoch 216/300 lr=9.35e-05 loss=6.4216e-02 (ber 7.677e-03 ler 3.490e-02 g 5.095e-02) train LER=1.168e-01 LER_strict=2.555e-01 BER=2.708e-03 time=215.2s
+2026-10-15 01:22:01,149 Epoch 217/300 lr=9.15e-05 loss=6.4142e-02 (ber 7.616e-03 ler 3.489e-02 g 5.088e-02) train LER=1.158e-01 LER_strict=2.542e-01 BER=2.689e-03 time=214.9s
+2026-10-15 01:25:31,457 Epoch 218/300 lr=8.95e-05 loss=6.3930e-02 (ber 7.639e-03 ler 3.458e-02 g 5.106e-02) train LER=1.147e-01 LER_strict=2.545e-01 BER=2.691e-03 time=210.2s
+2026-10-15 01:29:01,768 Epoch 219/300 lr=8.75e-05 loss=6.3712e-02 (ber 7.636e-03 ler 3.444e-02 g 5.092e-02) train LER=1.153e-01 LER_strict=2.549e-01 BER=2.683e-03 time=210.2s
+2026-10-15 01:32:31,931 Epoch 220/300 lr=8.55e-05 loss=6.2583e-02 (ber 7.469e-03 ler 3.365e-02 g 5.041e-02) train LER=1.124e-01 LER_strict=2.494e-01 BER=2.632e-03 time=210.1s
+2026-10-15 01:32:32,129 best model saved
+2026-10-15 01:32:42,943 Test[ep220] p=0.0100: LER=5.000e-05 LER_strict=4.000e-04 BER=1.000e-06 (n=20000)
+2026-10-15 01:32:53,759 Test[ep220] p=0.0213: LER=7.500e-04 LER_strict=3.800e-03 BER=1.244e-05 (n=20000)
+2026-10-15 01:33:04,575 Test[ep220] p=0.0325: LER=2.750e-03 LER_strict=1.750e-02 BER=5.575e-05 (n=20000)
+2026-10-15 01:33:15,395 Test[ep220] p=0.0438: LER=8.900e-03 LER_strict=5.215e-02 BER=2.024e-04 (n=20000)
+2026-10-15 01:33:26,213 Test[ep220] p=0.0550: LER=2.565e-02 LER_strict=1.221e-01 BER=5.208e-04 (n=20000)
+2026-10-15 01:33:37,031 Test[ep220] p=0.0663: LER=6.545e-02 LER_strict=2.387e-01 BER=1.274e-03 (n=20000)
+2026-10-15 01:33:47,852 Test[ep220] p=0.0775: LER=1.517e-01 LER_strict=4.227e-01 BER=2.968e-03 (n=20000)
+2026-10-15 01:33:58,671 Test[ep220] p=0.0888: LER=2.980e-01 LER_strict=6.210e-01 BER=6.362e-03 (n=20000)
+2026-10-15 01:34:09,489 Test[ep220] p=0.1000: LER=4.863e-01 LER_strict=7.924e-01 BER=1.260e-02 (n=20000)
+2026-10-15 01:34:09,489 Test[ep220] time 97.4s
+2026-10-15 01:37:39,785 Epoch 221/300 lr=8.36e-05 loss=6.3725e-02 (ber 7.595e-03 ler 3.437e-02 g 5.111e-02) train LER=1.153e-01 LER_strict=2.540e-01 BER=2.679e-03 time=210.3s
+2026-10-15 01:41:10,090 Epoch 222/300 lr=8.16e-05 loss=6.4211e-02 (ber 7.713e-03 ler 3.477e-02 g 5.118e-02) train LER=1.155e-01 LER_strict=2.531e-01 BER=2.715e-03 time=210.2s
+2026-10-15 01:44:40,241 Epoch 223/300 lr=7.97e-05 loss=6.2975e-02 (ber 7.570e-03 ler 3.385e-02 g 5.067e-02) train LER=1.134e-01 LER_strict=2.516e-01 BER=2.670e-03 time=210.1s
+2026-10-15 01:48:10,521 Epoch 224/300 lr=7.78e-05 loss=6.2856e-02 (ber 7.403e-03 ler 3.382e-02 g 5.066e-02) train LER=1.131e-01 LER_strict=2.501e-01 BER=2.608e-03 time=210.1s
+2026-10-15 01:51:41,241 Epoch 225/300 lr=7.59e-05 loss=6.3461e-02 (ber 7.551e-03 ler 3.429e-02 g 5.079e-02) train LER=1.147e-01 LER_strict=2.524e-01 BER=2.666e-03 time=210.6s
+2026-10-15 01:55:11,453 Epoch 226/300 lr=7.41e-05 loss=6.4042e-02 (ber 7.648e-03 ler 3.467e-02 g 5.111e-02) train LER=1.159e-01 LER_strict=2.524e-01 BER=2.700e-03 time=210.1s
+2026-10-15 01:58:41,753 Epoch 227/300 lr=7.22e-05 loss=6.3854e-02 (ber 7.664e-03 ler 3.448e-02 g 5.108e-02) train LER=1.153e-01 LER_strict=2.528e-01 BER=2.700e-03 time=210.2s
+2026-10-15 02:02:12,737 Epoch 228/300 lr=7.04e-05 loss=6.2713e-02 (ber 7.438e-03 ler 3.360e-02 g 5.080e-02) train LER=1.124e-01 LER_strict=2.512e-01 BER=2.633e-03 time=210.9s
+2026-10-15 02:05:47,247 Epoch 229/300 lr=6.86e-05 loss=6.3362e-02 (ber 7.554e-03 ler 3.409e-02 g 5.098e-02) train LER=1.142e-01 LER_strict=2.518e-01 BER=2.669e-03 time=214.4s
+2026-10-15 02:09:22,318 Epoch 230/300 lr=6.68e-05 loss=6.3449e-02 (ber 7.563e-03 ler 3.421e-02 g 5.092e-02) train LER=1.140e-01 LER_strict=2.519e-01 BER=2.659e-03 time=215.0s
+2026-10-15 02:12:56,886 Epoch 231/300 lr=6.51e-05 loss=6.3396e-02 (ber 7.491e-03 ler 3.420e-02 g 5.091e-02) train LER=1.143e-01 LER_strict=2.504e-01 BER=2.640e-03 time=214.4s
+2026-10-15 02:16:31,575 Epoch 232/300 lr=6.33e-05 loss=6.3614e-02 (ber 7.597e-03 ler 3.429e-02 g 5.106e-02) train LER=1.148e-01 LER_strict=2.528e-01 BER=2.686e-03 time=214.6s
+2026-10-15 02:20:06,105 Epoch 233/300 lr=6.16e-05 loss=6.3362e-02 (ber 7.542e-03 ler 3.411e-02 g 5.096e-02) train LER=1.139e-01 LER_strict=2.511e-01 BER=2.660e-03 time=214.4s
+2026-10-15 02:23:40,871 Epoch 234/300 lr=5.99e-05 loss=6.3126e-02 (ber 7.561e-03 ler 3.389e-02 g 5.090e-02) train LER=1.133e-01 LER_strict=2.514e-01 BER=2.674e-03 time=214.7s
+2026-10-15 02:27:15,418 Epoch 235/300 lr=5.83e-05 loss=6.3286e-02 (ber 7.592e-03 ler 3.396e-02 g 5.107e-02) train LER=1.150e-01 LER_strict=2.532e-01 BER=2.681e-03 time=214.5s
+2026-10-15 02:30:50,071 Epoch 236/300 lr=5.66e-05 loss=6.3498e-02 (ber 7.575e-03 ler 3.426e-02 g 5.089e-02) train LER=1.133e-01 LER_strict=2.498e-01 BER=2.666e-03 time=214.5s
+2026-10-15 02:34:24,695 Epoch 237/300 lr=5.50e-05 loss=6.2487e-02 (ber 7.469e-03 ler 3.334e-02 g 5.082e-02) train LER=1.124e-01 LER_strict=2.505e-01 BER=2.633e-03 time=214.5s
+2026-10-15 02:34:24,853 best model saved
+2026-10-15 02:37:59,278 Epoch 238/300 lr=5.34e-05 loss=6.2980e-02 (ber 7.534e-03 ler 3.382e-02 g 5.078e-02) train LER=1.129e-01 LER_strict=2.502e-01 BER=2.658e-03 time=214.4s
+2026-10-15 02:41:34,453 Epoch 239/300 lr=5.18e-05 loss=6.2751e-02 (ber 7.514e-03 ler 3.362e-02 g 5.075e-02) train LER=1.132e-01 LER_strict=2.496e-01 BER=2.647e-03 time=215.0s
+2026-10-15 02:45:09,481 Epoch 240/300 lr=5.02e-05 loss=6.3114e-02 (ber 7.527e-03 ler 3.398e-02 g 5.075e-02) train LER=1.140e-01 LER_strict=2.498e-01 BER=2.655e-03 time=214.9s
+2026-10-15 02:45:20,728 Test[ep240] p=0.0100: LER=5.000e-05 LER_strict=5.000e-04 BER=1.188e-06 (n=20000)
+2026-10-15 02:45:31,879 Test[ep240] p=0.0213: LER=5.000e-04 LER_strict=4.100e-03 BER=1.206e-05 (n=20000)
+2026-10-15 02:45:43,029 Test[ep240] p=0.0325: LER=2.500e-03 LER_strict=1.690e-02 BER=5.556e-05 (n=20000)
+2026-10-15 02:45:54,179 Test[ep240] p=0.0438: LER=8.700e-03 LER_strict=4.810e-02 BER=1.863e-04 (n=20000)
+2026-10-15 02:46:05,329 Test[ep240] p=0.0550: LER=2.560e-02 LER_strict=1.181e-01 BER=5.023e-04 (n=20000)
+2026-10-15 02:46:16,481 Test[ep240] p=0.0663: LER=6.285e-02 LER_strict=2.407e-01 BER=1.253e-03 (n=20000)
+2026-10-15 02:46:27,633 Test[ep240] p=0.0775: LER=1.431e-01 LER_strict=4.130e-01 BER=2.822e-03 (n=20000)
+2026-10-15 02:46:38,783 Test[ep240] p=0.0888: LER=2.849e-01 LER_strict=6.090e-01 BER=6.190e-03 (n=20000)
+2026-10-15 02:46:49,932 Test[ep240] p=0.1000: LER=4.864e-01 LER_strict=7.893e-01 BER=1.248e-02 (n=20000)
+2026-10-15 02:46:49,933 Test[ep240] time 100.4s
+2026-10-15 02:50:24,936 Epoch 241/300 lr=4.87e-05 loss=6.1862e-02 (ber 7.332e-03 ler 3.291e-02 g 5.056e-02) train LER=1.114e-01 LER_strict=2.463e-01 BER=2.588e-03 time=214.9s
+2026-10-15 02:50:25,103 best model saved
+2026-10-15 02:53:59,945 Epoch 242/300 lr=4.71e-05 loss=6.1881e-02 (ber 7.377e-03 ler 3.292e-02 g 5.054e-02) train LER=1.105e-01 LER_strict=2.462e-01 BER=2.602e-03 time=214.8s
+2026-10-15 02:57:35,167 Epoch 243/300 lr=4.56e-05 loss=6.2516e-02 (ber 7.467e-03 ler 3.347e-02 g 5.061e-02) train LER=1.129e-01 LER_strict=2.476e-01 BER=2.627e-03 time=215.1s
+2026-10-15 03:01:09,792 Epoch 244/300 lr=4.41e-05 loss=6.2092e-02 (ber 7.369e-03 ler 3.307e-02 g 5.068e-02) train LER=1.117e-01 LER_strict=2.477e-01 BER=2.601e-03 time=214.5s
+2026-10-15 03:04:43,935 Epoch 245/300 lr=4.27e-05 loss=6.2346e-02 (ber 7.411e-03 ler 3.336e-02 g 5.056e-02) train LER=1.117e-01 LER_strict=2.474e-01 BER=2.618e-03 time=214.0s
+2026-10-15 03:08:18,562 Epoch 246/300 lr=4.13e-05 loss=6.2275e-02 (ber 7.386e-03 ler 3.323e-02 g 5.071e-02) train LER=1.114e-01 LER_strict=2.481e-01 BER=2.609e-03 time=214.5s
+2026-10-15 03:11:53,324 Epoch 247/300 lr=3.98e-05 loss=6.2429e-02 (ber 7.386e-03 ler 3.336e-02 g 5.075e-02) train LER=1.115e-01 LER_strict=2.492e-01 BER=2.620e-03 time=214.7s
+2026-10-15 03:15:28,060 Epoch 248/300 lr=3.85e-05 loss=6.2038e-02 (ber 7.322e-03 ler 3.309e-02 g 5.056e-02) train LER=1.114e-01 LER_strict=2.463e-01 BER=2.586e-03 time=214.6s
+2026-10-15 03:19:02,712 Epoch 249/300 lr=3.71e-05 loss=6.2446e-02 (ber 7.428e-03 ler 3.335e-02 g 5.076e-02) train LER=1.119e-01 LER_strict=2.470e-01 BER=2.617e-03 time=214.6s
+2026-10-15 03:22:37,172 Epoch 250/300 lr=3.57e-05 loss=6.2594e-02 (ber 7.476e-03 ler 3.348e-02 g 5.076e-02) train LER=1.117e-01 LER_strict=2.479e-01 BER=2.636e-03 time=214.4s
+2026-10-15 03:26:11,768 Epoch 251/300 lr=3.44e-05 loss=6.1925e-02 (ber 7.356e-03 ler 3.284e-02 g 5.081e-02) train LER=1.097e-01 LER_strict=2.472e-01 BER=2.587e-03 time=214.5s
+2026-10-15 03:29:46,383 Epoch 252/300 lr=3.31e-05 loss=6.1933e-02 (ber 7.340e-03 ler 3.279e-02 g 5.094e-02) train LER=1.102e-01 LER_strict=2.494e-01 BER=2.589e-03 time=214.5s
+2026-10-15 03:33:20,912 Epoch 253/300 lr=3.19e-05 loss=6.2296e-02 (ber 7.398e-03 ler 3.319e-02 g 5.082e-02) train LER=1.112e-01 LER_strict=2.489e-01 BER=2.613e-03 time=214.4s
+2026-10-15 03:36:55,616 Epoch 254/300 lr=3.06e-05 loss=6.1715e-02 (ber 7.394e-03 ler 3.263e-02 g 5.077e-02) train LER=1.107e-01 LER_strict=2.471e-01 BER=2.605e-03 time=214.6s
+2026-10-15 03:36:55,779 best model saved
+2026-10-15 03:40:30,427 Epoch 255/300 lr=2.94e-05 loss=6.2204e-02 (ber 7.378e-03 ler 3.308e-02 g 5.086e-02) train LER=1.114e-01 LER_strict=2.471e-01 BER=2.605e-03 time=214.6s
+2026-10-15 03:44:05,053 Epoch 256/300 lr=2.82e-05 loss=6.1878e-02 (ber 7.361e-03 ler 3.284e-02 g 5.071e-02) train LER=1.113e-01 LER_strict=2.466e-01 BER=2.597e-03 time=214.5s
+2026-10-15 03:47:39,990 Epoch 257/300 lr=2.70e-05 loss=6.1708e-02 (ber 7.351e-03 ler 3.272e-02 g 5.063e-02) train LER=1.104e-01 LER_strict=2.461e-01 BER=2.602e-03 time=214.8s
+2026-10-15 03:47:40,135 best model saved
+2026-10-15 03:51:14,926 Epoch 258/300 lr=2.59e-05 loss=6.1883e-02 (ber 7.346e-03 ler 3.276e-02 g 5.089e-02) train LER=1.113e-01 LER_strict=2.470e-01 BER=2.593e-03 time=214.8s
+2026-10-15 03:54:49,796 Epoch 259/300 lr=2.47e-05 loss=6.1784e-02 (ber 7.328e-03 ler 3.280e-02 g 5.064e-02) train LER=1.099e-01 LER_strict=2.448e-01 BER=2.584e-03 time=214.7s
+2026-10-15 03:58:24,600 Epoch 260/300 lr=2.36e-05 loss=6.1768e-02 (ber 7.296e-03 ler 3.280e-02 g 5.064e-02) train LER=1.100e-01 LER_strict=2.452e-01 BER=2.577e-03 time=214.7s
+2026-10-15 03:58:35,759 Test[ep260] p=0.0100: LER=0.000e+00 LER_strict=2.500e-04 BER=6.250e-07 (n=20000)
+2026-10-15 03:58:46,849 Test[ep260] p=0.0213: LER=5.000e-04 LER_strict=3.550e-03 BER=1.112e-05 (n=20000)
+2026-10-15 03:58:57,939 Test[ep260] p=0.0325: LER=2.350e-03 LER_strict=1.655e-02 BER=5.906e-05 (n=20000)
+2026-10-15 03:59:09,029 Test[ep260] p=0.0438: LER=7.550e-03 LER_strict=4.800e-02 BER=1.788e-04 (n=20000)
+2026-10-15 03:59:20,121 Test[ep260] p=0.0550: LER=2.315e-02 LER_strict=1.143e-01 BER=4.791e-04 (n=20000)
+2026-10-15 03:59:31,211 Test[ep260] p=0.0663: LER=6.350e-02 LER_strict=2.310e-01 BER=1.209e-03 (n=20000)
+2026-10-15 03:59:42,303 Test[ep260] p=0.0775: LER=1.383e-01 LER_strict=4.047e-01 BER=2.734e-03 (n=20000)
+2026-10-15 03:59:53,399 Test[ep260] p=0.0888: LER=2.770e-01 LER_strict=6.027e-01 BER=6.128e-03 (n=20000)
+2026-10-15 04:00:04,489 Test[ep260] p=0.1000: LER=4.734e-01 LER_strict=7.823e-01 BER=1.236e-02 (n=20000)
+2026-10-15 04:00:04,490 Test[ep260] time 99.8s
+2026-10-15 04:03:39,140 Epoch 261/300 lr=2.26e-05 loss=6.1710e-02 (ber 7.318e-03 ler 3.269e-02 g 5.072e-02) train LER=1.107e-01 LER_strict=2.459e-01 BER=2.585e-03 time=214.6s
+2026-10-15 04:07:14,087 Epoch 262/300 lr=2.15e-05 loss=6.1843e-02 (ber 7.274e-03 ler 3.286e-02 g 5.069e-02) train LER=1.106e-01 LER_strict=2.461e-01 BER=2.562e-03 time=214.8s
+2026-10-15 04:10:48,924 Epoch 263/300 lr=2.05e-05 loss=6.1894e-02 (ber 7.350e-03 ler 3.276e-02 g 5.091e-02) train LER=1.098e-01 LER_strict=2.463e-01 BER=2.593e-03 time=214.7s
+2026-10-15 04:14:24,171 Epoch 264/300 lr=1.95e-05 loss=6.1345e-02 (ber 7.225e-03 ler 3.237e-02 g 5.073e-02) train LER=1.110e-01 LER_strict=2.464e-01 BER=2.546e-03 time=215.2s
+2026-10-15 04:14:24,313 best model saved
+2026-10-15 04:17:59,443 Epoch 265/300 lr=1.85e-05 loss=6.1573e-02 (ber 7.344e-03 ler 3.260e-02 g 5.061e-02) train LER=1.103e-01 LER_strict=2.463e-01 BER=2.599e-03 time=215.1s
+2026-10-15 04:21:34,567 Epoch 266/300 lr=1.76e-05 loss=6.1562e-02 (ber 7.315e-03 ler 3.255e-02 g 5.072e-02) train LER=1.090e-01 LER_strict=2.456e-01 BER=2.580e-03 time=215.0s
+2026-10-15 04:25:09,536 Epoch 267/300 lr=1.66e-05 loss=6.1848e-02 (ber 7.378e-03 ler 3.276e-02 g 5.079e-02) train LER=1.102e-01 LER_strict=2.465e-01 BER=2.593e-03 time=214.9s
+2026-10-15 04:28:44,691 Epoch 268/300 lr=1.58e-05 loss=6.1374e-02 (ber 7.315e-03 ler 3.242e-02 g 5.058e-02) train LER=1.096e-01 LER_strict=2.470e-01 BER=2.577e-03 time=215.1s
+2026-10-15 04:32:19,605 Epoch 269/300 lr=1.49e-05 loss=6.1581e-02 (ber 7.281e-03 ler 3.269e-02 g 5.049e-02) train LER=1.100e-01 LER_strict=2.447e-01 BER=2.564e-03 time=214.8s
+2026-10-15 04:35:54,237 Epoch 270/300 lr=1.40e-05 loss=6.1730e-02 (ber 7.365e-03 ler 3.263e-02 g 5.083e-02) train LER=1.100e-01 LER_strict=2.457e-01 BER=2.602e-03 time=214.5s
+2026-10-15 04:39:28,907 Epoch 271/300 lr=1.32e-05 loss=6.1801e-02 (ber 7.347e-03 ler 3.270e-02 g 5.085e-02) train LER=1.104e-01 LER_strict=2.451e-01 BER=2.591e-03 time=214.6s
+2026-10-15 04:43:03,974 Epoch 272/300 lr=1.24e-05 loss=6.1035e-02 (ber 7.239e-03 ler 3.211e-02 g 5.061e-02) train LER=1.095e-01 LER_strict=2.440e-01 BER=2.555e-03 time=215.0s
+2026-10-15 04:43:04,140 best model saved
+2026-10-15 04:46:39,314 Epoch 273/300 lr=1.16e-05 loss=6.1609e-02 (ber 7.316e-03 ler 3.261e-02 g 5.069e-02) train LER=1.099e-01 LER_strict=2.458e-01 BER=2.581e-03 time=215.2s
+2026-10-15 04:50:14,560 Epoch 274/300 lr=1.09e-05 loss=6.0979e-02 (ber 7.181e-03 ler 3.214e-02 g 5.049e-02) train LER=1.080e-01 LER_strict=2.427e-01 BER=2.532e-03 time=215.2s
+2026-10-15 04:50:14,727 best model saved
+2026-10-15 04:53:49,613 Epoch 275/300 lr=1.02e-05 loss=6.1374e-02 (ber 7.269e-03 ler 3.245e-02 g 5.057e-02) train LER=1.086e-01 LER_strict=2.452e-01 BER=2.564e-03 time=214.9s
+2026-10-15 04:57:24,548 Epoch 276/300 lr=9.50e-06 loss=6.1969e-02 (ber 7.352e-03 ler 3.285e-02 g 5.089e-02) train LER=1.105e-01 LER_strict=2.451e-01 BER=2.604e-03 time=214.8s
+2026-10-15 05:00:59,595 Epoch 277/300 lr=8.84e-06 loss=6.1261e-02 (ber 7.209e-03 ler 3.226e-02 g 5.079e-02) train LER=1.079e-01 LER_strict=2.423e-01 BER=2.546e-03 time=214.9s
+2026-10-15 05:04:34,711 Epoch 278/300 lr=8.20e-06 loss=6.2026e-02 (ber 7.349e-03 ler 3.297e-02 g 5.077e-02) train LER=1.103e-01 LER_strict=2.443e-01 BER=2.594e-03 time=215.0s
+2026-10-15 05:08:09,868 Epoch 279/300 lr=7.59e-06 loss=6.1085e-02 (ber 7.213e-03 ler 3.220e-02 g 5.056e-02) train LER=1.087e-01 LER_strict=2.454e-01 BER=2.549e-03 time=215.1s
+2026-10-15 05:11:45,125 Epoch 280/300 lr=7.01e-06 loss=6.0850e-02 (ber 7.206e-03 ler 3.202e-02 g 5.045e-02) train LER=1.081e-01 LER_strict=2.437e-01 BER=2.547e-03 time=215.2s
+2026-10-15 05:11:45,277 best model saved
+2026-10-15 05:11:56,429 Test[ep280] p=0.0100: LER=5.000e-05 LER_strict=4.000e-04 BER=1.188e-06 (n=20000)
+2026-10-15 05:12:07,580 Test[ep280] p=0.0213: LER=6.000e-04 LER_strict=3.900e-03 BER=1.094e-05 (n=20000)
+2026-10-15 05:12:18,730 Test[ep280] p=0.0325: LER=2.300e-03 LER_strict=1.595e-02 BER=5.462e-05 (n=20000)
+2026-10-15 05:12:29,880 Test[ep280] p=0.0438: LER=8.600e-03 LER_strict=4.890e-02 BER=1.840e-04 (n=20000)
+2026-10-15 05:12:41,030 Test[ep280] p=0.0550: LER=2.405e-02 LER_strict=1.148e-01 BER=5.049e-04 (n=20000)
+2026-10-15 05:12:52,180 Test[ep280] p=0.0663: LER=6.015e-02 LER_strict=2.306e-01 BER=1.221e-03 (n=20000)
+2026-10-15 05:13:03,330 Test[ep280] p=0.0775: LER=1.368e-01 LER_strict=3.975e-01 BER=2.742e-03 (n=20000)
+2026-10-15 05:13:14,481 Test[ep280] p=0.0888: LER=2.788e-01 LER_strict=5.977e-01 BER=6.081e-03 (n=20000)
+2026-10-15 05:13:25,632 Test[ep280] p=0.1000: LER=4.697e-01 LER_strict=7.808e-01 BER=1.214e-02 (n=20000)
+2026-10-15 05:13:25,632 Test[ep280] time 100.4s
+2026-10-15 05:17:00,937 Epoch 281/300 lr=6.45e-06 loss=6.0779e-02 (ber 7.178e-03 ler 3.196e-02 g 5.046e-02) train LER=1.072e-01 LER_strict=2.421e-01 BER=2.536e-03 time=215.2s
+2026-10-15 05:17:01,094 best model saved
+2026-10-15 05:20:35,947 Epoch 282/300 lr=5.92e-06 loss=6.1810e-02 (ber 7.283e-03 ler 3.276e-02 g 5.082e-02) train LER=1.106e-01 LER_strict=2.447e-01 BER=2.574e-03 time=214.8s
+2026-10-15 05:24:10,885 Epoch 283/300 lr=5.42e-06 loss=6.1465e-02 (ber 7.256e-03 ler 3.248e-02 g 5.071e-02) train LER=1.082e-01 LER_strict=2.434e-01 BER=2.560e-03 time=214.9s
+2026-10-15 05:27:46,484 Epoch 284/300 lr=4.94e-06 loss=6.1835e-02 (ber 7.315e-03 ler 3.273e-02 g 5.089e-02) train LER=1.091e-01 LER_strict=2.452e-01 BER=2.584e-03 time=215.4s
+2026-10-15 05:31:22,056 Epoch 285/300 lr=4.49e-06 loss=6.0935e-02 (ber 7.233e-03 ler 3.194e-02 g 5.075e-02) train LER=1.079e-01 LER_strict=2.438e-01 BER=2.552e-03 time=215.5s
+2026-10-15 05:34:57,663 Epoch 286/300 lr=4.07e-06 loss=6.1334e-02 (ber 7.256e-03 ler 3.231e-02 g 5.079e-02) train LER=1.087e-01 LER_strict=2.440e-01 BER=2.562e-03 time=215.5s
+2026-10-15 05:38:32,747 Epoch 287/300 lr=3.68e-06 loss=6.2232e-02 (ber 7.460e-03 ler 3.301e-02 g 5.098e-02) train LER=1.104e-01 LER_strict=2.462e-01 BER=2.626e-03 time=215.0s
+2026-10-15 05:42:07,384 Epoch 288/300 lr=3.31e-06 loss=6.1450e-02 (ber 7.281e-03 ler 3.247e-02 g 5.067e-02) train LER=1.088e-01 LER_strict=2.445e-01 BER=2.573e-03 time=214.5s
+2026-10-15 05:45:41,893 Epoch 289/300 lr=2.97e-06 loss=6.1411e-02 (ber 7.300e-03 ler 3.245e-02 g 5.061e-02) train LER=1.089e-01 LER_strict=2.427e-01 BER=2.571e-03 time=214.4s
+2026-10-15 05:49:16,470 Epoch 290/300 lr=2.65e-06 loss=6.2063e-02 (ber 7.330e-03 ler 3.296e-02 g 5.088e-02) train LER=1.103e-01 LER_strict=2.447e-01 BER=2.583e-03 time=214.5s
+2026-10-15 05:52:51,300 Epoch 291/300 lr=2.37e-06 loss=6.1250e-02 (ber 7.238e-03 ler 3.234e-02 g 5.058e-02) train LER=1.089e-01 LER_strict=2.433e-01 BER=2.555e-03 time=214.7s
+2026-10-15 05:56:25,924 Epoch 292/300 lr=2.11e-06 loss=6.1713e-02 (ber 7.336e-03 ler 3.270e-02 g 5.069e-02) train LER=1.104e-01 LER_strict=2.437e-01 BER=2.585e-03 time=214.5s
+2026-10-15 06:00:00,487 Epoch 293/300 lr=1.88e-06 loss=6.1048e-02 (ber 7.180e-03 ler 3.218e-02 g 5.056e-02) train LER=1.082e-01 LER_strict=2.433e-01 BER=2.542e-03 time=214.5s
+2026-10-15 06:03:35,115 Epoch 294/300 lr=1.67e-06 loss=6.0851e-02 (ber 7.205e-03 ler 3.197e-02 g 5.056e-02) train LER=1.084e-01 LER_strict=2.426e-01 BER=2.549e-03 time=214.5s
+2026-10-15 06:07:09,700 Epoch 295/300 lr=1.49e-06 loss=6.1450e-02 (ber 7.263e-03 ler 3.246e-02 g 5.071e-02) train LER=1.090e-01 LER_strict=2.437e-01 BER=2.568e-03 time=214.5s
+2026-10-15 06:10:45,036 Epoch 296/300 lr=1.34e-06 loss=6.1483e-02 (ber 7.228e-03 ler 3.249e-02 g 5.075e-02) train LER=1.100e-01 LER_strict=2.452e-01 BER=2.561e-03 time=215.1s
+2026-10-15 06:14:20,499 Epoch 297/300 lr=1.22e-06 loss=6.1720e-02 (ber 7.295e-03 ler 3.266e-02 g 5.082e-02) train LER=1.091e-01 LER_strict=2.440e-01 BER=2.574e-03 time=215.4s
+2026-10-15 06:17:56,127 Epoch 298/300 lr=1.12e-06 loss=6.1089e-02 (ber 7.234e-03 ler 3.212e-02 g 5.071e-02) train LER=1.084e-01 LER_strict=2.440e-01 BER=2.547e-03 time=215.5s
+2026-10-15 06:21:31,669 Epoch 299/300 lr=1.05e-06 loss=6.0904e-02 (ber 7.221e-03 ler 3.198e-02 g 5.063e-02) train LER=1.080e-01 LER_strict=2.444e-01 BER=2.549e-03 time=215.4s
+2026-10-15 06:25:07,489 Epoch 300/300 lr=1.01e-06 loss=6.1095e-02 (ber 7.297e-03 ler 3.216e-02 g 5.058e-02) train LER=1.085e-01 LER_strict=2.442e-01 BER=2.575e-03 time=215.7s
+2026-10-15 06:25:18,737 Test[ep300] p=0.0100: LER=0.000e+00 LER_strict=2.500e-04 BER=1.125e-06 (n=20000)
+2026-10-15 06:25:29,891 Test[ep300] p=0.0213: LER=5.500e-04 LER_strict=4.100e-03 BER=1.363e-05 (n=20000)
+2026-10-15 06:25:41,045 Test[ep300] p=0.0325: LER=2.500e-03 LER_strict=1.845e-02 BER=5.956e-05 (n=20000)
+2026-10-15 06:25:52,197 Test[ep300] p=0.0438: LER=6.750e-03 LER_strict=4.695e-02 BER=1.800e-04 (n=20000)
+2026-10-15 06:26:03,350 Test[ep300] p=0.0550: LER=2.210e-02 LER_strict=1.095e-01 BER=4.738e-04 (n=20000)
+2026-10-15 06:26:14,502 Test[ep300] p=0.0663: LER=5.965e-02 LER_strict=2.283e-01 BER=1.184e-03 (n=20000)
+2026-10-15 06:26:25,657 Test[ep300] p=0.0775: LER=1.372e-01 LER_strict=3.943e-01 BER=2.705e-03 (n=20000)
+2026-10-15 06:26:36,811 Test[ep300] p=0.0888: LER=2.756e-01 LER_strict=5.980e-01 BER=6.019e-03 (n=20000)
+2026-10-15 06:26:47,966 Test[ep300] p=0.1000: LER=4.723e-01 LER_strict=7.790e-01 BER=1.216e-02 (n=20000)
+2026-10-15 06:26:47,967 Test[ep300] time 100.4s
+2026-10-15 06:26:48,192 loaded best checkpoint (epoch 281, loss 6.0779e-02)
+2026-10-15 06:31:26,953 Final p=0.0100: LER=5.000e-05 LER_strict=3.540e-04 BER=9.175e-07 (n=500000)
+2026-10-15 06:36:05,713 Final p=0.0153: LER=1.500e-04 LER_strict=1.254e-03 BER=3.737e-06 (n=500000)
+2026-10-15 06:40:44,468 Final p=0.0206: LER=4.460e-04 LER_strict=3.374e-03 BER=1.046e-05 (n=500000)
+2026-10-15 06:45:23,208 Final p=0.0259: LER=1.070e-03 LER_strict=7.506e-03 BER=2.516e-05 (n=500000)
+2026-10-15 06:50:01,933 Final p=0.0312: LER=2.048e-03 LER_strict=1.422e-02 BER=4.828e-05 (n=500000)
+2026-10-15 06:54:40,668 Final p=0.0365: LER=4.024e-03 LER_strict=2.535e-02 BER=9.088e-05 (n=500000)
+2026-10-15 06:59:19,396 Final p=0.0418: LER=6.894e-03 LER_strict=4.091e-02 BER=1.549e-04 (n=500000)
+2026-10-15 07:03:58,127 Final p=0.0471: LER=1.154e-02 LER_strict=6.285e-02 BER=2.474e-04 (n=500000)
+2026-10-15 07:08:36,849 Final p=0.0524: LER=1.833e-02 LER_strict=9.469e-02 BER=3.939e-04 (n=500000)
+2026-10-15 07:13:15,521 Final p=0.0576: LER=2.933e-02 LER_strict=1.362e-01 BER=6.120e-04 (n=500000)
+2026-10-15 07:17:54,244 Final p=0.0629: LER=4.562e-02 LER_strict=1.898e-01 BER=9.336e-04 (n=500000)
+2026-10-15 07:22:33,016 Final p=0.0682: LER=6.940e-02 LER_strict=2.564e-01 BER=1.407e-03 (n=500000)
+2026-10-15 07:27:11,796 Final p=0.0735: LER=1.048e-01 LER_strict=3.350e-01 BER=2.081e-03 (n=500000)
+2026-10-15 07:31:50,583 Final p=0.0788: LER=1.510e-01 LER_strict=4.230e-01 BER=3.053e-03 (n=500000)
+2026-10-15 07:36:29,357 Final p=0.0841: LER=2.129e-01 LER_strict=5.175e-01 BER=4.453e-03 (n=500000)
+2026-10-15 07:41:08,118 Final p=0.0894: LER=2.873e-01 LER_strict=6.103e-01 BER=6.331e-03 (n=500000)
+2026-10-15 07:45:46,881 Final p=0.0947: LER=3.755e-01 LER_strict=7.010e-01 BER=8.919e-03 (n=500000)
+2026-10-15 07:50:25,556 Final p=0.1000: LER=4.706e-01 LER_strict=7.803e-01 BER=1.221e-02 (n=500000)
+2026-10-15 07:50:25,561 Final time 5017.4s
+2026-10-15 07:50:25,589 done
+2026-10-20 06:13:16,723 args: {"model": "product", "code": "hgp-400", "noise": "depolarizing", "err_types": "xz", "out_root": "runs", "run_name": null, "seed": 42, "gpus": "0", "d_model": 128, "h": 8, "N_dec": 6, "dropout": 0.0, "d_g": 32, "N_g": 1, "no_share": false, "no_out_mix": false, "g_hidden_mult": 5, "no_g": 0, "no_mask": 0, "epochs": 300, "batches_per_epoch": 1000, "batch_size": 128, "lr": 0.0005, "lr_min": 1e-06, "grad_clip": 1.0, "weight_decay": 0.0, "accum_steps": 1, "warmup_steps": 1000, "max_skipped": 50, "amp": false, "lam_ber": 0.5, "lam_ler": 1.0, "lam_g": 0.5, "ler_warmup_epochs": 0, "p_test": "0.01:0.10:9", "p_train": null, "p_sampling": "discrete", "test_every": 20, "test_samples": 20000, "final_samples": 500000, "final_p_test": "0.01:0.10:18", "test_batch_size": 512, "resume": "auto", "max_hours": 22.0, "final_on_timeout": 0, "workers": 0}
+2026-10-20 06:13:17,889 CSSCode(hgp-400: [[400,16]], rx=192, rz=192, grid rows=16+12 cols=16+12), d <= min(8,8) (randomized upper bound)
+2026-10-20 06:13:18,818 model=product params=1,214,532 device=cuda
+2026-10-20 06:13:34,082 p_test=['0.0100', '0.0213', '0.0325', '0.0438', '0.0550', '0.0663', '0.0775', '0.0888', '0.1000']  p_train=['0.0100', '0.0213', '0.0325', '0.0438', '0.0550', '0.0663', '0.0775', '0.0888', '0.1000'] (discrete)
+2026-10-20 06:13:34,263 resumed from runs/product_hgp-400_depolarizing_xz_N6_d128_s42/last.pt at epoch 301
+2026-10-20 06:13:34,265 training and final evaluation already complete; nothing to do

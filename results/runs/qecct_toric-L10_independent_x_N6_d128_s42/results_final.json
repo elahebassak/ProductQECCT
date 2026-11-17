@@ -1,0 +1,219 @@
+{
+  "model": "qecct",
+  "code": "toric-L10",
+  "noise": "independent",
+  "err_types": "x",
+  "params": 2590817,
+  "n": 200,
+  "k": 2,
+  "results": {
+    "0.010000": {
+      "ler_x": 1.4e-05,
+      "ler_x_strict": 0.173512,
+      "synd_mismatch_x": 0.173512,
+      "ler": 1.4e-05,
+      "ler_strict": 0.173512,
+      "ber": 0.002019,
+      "samples": 500000
+    },
+    "0.021176": {
+      "ler_x": 0.000284,
+      "ler_x_strict": 0.390288,
+      "synd_mismatch_x": 0.390288,
+      "ler": 0.000284,
+      "ler_strict": 0.390288,
+      "ber": 0.00553075,
+      "samples": 500000
+    },
+    "0.032353": {
+      "ler_x": 0.002686,
+      "ler_x_strict": 0.590458,
+      "synd_mismatch_x": 0.590456,
+      "ler": 0.002686,
+      "ler_strict": 0.590458,
+      "ber": 0.01051121,
+      "samples": 500000
+    },
+    "0.043529": {
+      "ler_x": 0.011702,
+      "ler_x_strict": 0.750704,
+      "synd_mismatch_x": 0.750692,
+      "ler": 0.011702,
+      "ler_strict": 0.750704,
+      "ber": 0.01726577,
+      "samples": 500000
+    },
+    "0.054706": {
+      "ler_x": 0.033852,
+      "ler_x_strict": 0.860738,
+      "synd_mismatch_x": 0.860716,
+      "ler": 0.033852,
+      "ler_strict": 0.860738,
+      "ber": 0.02575919,
+      "samples": 500000
+    },
+    "0.065882": {
+      "ler_x": 0.07717,
+      "ler_x_strict": 0.928322,
+      "synd_mismatch_x": 0.928298,
+      "ler": 0.07717,
+      "ler_strict": 0.928322,
+      "ber": 0.03622007,
+      "samples": 500000
+    },
+    "0.077059": {
+      "ler_x": 0.14409,
+      "ler_x_strict": 0.966468,
+      "synd_mismatch_x": 0.966444,
+      "ler": 0.14409,
+      "ler_strict": 0.966468,
+      "ber": 0.04846909,
+      "samples": 500000
+    },
+    "0.088235": {
+      "ler_x": 0.227914,
+      "ler_x_strict": 0.985434,
+      "synd_mismatch_x": 0.985408,
+      "ler": 0.227914,
+      "ler_strict": 0.985434,
+      "ber": 0.06196503,
+      "samples": 500000
+    },
+    "0.099412": {
+      "ler_x": 0.321798,
+      "ler_x_strict": 0.99398,
+      "synd_mismatch_x": 0.99395,
+      "ler": 0.321798,
+      "ler_strict": 0.99398,
+      "ber": 0.07638815,
+      "samples": 500000
+    },
+    "0.110588": {
+      "ler_x": 0.414602,
+      "ler_x_strict": 0.997802,
+      "synd_mismatch_x": 0.997784,
+      "ler": 0.414602,
+      "ler_strict": 0.997802,
+      "ber": 0.09126994,
+      "samples": 500000
+    },
+    "0.121765": {
+      "ler_x": 0.499896,
+      "ler_x_strict": 0.999122,
+      "synd_mismatch_x": 0.999114,
+      "ler": 0.499896,
+      "ler_strict": 0.999122,
+      "ber": 0.10629634,
+      "samples": 500000
+    },
+    "0.132941": {
+      "ler_x": 0.571298,
+      "ler_x_strict": 0.999712,
+      "synd_mismatch_x": 0.999696,
+      "ler": 0.571298,
+      "ler_strict": 0.999712,
+      "ber": 0.12117498,
+      "samples": 500000
+    },
+    "0.144118": {
+      "ler_x": 0.627186,
+      "ler_x_strict": 0.999872,
+      "synd_mismatch_x": 0.999862,
+      "ler": 0.627186,
+      "ler_strict": 0.999872,
+      "ber": 0.13573348,
+      "samples": 500000
+    },
+    "0.155294": {
+      "ler_x": 0.667194,
+      "ler_x_strict": 0.999972,
+      "synd_mismatch_x": 0.999968,
+      "ler": 0.667194,
+      "ler_strict": 0.999972,
+      "ber": 0.14976398,
+      "samples": 500000
+    },
+    "0.166471": {
+      "ler_x": 0.696808,
+      "ler_x_strict": 0.999994,
+      "synd_mismatch_x": 0.999992,
+      "ler": 0.696808,
+      "ler_strict": 0.999994,
+      "ber": 0.16348236,
+      "samples": 500000
+    },
+    "0.177647": {
+      "ler_x": 0.717066,
+      "ler_x_strict": 0.999998,
+      "synd_mismatch_x": 0.999998,
+      "ler": 0.717066,
+      "ler_strict": 0.999998,
+      "ber": 0.17672713,
+      "samples": 500000
+    },
+    "0.188824": {
+      "ler_x": 0.729304,
+      "ler_x_strict": 1.0,
+      "synd_mismatch_x": 1.0,
+      "ler": 0.729304,
+      "ler_strict": 1.0,
+      "ber": 0.18967402,
+      "samples": 500000
+    },
+    "0.200000": {
+      "ler_x": 0.7366,
+      "ler_x_strict": 1.0,
+      "synd_mismatch_x": 1.0,
+      "ler": 0.7366,
+      "ler_strict": 1.0,
+      "ber": 0.20209233,
+      "samples": 500000
+    }
+  },
+  "args": {
+    "model": "qecct",
+    "code": "toric-L10",
+    "noise": "independent",
+    "err_types": "x",
+    "out_root": "runs",
+    "run_name": null,
+    "seed": 42,
+    "gpus": "0",
+    "d_model": 128,
+    "h": 8,
+    "N_dec": 6,
+    "dropout": 0.0,
+    "d_g": 32,
+    "N_g": 1,
+    "no_share": false,
+    "no_out_mix": false,
+    "g_hidden_mult": 5,
+    "no_g": 0,
+    "no_mask": 0,
+    "epochs": 300,
+    "batches_per_epoch": 1000,
+    "batch_size": 128,
+    "lr": 0.0005,
+    "lr_min": 1e-06,
+    "grad_clip": 1.0,
+    "weight_decay": 0.0,
+    "warmup_steps": 1000,
+    "max_skipped": 50,
+    "amp": false,
+    "lam_ber": 0.5,
+    "lam_ler": 1.0,
+    "lam_g": 0.5,
+    "ler_warmup_epochs": 0,
+    "p_test": "0.01:0.2:9",
+    "p_train": null,
+    "p_sampling": "discrete",
+    "test_every": 20,
+    "test_samples": 20000,
+    "final_samples": 500000,
+    "final_p_test": "0.01:0.2:18",
+    "test_batch_size": 512,
+    "resume": "auto",
+    "max_hours": 69.0,
+    "workers": 0
+  }
+}

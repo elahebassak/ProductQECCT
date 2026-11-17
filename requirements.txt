@@ -1,0 +1,11 @@
+torch>=2.1
+numpy>=1.24
+scipy>=1.10
+ldpc>=2.1          # BP / BP+OSD classical baselines (pip install "git+https://github.com/quantumgizmos/ldpc.git" if the sdist fails to build)
+pymatching>=2.0    # MWPM baseline
+stim ; python_version >= "3.9"      # optional dependency of ldpc
+sinter             # optional dependency of ldpc
+matplotlib         # figures (docs/make_paper_figures.py, collect_results.py --plots)
+openpyxl           # tools/make_results_xlsx.py
+requests           # tools/zenodo_upload.py
+requests           # tools/zenodo_upload.py

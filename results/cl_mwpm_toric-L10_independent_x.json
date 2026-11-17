@@ -1,0 +1,209 @@
+{
+  "model": "mwpm",
+  "code": "toric-L10",
+  "noise": "independent",
+  "err_types": "x",
+  "n": 200,
+  "k": 2,
+  "results": {
+    "0.010000": {
+      "ler_x": 1e-06,
+      "ler_x_strict": 1e-06,
+      "synd_mismatch_x": 0.0,
+      "ler": 1e-06,
+      "ler_strict": 1e-06,
+      "ber": 0.00061035,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 16.488484144210815
+    },
+    "0.021176": {
+      "ler_x": 6.4e-05,
+      "ler_x_strict": 6.4e-05,
+      "synd_mismatch_x": 0.0,
+      "ler": 6.4e-05,
+      "ler_strict": 6.4e-05,
+      "ber": 0.00277812,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 17.450037479400635
+    },
+    "0.032353": {
+      "ler_x": 0.000713,
+      "ler_x_strict": 0.000713,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.000713,
+      "ler_strict": 0.000713,
+      "ber": 0.00661661,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 18.7395122051239
+    },
+    "0.043529": {
+      "ler_x": 0.004199,
+      "ler_x_strict": 0.004199,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.004199,
+      "ler_strict": 0.004199,
+      "ber": 0.01233184,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 20.060001373291016
+    },
+    "0.054706": {
+      "ler_x": 0.015592,
+      "ler_x_strict": 0.015592,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.015592,
+      "ler_strict": 0.015592,
+      "ber": 0.02026086,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 22.078502416610718
+    },
+    "0.065882": {
+      "ler_x": 0.042428,
+      "ler_x_strict": 0.042428,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.042428,
+      "ler_strict": 0.042428,
+      "ber": 0.03090884,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 24.23519229888916
+    },
+    "0.077059": {
+      "ler_x": 0.090018,
+      "ler_x_strict": 0.090018,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.090018,
+      "ler_strict": 0.090018,
+      "ber": 0.04430045,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 26.78691053390503
+    },
+    "0.088235": {
+      "ler_x": 0.162053,
+      "ler_x_strict": 0.162053,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.162053,
+      "ler_strict": 0.162053,
+      "ber": 0.06056647,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 29.569359302520752
+    },
+    "0.099412": {
+      "ler_x": 0.251394,
+      "ler_x_strict": 0.251394,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.251394,
+      "ler_strict": 0.251394,
+      "ber": 0.0787338,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 32.39751887321472
+    },
+    "0.110588": {
+      "ler_x": 0.347727,
+      "ler_x_strict": 0.347727,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.347727,
+      "ler_strict": 0.347727,
+      "ber": 0.09826969,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 35.26402735710144
+    },
+    "0.121765": {
+      "ler_x": 0.442827,
+      "ler_x_strict": 0.442827,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.442827,
+      "ler_strict": 0.442827,
+      "ber": 0.11805304,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 37.97521686553955
+    },
+    "0.132941": {
+      "ler_x": 0.525912,
+      "ler_x_strict": 0.525912,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.525912,
+      "ler_strict": 0.525912,
+      "ber": 0.13768428,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 40.68812131881714
+    },
+    "0.144118": {
+      "ler_x": 0.594015,
+      "ler_x_strict": 0.594015,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.594015,
+      "ler_strict": 0.594015,
+      "ber": 0.15654855,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 42.91867923736572
+    },
+    "0.155294": {
+      "ler_x": 0.646223,
+      "ler_x_strict": 0.646223,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.646223,
+      "ler_strict": 0.646223,
+      "ber": 0.17454363,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 44.94110941886902
+    },
+    "0.166471": {
+      "ler_x": 0.682282,
+      "ler_x_strict": 0.682282,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.682282,
+      "ler_strict": 0.682282,
+      "ber": 0.19163197,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 46.78815817832947
+    },
+    "0.177647": {
+      "ler_x": 0.707154,
+      "ler_x_strict": 0.707154,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.707154,
+      "ler_strict": 0.707154,
+      "ber": 0.20783908,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 48.37044715881348
+    },
+    "0.188824": {
+      "ler_x": 0.724367,
+      "ler_x_strict": 0.724367,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.724367,
+      "ler_strict": 0.724367,
+      "ber": 0.22326925,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 49.858391761779785
+    },
+    "0.200000": {
+      "ler_x": 0.734643,
+      "ler_x_strict": 0.734643,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.734643,
+      "ler_strict": 0.734643,
+      "ber": 0.23788832,
+      "samples": 1000000,
+      "decode_time_per_shot_us": 50.9383647441864
+    }
+  },
+  "args": {
+    "code": "toric-L10",
+    "noise": "independent",
+    "err_types": "x",
+    "decoder": "mwpm",
+    "p_test": "0.01:0.2:18",
+    "samples": 1000000,
+    "chunk": 2000,
+    "workers": 16,
+    "seed": 1234,
+    "max_iter": 100,
+    "bp_method": "minimum_sum",
+    "ms_scaling": 0.625,
+    "schedule": "parallel",
+    "osd_method": "OSD_CS",
+    "osd_order": 10,
+    "out": "results/cl_mwpm_toric-L10_independent_x.json"
+  },
+  "total_time_s": 66.24487113952637
+}

@@ -1,0 +1,88 @@
+{
+  "model": "product",
+  "code": "hgp-3600",
+  "noise": "depolarizing",
+  "err_types": "xz",
+  "params": 1257540,
+  "ckpt": "runs/product_hgp-3600_depolarizing_xz_N6_d128_s42/last.pt",
+  "epoch": 300,
+  "samples": 500000,
+  "results": {
+    "0.073529": {
+      "ler_x": 0.080216,
+      "ler_x_strict": 0.338292,
+      "synd_mismatch_x": 0.33763,
+      "ler_z": 0.089498,
+      "ler_z_strict": 0.336082,
+      "synd_mismatch_z": 0.335576,
+      "ler": 0.161122,
+      "ler_strict": 0.54696,
+      "ber": 0.0005001772222222223,
+      "samples": 500000
+    },
+    "0.078824": {
+      "ler_x": 0.134726,
+      "ler_x_strict": 0.472096,
+      "synd_mismatch_x": 0.471462,
+      "ler_z": 0.146674,
+      "ler_z_strict": 0.469632,
+      "synd_mismatch_z": 0.469082,
+      "ler": 0.25803,
+      "ler_strict": 0.70016,
+      "ber": 0.0007699466666666666,
+      "samples": 500000
+    },
+    "0.084118": {
+      "ler_x": 0.22091,
+      "ler_x_strict": 0.62479,
+      "synd_mismatch_x": 0.624264,
+      "ler_z": 0.236658,
+      "ler_z_strict": 0.62279,
+      "synd_mismatch_z": 0.62227,
+      "ler": 0.396192,
+      "ler_strict": 0.836568,
+      "ber": 0.0012070827777777777,
+      "samples": 500000
+    },
+    "0.089412": {
+      "ler_x": 0.345436,
+      "ler_x_strict": 0.774346,
+      "synd_mismatch_x": 0.773936,
+      "ler_z": 0.366592,
+      "ler_z_strict": 0.771772,
+      "synd_mismatch_z": 0.77137,
+      "ler": 0.567488,
+      "ler_strict": 0.930124,
+      "ber": 0.0019182744444444445,
+      "samples": 500000
+    },
+    "0.094706": {
+      "ler_x": 0.509208,
+      "ler_x_strict": 0.890518,
+      "synd_mismatch_x": 0.890296,
+      "ler_z": 0.53062,
+      "ler_z_strict": 0.890136,
+      "synd_mismatch_z": 0.889958,
+      "ler": 0.742478,
+      "ler_strict": 0.978758,
+      "ber": 0.003102208611111111,
+      "samples": 500000
+    },
+    "0.100000": {
+      "ler_x": 0.688564,
+      "ler_x_strict": 0.960588,
+      "synd_mismatch_x": 0.960488,
+      "ler_z": 0.709628,
+      "ler_z_strict": 0.960326,
+      "synd_mismatch_z": 0.960216,
+      "ler": 0.883938,
+      "ler_strict": 0.995708,
+      "ber": 0.005094075277777778,
+      "samples": 500000
+    },
+    "_meta": {
+      "latency_us_b1": 18114.662170410156,
+      "latency_us_b64": 6776.362657546997
+    }
+  }
+}

@@ -1,0 +1,43 @@
+#!/bin/bash
+# Submit all jobs of this phase.  Run from the project root: bash slurm/submit_phase1.sh
+mkdir -p logs results
+sbatch slurm/jobs/tr_product_toric-L4_independent_x.sh
+sbatch slurm/jobs/tr_qecct_toric-L4_independent_x.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L4_independent_x.sh
+sbatch slurm/jobs/cl_mwpm_toric-L4_independent_x.sh
+sbatch slurm/jobs/cl_bposd_toric-L4_independent_x.sh
+sbatch slurm/jobs/tr_product_toric-L4_depolarizing_xz.sh
+sbatch slurm/jobs/tr_qecct_toric-L4_depolarizing_xz.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L4_depolarizing_xz.sh
+sbatch slurm/jobs/cl_mwpm_toric-L4_depolarizing_xz.sh
+sbatch slurm/jobs/cl_bposd_toric-L4_depolarizing_xz.sh
+sbatch slurm/jobs/tr_product_toric-L6_independent_x.sh
+sbatch slurm/jobs/tr_qecct_toric-L6_independent_x.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L6_independent_x.sh
+sbatch slurm/jobs/cl_mwpm_toric-L6_independent_x.sh
+sbatch slurm/jobs/cl_bposd_toric-L6_independent_x.sh
+sbatch slurm/jobs/tr_product_toric-L6_depolarizing_xz.sh
+sbatch slurm/jobs/tr_qecct_toric-L6_depolarizing_xz.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L6_depolarizing_xz.sh
+sbatch slurm/jobs/cl_mwpm_toric-L6_depolarizing_xz.sh
+sbatch slurm/jobs/cl_bposd_toric-L6_depolarizing_xz.sh
+sbatch slurm/jobs/tr_product_toric-L8_independent_x.sh
+sbatch slurm/jobs/tr_qecct_toric-L8_independent_x.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L8_independent_x.sh
+sbatch slurm/jobs/cl_mwpm_toric-L8_independent_x.sh
+sbatch slurm/jobs/cl_bposd_toric-L8_independent_x.sh
+sbatch slurm/jobs/tr_product_toric-L8_depolarizing_xz.sh
+sbatch slurm/jobs/tr_qecct_toric-L8_depolarizing_xz.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L8_depolarizing_xz.sh
+sbatch slurm/jobs/cl_mwpm_toric-L8_depolarizing_xz.sh
+sbatch slurm/jobs/cl_bposd_toric-L8_depolarizing_xz.sh
+sbatch slurm/jobs/tr_product_toric-L10_independent_x.sh
+sbatch slurm/jobs/tr_qecct_toric-L10_independent_x.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L10_independent_x.sh
+sbatch slurm/jobs/cl_mwpm_toric-L10_independent_x.sh
+sbatch slurm/jobs/cl_bposd_toric-L10_independent_x.sh
+sbatch slurm/jobs/tr_product_toric-L10_depolarizing_xz.sh
+sbatch slurm/jobs/tr_qecct_toric-L10_depolarizing_xz.sh
+sbatch slurm/jobs/tr_crossqecct_toric-L10_depolarizing_xz.sh
+sbatch slurm/jobs/cl_mwpm_toric-L10_depolarizing_xz.sh
+sbatch slurm/jobs/cl_bposd_toric-L10_depolarizing_xz.sh

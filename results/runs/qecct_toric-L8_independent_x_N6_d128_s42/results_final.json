@@ -1,0 +1,216 @@
+{
+  "model": "qecct",
+  "code": "toric-L8",
+  "noise": "independent",
+  "err_types": "x",
+  "params": 1773185,
+  "n": 128,
+  "k": 2,
+  "results": {
+    "0.010000": {
+      "ler_x": 1.8e-05,
+      "ler_x_strict": 0.14245,
+      "synd_mismatch_x": 0.14245,
+      "ler": 1.8e-05,
+      "ler_strict": 0.14245,
+      "ber": 0.002514234375,
+      "samples": 500000
+    },
+    "0.021176": {
+      "ler_x": 0.0005,
+      "ler_x_strict": 0.316602,
+      "synd_mismatch_x": 0.316596,
+      "ler": 0.0005,
+      "ler_strict": 0.316602,
+      "ber": 0.006535109375,
+      "samples": 500000
+    },
+    "0.032353": {
+      "ler_x": 0.003146,
+      "ler_x_strict": 0.485438,
+      "synd_mismatch_x": 0.485416,
+      "ler": 0.003146,
+      "ler_strict": 0.485438,
+      "ber": 0.01196246875,
+      "samples": 500000
+    },
+    "0.043529": {
+      "ler_x": 0.012522,
+      "ler_x_strict": 0.63412,
+      "synd_mismatch_x": 0.634046,
+      "ler": 0.012522,
+      "ler_strict": 0.63412,
+      "ber": 0.019007125,
+      "samples": 500000
+    },
+    "0.054706": {
+      "ler_x": 0.033872,
+      "ler_x_strict": 0.753848,
+      "synd_mismatch_x": 0.753702,
+      "ler": 0.033872,
+      "ler_strict": 0.753848,
+      "ber": 0.02783496875,
+      "samples": 500000
+    },
+    "0.065882": {
+      "ler_x": 0.071732,
+      "ler_x_strict": 0.843406,
+      "synd_mismatch_x": 0.843122,
+      "ler": 0.071732,
+      "ler_strict": 0.843406,
+      "ber": 0.03846509375,
+      "samples": 500000
+    },
+    "0.077059": {
+      "ler_x": 0.127742,
+      "ler_x_strict": 0.90434,
+      "synd_mismatch_x": 0.904002,
+      "ler": 0.127742,
+      "ler_strict": 0.90434,
+      "ber": 0.050766953125,
+      "samples": 500000
+    },
+    "0.088235": {
+      "ler_x": 0.197298,
+      "ler_x_strict": 0.945114,
+      "synd_mismatch_x": 0.94476,
+      "ler": 0.197298,
+      "ler_strict": 0.945114,
+      "ber": 0.0642125,
+      "samples": 500000
+    },
+    "0.099412": {
+      "ler_x": 0.27898,
+      "ler_x_strict": 0.969458,
+      "synd_mismatch_x": 0.969034,
+      "ler": 0.27898,
+      "ler_strict": 0.969458,
+      "ber": 0.07867259375,
+      "samples": 500000
+    },
+    "0.110588": {
+      "ler_x": 0.36123,
+      "ler_x_strict": 0.983586,
+      "synd_mismatch_x": 0.983182,
+      "ler": 0.36123,
+      "ler_strict": 0.983586,
+      "ber": 0.0934253125,
+      "samples": 500000
+    },
+    "0.121765": {
+      "ler_x": 0.438934,
+      "ler_x_strict": 0.991682,
+      "synd_mismatch_x": 0.99135,
+      "ler": 0.438934,
+      "ler_strict": 0.991682,
+      "ber": 0.108356984375,
+      "samples": 500000
+    },
+    "0.132941": {
+      "ler_x": 0.509606,
+      "ler_x_strict": 0.995822,
+      "synd_mismatch_x": 0.995542,
+      "ler": 0.509606,
+      "ler_strict": 0.995822,
+      "ber": 0.123091171875,
+      "samples": 500000
+    },
+    "0.144118": {
+      "ler_x": 0.569128,
+      "ler_x_strict": 0.99791,
+      "synd_mismatch_x": 0.997678,
+      "ler": 0.569128,
+      "ler_strict": 0.99791,
+      "ber": 0.137672203125,
+      "samples": 500000
+    },
+    "0.155294": {
+      "ler_x": 0.617068,
+      "ler_x_strict": 0.998952,
+      "synd_mismatch_x": 0.99875,
+      "ler": 0.617068,
+      "ler_strict": 0.998952,
+      "ber": 0.151617078125,
+      "samples": 500000
+    },
+    "0.166471": {
+      "ler_x": 0.65637,
+      "ler_x_strict": 0.999474,
+      "synd_mismatch_x": 0.999346,
+      "ler": 0.65637,
+      "ler_strict": 0.999474,
+      "ber": 0.16539975,
+      "samples": 500000
+    },
+    "0.177647": {
+      "ler_x": 0.684798,
+      "ler_x_strict": 0.999772,
+      "synd_mismatch_x": 0.99968,
+      "ler": 0.684798,
+      "ler_strict": 0.999772,
+      "ber": 0.17863690625,
+      "samples": 500000
+    },
+    "0.188824": {
+      "ler_x": 0.705692,
+      "ler_x_strict": 0.999882,
+      "synd_mismatch_x": 0.99983,
+      "ler": 0.705692,
+      "ler_strict": 0.999882,
+      "ber": 0.19159190625,
+      "samples": 500000
+    },
+    "0.200000": {
+      "ler_x": 0.719128,
+      "ler_x_strict": 0.999946,
+      "synd_mismatch_x": 0.999888,
+      "ler": 0.719128,
+      "ler_strict": 0.999946,
+      "ber": 0.204035859375,
+      "samples": 500000
+    }
+  },
+  "args": {
+    "model": "qecct",
+    "code": "toric-L8",
+    "noise": "independent",
+    "err_types": "x",
+    "out_root": "runs",
+    "run_name": null,
+    "seed": 42,
+    "gpus": "0",
+    "d_model": 128,
+    "h": 8,
+    "N_dec": 6,
+    "dropout": 0.0,
+    "d_g": 32,
+    "N_g": 1,
+    "no_share": false,
+    "no_out_mix": false,
+    "g_hidden_mult": 5,
+    "no_g": 0,
+    "no_mask": 0,
+    "epochs": 300,
+    "batches_per_epoch": 1000,
+    "batch_size": 128,
+    "lr": 0.0005,
+    "lr_min": 1e-06,
+    "grad_clip": 1.0,
+    "amp": false,
+    "lam_ber": 0.5,
+    "lam_ler": 1.0,
+    "lam_g": 0.5,
+    "ler_warmup_epochs": 0,
+    "p_test": "0.01:0.2:9",
+    "p_train": null,
+    "p_sampling": "discrete",
+    "test_every": 20,
+    "test_samples": 20000,
+    "final_samples": 500000,
+    "final_p_test": "0.01:0.2:18",
+    "test_batch_size": 512,
+    "resume": "auto",
+    "max_hours": 69.0,
+    "workers": 0
+  }
+}

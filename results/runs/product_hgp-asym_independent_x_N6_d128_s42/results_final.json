@@ -1,0 +1,221 @@
+{
+  "model": "product",
+  "code": "hgp-asym",
+  "noise": "independent",
+  "err_types": "x",
+  "params": 1216534,
+  "n": 500,
+  "k": 20,
+  "results": {
+    "0.010000": {
+      "ler_x": 0.00084,
+      "ler_x_strict": 0.001742,
+      "synd_mismatch_x": 0.001682,
+      "ler": 0.00084,
+      "ler_strict": 0.001742,
+      "ber": 1.144e-05,
+      "samples": 500000
+    },
+    "0.015294": {
+      "ler_x": 0.003096,
+      "ler_x_strict": 0.006758,
+      "synd_mismatch_x": 0.006522,
+      "ler": 0.003096,
+      "ler_strict": 0.006758,
+      "ber": 4.8656e-05,
+      "samples": 500000
+    },
+    "0.020588": {
+      "ler_x": 0.00778,
+      "ler_x_strict": 0.018088,
+      "synd_mismatch_x": 0.017422,
+      "ler": 0.00778,
+      "ler_strict": 0.018088,
+      "ber": 0.000138524,
+      "samples": 500000
+    },
+    "0.025882": {
+      "ler_x": 0.01673,
+      "ler_x_strict": 0.040832,
+      "synd_mismatch_x": 0.039396,
+      "ler": 0.01673,
+      "ler_strict": 0.040832,
+      "ber": 0.000335796,
+      "samples": 500000
+    },
+    "0.031176": {
+      "ler_x": 0.030852,
+      "ler_x_strict": 0.077646,
+      "synd_mismatch_x": 0.07506,
+      "ler": 0.030852,
+      "ler_strict": 0.077646,
+      "ber": 0.000680664,
+      "samples": 500000
+    },
+    "0.036471": {
+      "ler_x": 0.055266,
+      "ler_x_strict": 0.137776,
+      "synd_mismatch_x": 0.133692,
+      "ler": 0.055266,
+      "ler_strict": 0.137776,
+      "ber": 0.001333364,
+      "samples": 500000
+    },
+    "0.041765": {
+      "ler_x": 0.094416,
+      "ler_x_strict": 0.223432,
+      "synd_mismatch_x": 0.217886,
+      "ler": 0.094416,
+      "ler_strict": 0.223432,
+      "ber": 0.002477272,
+      "samples": 500000
+    },
+    "0.047059": {
+      "ler_x": 0.155142,
+      "ler_x_strict": 0.337004,
+      "synd_mismatch_x": 0.329984,
+      "ler": 0.155142,
+      "ler_strict": 0.337004,
+      "ber": 0.004422964,
+      "samples": 500000
+    },
+    "0.052353": {
+      "ler_x": 0.242268,
+      "ler_x_strict": 0.468974,
+      "synd_mismatch_x": 0.461146,
+      "ler": 0.242268,
+      "ler_strict": 0.468974,
+      "ber": 0.007493608,
+      "samples": 500000
+    },
+    "0.057647": {
+      "ler_x": 0.352444,
+      "ler_x_strict": 0.604482,
+      "synd_mismatch_x": 0.596956,
+      "ler": 0.352444,
+      "ler_strict": 0.604482,
+      "ber": 0.01199854,
+      "samples": 500000
+    },
+    "0.062941": {
+      "ler_x": 0.479166,
+      "ler_x_strict": 0.728256,
+      "synd_mismatch_x": 0.721424,
+      "ler": 0.479166,
+      "ler_strict": 0.728256,
+      "ber": 0.018277392,
+      "samples": 500000
+    },
+    "0.068235": {
+      "ler_x": 0.608372,
+      "ler_x_strict": 0.8297,
+      "synd_mismatch_x": 0.824506,
+      "ler": 0.608372,
+      "ler_strict": 0.8297,
+      "ber": 0.026248492,
+      "samples": 500000
+    },
+    "0.073529": {
+      "ler_x": 0.725262,
+      "ler_x_strict": 0.901084,
+      "synd_mismatch_x": 0.897474,
+      "ler": 0.725262,
+      "ler_strict": 0.901084,
+      "ber": 0.035643048,
+      "samples": 500000
+    },
+    "0.078824": {
+      "ler_x": 0.821568,
+      "ler_x_strict": 0.947934,
+      "synd_mismatch_x": 0.94549,
+      "ler": 0.821568,
+      "ler_strict": 0.947934,
+      "ber": 0.046025588,
+      "samples": 500000
+    },
+    "0.084118": {
+      "ler_x": 0.89048,
+      "ler_x_strict": 0.974608,
+      "synd_mismatch_x": 0.973214,
+      "ler": 0.89048,
+      "ler_strict": 0.974608,
+      "ber": 0.05699452,
+      "samples": 500000
+    },
+    "0.089412": {
+      "ler_x": 0.938154,
+      "ler_x_strict": 0.988806,
+      "synd_mismatch_x": 0.98809,
+      "ler": 0.938154,
+      "ler_strict": 0.988806,
+      "ber": 0.06776592,
+      "samples": 500000
+    },
+    "0.094706": {
+      "ler_x": 0.966582,
+      "ler_x_strict": 0.995494,
+      "synd_mismatch_x": 0.995164,
+      "ler": 0.966582,
+      "ler_strict": 0.995494,
+      "ber": 0.078264912,
+      "samples": 500000
+    },
+    "0.100000": {
+      "ler_x": 0.983272,
+      "ler_x_strict": 0.99825,
+      "synd_mismatch_x": 0.998116,
+      "ler": 0.983272,
+      "ler_strict": 0.99825,
+      "ber": 0.088002536,
+      "samples": 500000
+    }
+  },
+  "args": {
+    "model": "product",
+    "code": "hgp-asym",
+    "noise": "independent",
+    "err_types": "x",
+    "out_root": "runs",
+    "run_name": null,
+    "seed": 42,
+    "gpus": "0",
+    "d_model": 128,
+    "h": 8,
+    "N_dec": 6,
+    "dropout": 0.0,
+    "d_g": 32,
+    "N_g": 1,
+    "no_share": false,
+    "no_out_mix": false,
+    "g_hidden_mult": 5,
+    "no_g": 0,
+    "no_mask": 0,
+    "epochs": 300,
+    "batches_per_epoch": 1000,
+    "batch_size": 128,
+    "lr": 0.0005,
+    "lr_min": 1e-06,
+    "grad_clip": 1.0,
+    "weight_decay": 0.0,
+    "accum_steps": 1,
+    "warmup_steps": 1000,
+    "max_skipped": 50,
+    "amp": false,
+    "lam_ber": 0.5,
+    "lam_ler": 1.0,
+    "lam_g": 0.5,
+    "ler_warmup_epochs": 0,
+    "p_test": "0.01:0.10:9",
+    "p_train": null,
+    "p_sampling": "discrete",
+    "test_every": 20,
+    "test_samples": 20000,
+    "final_samples": 500000,
+    "final_p_test": "0.01:0.10:18",
+    "test_batch_size": 512,
+    "resume": "auto",
+    "max_hours": 22.0,
+    "final_on_timeout": 0,
+    "workers": 0
+  }
+}

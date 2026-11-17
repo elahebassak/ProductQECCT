@@ -1,0 +1,210 @@
+{
+  "model": "bposd[ms0.625-serial]",
+  "code": "hgp-400",
+  "noise": "independent",
+  "err_types": "x",
+  "n": 400,
+  "k": 16,
+  "results": {
+    "0.010000": {
+      "ler_x": 0.000395,
+      "ler_x_strict": 0.000395,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.000395,
+      "ler_strict": 0.000395,
+      "ber": 1.24625e-05,
+      "samples": 200000,
+      "decode_time_per_shot_us": 121.69058680534363
+    },
+    "0.015294": {
+      "ler_x": 0.001405,
+      "ler_x_strict": 0.001405,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.001405,
+      "ler_strict": 0.001405,
+      "ber": 5.08e-05,
+      "samples": 200000,
+      "decode_time_per_shot_us": 186.98068618774414
+    },
+    "0.020588": {
+      "ler_x": 0.003865,
+      "ler_x_strict": 0.003865,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.003865,
+      "ler_strict": 0.003865,
+      "ber": 0.000136125,
+      "samples": 200000,
+      "decode_time_per_shot_us": 274.2406153678894
+    },
+    "0.025882": {
+      "ler_x": 0.007985,
+      "ler_x_strict": 0.007985,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.007985,
+      "ler_strict": 0.007985,
+      "ber": 0.000292775,
+      "samples": 200000,
+      "decode_time_per_shot_us": 406.8923580646515
+    },
+    "0.031176": {
+      "ler_x": 0.01465,
+      "ler_x_strict": 0.01465,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.01465,
+      "ler_strict": 0.01465,
+      "ber": 0.0005732125,
+      "samples": 200000,
+      "decode_time_per_shot_us": 568.9723575115204
+    },
+    "0.036471": {
+      "ler_x": 0.02702,
+      "ler_x_strict": 0.02702,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.02702,
+      "ler_strict": 0.02702,
+      "ber": 0.0010620875,
+      "samples": 200000,
+      "decode_time_per_shot_us": 762.0001769065857
+    },
+    "0.041765": {
+      "ler_x": 0.043245,
+      "ler_x_strict": 0.043245,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.043245,
+      "ler_strict": 0.043245,
+      "ber": 0.0018809125,
+      "samples": 200000,
+      "decode_time_per_shot_us": 1089.9431610107422
+    },
+    "0.047059": {
+      "ler_x": 0.06989,
+      "ler_x_strict": 0.06989,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.06989,
+      "ler_strict": 0.06989,
+      "ber": 0.0032433125,
+      "samples": 200000,
+      "decode_time_per_shot_us": 1387.4637067317963
+    },
+    "0.052353": {
+      "ler_x": 0.109725,
+      "ler_x_strict": 0.109725,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.109725,
+      "ler_strict": 0.109725,
+      "ber": 0.0056739375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 1704.6930956840515
+    },
+    "0.057647": {
+      "ler_x": 0.166725,
+      "ler_x_strict": 0.166725,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.166725,
+      "ler_strict": 0.166725,
+      "ber": 0.0097521375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 2017.2669219970703
+    },
+    "0.062941": {
+      "ler_x": 0.23918,
+      "ler_x_strict": 0.23918,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.23918,
+      "ler_strict": 0.23918,
+      "ber": 0.0158539375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 2313.6969244480133
+    },
+    "0.068235": {
+      "ler_x": 0.3337,
+      "ler_x_strict": 0.3337,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.3337,
+      "ler_strict": 0.3337,
+      "ber": 0.0250064875,
+      "samples": 200000,
+      "decode_time_per_shot_us": 2579.2906844615936
+    },
+    "0.073529": {
+      "ler_x": 0.44168,
+      "ler_x_strict": 0.44168,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.44168,
+      "ler_strict": 0.44168,
+      "ber": 0.03756,
+      "samples": 200000,
+      "decode_time_per_shot_us": 2765.4755342006683
+    },
+    "0.078824": {
+      "ler_x": 0.551965,
+      "ler_x_strict": 0.551965,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.551965,
+      "ler_strict": 0.551965,
+      "ber": 0.052727375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 3001.1270439624786
+    },
+    "0.084118": {
+      "ler_x": 0.65798,
+      "ler_x_strict": 0.65798,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.65798,
+      "ler_strict": 0.65798,
+      "ber": 0.0702497375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 3148.066759109497
+    },
+    "0.089412": {
+      "ler_x": 0.75435,
+      "ler_x_strict": 0.75435,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.75435,
+      "ler_strict": 0.75435,
+      "ber": 0.0894124875,
+      "samples": 200000,
+      "decode_time_per_shot_us": 3314.588395357132
+    },
+    "0.094706": {
+      "ler_x": 0.831295,
+      "ler_x_strict": 0.831295,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.831295,
+      "ler_strict": 0.831295,
+      "ber": 0.1085687375,
+      "samples": 200000,
+      "decode_time_per_shot_us": 3241.2750935554504
+    },
+    "0.100000": {
+      "ler_x": 0.890625,
+      "ler_x_strict": 0.890625,
+      "synd_mismatch_x": 0.0,
+      "ler": 0.890625,
+      "ler_strict": 0.890625,
+      "ber": 0.12680695,
+      "samples": 200000,
+      "decode_time_per_shot_us": 3486.6896390914917
+    }
+  },
+  "args": {
+    "code": "hgp-400",
+    "noise": "independent",
+    "err_types": "x",
+    "decoder": "bposd",
+    "p_test": "0.01:0.10:18",
+    "samples": 200000,
+    "chunk": 2000,
+    "workers": 16,
+    "seed": 1234,
+    "max_iter": 100,
+    "bp_method": "minimum_sum",
+    "ms_scaling": 0.625,
+    "schedule": "serial",
+    "osd_method": "OSD_CS",
+    "osd_order": 10,
+    "out": "results/clt_bposd_ms0.625_serial_hgp-400_independent_x.json",
+    "tag": "[ms0.625-serial]"
+  },
+  "total_time_s": 540.2171125411987
+}

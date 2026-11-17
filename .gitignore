@@ -1,0 +1,20 @@
+# checkpoints and job output stay out of git (checkpoints are on Zenodo)
+/runs/
+release_checkpoints/
+/logs/
+slurm/jobs_chained/
+*.pt
+__pycache__/
+*.pyc
+.pytest_cache/
+# LaTeX build files
+docs/**/*.aux
+docs/**/*.log
+docs/**/*.bbl
+docs/**/*.blg
+docs/**/*.out
+docs/**/*.toc
+docs/**/*.synctex.gz
+# local environments
+pqecct_env/
+.venv/

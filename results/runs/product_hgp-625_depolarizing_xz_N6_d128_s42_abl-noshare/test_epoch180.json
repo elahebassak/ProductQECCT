@@ -1,0 +1,110 @@
+{
+  "0.010000": {
+    "ler_x": 0.0,
+    "ler_x_strict": 0.00015,
+    "synd_mismatch_x": 0.00015,
+    "ler_z": 0.0,
+    "ler_z_strict": 0.0,
+    "synd_mismatch_z": 0.0,
+    "ler": 0.0,
+    "ler_strict": 0.00015,
+    "ber": 2e-07,
+    "samples": 20000
+  },
+  "0.021250": {
+    "ler_x": 0.0005,
+    "ler_x_strict": 0.00185,
+    "synd_mismatch_x": 0.00175,
+    "ler_z": 0.0004,
+    "ler_z_strict": 0.0015,
+    "synd_mismatch_z": 0.00135,
+    "ler": 0.0009,
+    "ler_strict": 0.00335,
+    "ber": 7.28e-06,
+    "samples": 20000
+  },
+  "0.032500": {
+    "ler_x": 0.0017,
+    "ler_x_strict": 0.0067,
+    "synd_mismatch_x": 0.00645,
+    "ler_z": 0.0023,
+    "ler_z_strict": 0.0072,
+    "synd_mismatch_z": 0.0069,
+    "ler": 0.004,
+    "ler_strict": 0.01385,
+    "ber": 3.636e-05,
+    "samples": 20000
+  },
+  "0.043750": {
+    "ler_x": 0.0063,
+    "ler_x_strict": 0.02275,
+    "synd_mismatch_x": 0.02205,
+    "ler_z": 0.00785,
+    "ler_z_strict": 0.02345,
+    "synd_mismatch_z": 0.02245,
+    "ler": 0.014,
+    "ler_strict": 0.04515,
+    "ber": 0.0001212,
+    "samples": 20000
+  },
+  "0.055000": {
+    "ler_x": 0.01805,
+    "ler_x_strict": 0.05845,
+    "synd_mismatch_x": 0.05605,
+    "ler_z": 0.0193,
+    "ler_z_strict": 0.05765,
+    "synd_mismatch_z": 0.05495,
+    "ler": 0.0368,
+    "ler_strict": 0.1101,
+    "ber": 0.00034048,
+    "samples": 20000
+  },
+  "0.066250": {
+    "ler_x": 0.04205,
+    "ler_x_strict": 0.131,
+    "synd_mismatch_x": 0.12605,
+    "ler_z": 0.04565,
+    "ler_z_strict": 0.1275,
+    "synd_mismatch_z": 0.123,
+    "ler": 0.0844,
+    "ler_strict": 0.23145,
+    "ber": 0.0008118,
+    "samples": 20000
+  },
+  "0.077500": {
+    "ler_x": 0.09925,
+    "ler_x_strict": 0.26205,
+    "synd_mismatch_x": 0.25625,
+    "ler_z": 0.10805,
+    "ler_z_strict": 0.26025,
+    "synd_mismatch_z": 0.2546,
+    "ler": 0.18935,
+    "ler_strict": 0.426,
+    "ber": 0.00200984,
+    "samples": 20000
+  },
+  "0.088750": {
+    "ler_x": 0.2106,
+    "ler_x_strict": 0.45445,
+    "synd_mismatch_x": 0.44695,
+    "ler_z": 0.22125,
+    "ler_z_strict": 0.45465,
+    "synd_mismatch_z": 0.44815,
+    "ler": 0.3612,
+    "ler_strict": 0.6505,
+    "ber": 0.00451488,
+    "samples": 20000
+  },
+  "0.100000": {
+    "ler_x": 0.3927,
+    "ler_x_strict": 0.67075,
+    "synd_mismatch_x": 0.6652,
+    "ler_z": 0.405,
+    "ler_z_strict": 0.67475,
+    "synd_mismatch_z": 0.66975,
+    "ler": 0.5869,
+    "ler_strict": 0.84045,
+    "ber": 0.00982856,
+    "samples": 20000
+  }
+}
