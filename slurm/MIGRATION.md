@@ -22,8 +22,8 @@ needed 28.5 GiB with gradient accumulation and fits an H100 without it. Everythi
 ## 0. On Nibi — cancel the queued jobs (nothing is running, so the files are static)
 
 ```bash
-scancel -u elabass
-squeue -u elabass          # should be empty
+scancel -u <user>
+squeue -u <user>          # should be empty
 ```
 
 ## 1. On each of Narval and Fir — code + environment (once per cluster)
@@ -31,14 +31,14 @@ squeue -u elabass          # should be empty
 Upload the package zip from your laptop, then:
 
 ```bash
-ssh elabass@narval.alliancecan.ca      # and, separately, elabass@fir.alliancecan.ca
+ssh <user>@narval.alliancecan.ca      # and, separately, <user>@fir.alliancecan.ca
 cd ~ && rm -rf ProductQECCT && unzip -q ProductQECCT_oct27.zip && cd ProductQECCT
 bash slurm/setup_env.sh                # ~10 min; builds ldpc from GitHub, needs the login node's internet
 python tests/test_all.py               # 7 tests
 ```
 
 Narval's home quota is 50 GB and Fir's similar; the runs are small (< 5 GB in total), so home is fine.
-If you prefer `/project/def-esousa/elabass`, put `ProductQECCT` there and symlink it into `~`.
+If you prefer `/project/<your-allocation>/<user>`, put `ProductQECCT` there and symlink it into `~`.
 
 ## 2. Pull checkpoints and results from Nibi (per cluster, only the runs that cluster continues)
 
@@ -55,7 +55,7 @@ bash slurm/pull_runs.sh "qecct_hgp-625_* crossqecct_hgp-625_* qecct_hgp-asym_* c
 Each rsync asks for your Nibi password and a Duo push. The script ends by printing the epoch stored in each
 `last.pt`; check that these match what Nibi had (e.g. product hgp-625 depolarizing: 253; QECCT hgp-400
 independent: ~220; CrossQECCT hgp-400 independent: ~280). If the `nibi.alliancecan.ca` alias does not
-resolve, run with `NIBI=elabass@nibi.sharcnet.ca`.
+resolve, run with `NIBI=<user>@nibi.sharcnet.ca`.
 
 If `rsync` from the login node is refused, use Globus (nibi → narval / fir collections, folder
 `ProductQECCT/runs` and `ProductQECCT/results`) and skip this step.
@@ -68,7 +68,7 @@ cd ~/ProductQECCT
 sinfo -o "%G" | sort -u                                   # confirm the GRES name is gpu:h100 (else set GRES=...)
 CLUSTER=fir bash slurm/submit_cluster.sh "tr_qecct_hgp-625_* tr_crossqecct_hgp-625_* tr_qecct_hgp-asym_* tr_crossqecct_hgp-asym_*" 4
 CLUSTER=fir bash slurm/submit_cluster.sh "tr_product_hgp-1600_* tr_product_hgp-3600_*" 6
-squeue -u elabass
+squeue -u <user>
 ```
 On **Narval**:
 ```bash
@@ -79,7 +79,7 @@ CLUSTER=narval bash slurm/submit_cluster.sh "tr_qecct_hgp-400_* tr_crossqecct_hg
 CLUSTER=narval bash slurm/submit_cluster.sh "tr_qecct_toric-L10_depolarizing_*" 1
 # ablations, after the above have started (12 runs, product model only)
 INCLUDE_ABL=1 CLUSTER=narval bash slurm/submit_cluster.sh "tr_product_toric-L8_depolarizing_xz_abl-* tr_product_hgp-625_depolarizing_xz_abl-*" 2
-squeue -u elabass
+squeue -u <user>
 ```
 Notes
 - `submit_cluster.sh` skips any run that already has `runs/<run>/results_final.json`, rewrites the GPU/memory
