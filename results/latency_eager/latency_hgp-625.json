@@ -1,0 +1,121 @@
+{
+  "code": "hgp-625",
+  "n_qubits": 625,
+  "noise": "depolarizing",
+  "err_types": "xz",
+  "p": 0.041765,
+  "n": 1000,
+  "warmup": 20,
+  "seed": 7,
+  "protocol": "Decoding latency per codeword at batch size 1, one protocol for every decoder.\n\nProtocol (identical for neural and classical decoders):\n  * N syndromes are sampled once (depolarizing noise, X/Z decoded jointly, fixed seed) and stored in memory,\n    in the decoder's input format (numpy uint8 for classical, torch tensors on the device for neural);\n  * the timed region is syndrome -> hard correction for ONE codeword: for separate CSS decoders both the\n    X and the Z decode, for the joint decoder the single 3n-column decode, for neural decoders the forward\n    pass plus the threshold (logits > 0) and, on GPU, a device synchronization;\n  * every decoder is constructed once and warmed up (20 codewords) before timing; N timed codewords follow;\n  * classical decoders run single-threaded on the CPU (OMP/MKL threads = 1); neural decoders are timed on\n    the GPU (fp32) and, for a like-for-like comparison, on one CPU thread as well;\n  * reported: mean, median, 90th percentile (us/codeword). The amortized throughput at batch 512 is also\n    recorded for the neural decoders.",
+  "hardware": {
+    "cpu": "AMD EPYC 7413 24-Core Processor",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.1",
+    "python": "3.11.5",
+    "omp_threads": "1"
+  },
+  "bp_settings": {
+    "max_iter": 100,
+    "bp_method": "minimum_sum",
+    "ms_scaling": 0.625,
+    "schedule_separate": "parallel",
+    "schedule_joint": "serial",
+    "osd_method": "OSD_CS",
+    "osd_order": 10
+  },
+  "classical": {
+    "bp": {
+      "mean_us": 644.2343364469707,
+      "median_us": 271.1080014705658,
+      "p90_us": 1486.9650127366185,
+      "std_us": 643.3921050842214,
+      "n": 1000
+    },
+    "bposd": {
+      "mean_us": 1249.368143035099,
+      "median_us": 267.28538796305656,
+      "p90_us": 3520.898474380374,
+      "std_us": 1620.6917062246796,
+      "n": 1000
+    },
+    "bposd_corr": {
+      "mean_us": 6442.894084611908,
+      "median_us": 1068.2373540475965,
+      "p90_us": 36444.87806595862,
+      "std_us": 12720.259486228055,
+      "n": 1000
+    }
+  },
+  "neural": {
+    "product": {
+      "cuda": {
+        "params": 1218536,
+        "epoch": 274,
+        "ckpt": "runs/product_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 18307.1960110683,
+        "median_us": 18015.877110883594,
+        "p90_us": 19445.415399968624,
+        "std_us": 649.9643428562749,
+        "n": 1000,
+        "amortized_us_b512": 1066.5081230399664
+      },
+      "cpu": {
+        "params": 1218536,
+        "epoch": 274,
+        "ckpt": "runs/product_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 152913.7954630423,
+        "median_us": 152915.901504457,
+        "p90_us": 154403.1321303919,
+        "std_us": 1211.1282318777908,
+        "n": 1000
+      }
+    },
+    "qecct": {
+      "cuda": {
+        "params": 54379317,
+        "epoch": 297,
+        "ckpt": "runs/qecct_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 4608.848575269803,
+        "median_us": 4593.315999954939,
+        "p90_us": 4816.029756329954,
+        "std_us": 191.93258109564837,
+        "n": 1000,
+        "amortized_us_b512": 2359.795233223849
+      },
+      "cpu": {
+        "params": 54379317,
+        "epoch": 297,
+        "ckpt": "runs/qecct_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 465786.5975773894,
+        "median_us": 467242.841492407,
+        "p90_us": 473187.53586150706,
+        "std_us": 7333.891345699455,
+        "n": 1000
+      }
+    },
+    "crossqecct": {
+      "cuda": {
+        "params": 54380853,
+        "epoch": 297,
+        "ckpt": "runs/crossqecct_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 6250.1234277151525,
+        "median_us": 6172.536057420075,
+        "p90_us": 6723.463791422546,
+        "std_us": 349.30882889050685,
+        "n": 1000,
+        "amortized_us_b512": 2601.079272244533
+      },
+      "cpu": {
+        "params": 54380853,
+        "epoch": 297,
+        "ckpt": "runs/crossqecct_hgp-625_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 248298.66365063936,
+        "median_us": 248767.77944155037,
+        "p90_us": 252397.79986441135,
+        "std_us": 3942.2931409988296,
+        "n": 1000
+      }
+    }
+  }
+}

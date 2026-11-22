@@ -1,0 +1,115 @@
+{
+  "code": "toric-L8",
+  "n_qubits": 128,
+  "noise": "depolarizing",
+  "err_types": "xz",
+  "p": 0.102941,
+  "n": 1000,
+  "warmup": 20,
+  "seed": 7,
+  "protocol": "Decoding latency per codeword at batch size 1, one protocol for every decoder.\n\nProtocol (identical for neural and classical decoders):\n  * N syndromes are sampled once (depolarizing noise, X/Z decoded jointly, fixed seed) and stored in memory,\n    in the decoder's input format (numpy uint8 for classical, torch tensors on the device for neural);\n  * the timed region is syndrome -> hard correction for ONE codeword: for separate CSS decoders both the\n    X and the Z decode, for the joint decoder the single 3n-column decode, for neural decoders the forward\n    pass plus the threshold (logits > 0) and, on GPU, a device synchronization;\n  * every decoder is constructed once and warmed up (20 codewords) before timing; N timed codewords follow;\n  * classical decoders run single-threaded on the CPU (OMP/MKL threads = 1); neural decoders are timed on\n    the GPU (fp32) and, for a like-for-like comparison, on one CPU thread as well;\n  * reported: mean, median, 90th percentile (us/codeword). The amortized throughput at batch 512 is also\n    recorded for the neural decoders.",
+  "hardware": {
+    "cpu": "AMD EPYC 7413 24-Core Processor",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.1",
+    "python": "3.11.5",
+    "omp_threads": "1"
+  },
+  "bp_settings": {
+    "max_iter": 100,
+    "bp_method": "minimum_sum",
+    "ms_scaling": 0.625,
+    "schedule_separate": "serial",
+    "schedule_joint": "serial",
+    "osd_method": "OSD_CS",
+    "osd_order": 10
+  },
+  "classical": {
+    "mwpm": {
+      "mean_us": 17.16973981820047,
+      "median_us": 16.280915588140488,
+      "p90_us": 22.783945314586163,
+      "std_us": 4.411175960252545,
+      "n": 1000
+    },
+    "bposd": {
+      "mean_us": 641.0988119896501,
+      "median_us": 837.5750621780753,
+      "p90_us": 859.3409089371562,
+      "std_us": 279.6222756746813,
+      "n": 1000
+    },
+    "bposd_corr": {
+      "mean_us": 1775.838922476396,
+      "median_us": 2202.3693891242146,
+      "p90_us": 2319.020964205265,
+      "std_us": 879.4212928429746,
+      "n": 1000
+    }
+  },
+  "neural": {
+    "product": {
+      "cuda": {
+        "params": 1208580,
+        "epoch": 281,
+        "ckpt": "runs/product_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 17428.649720735848,
+        "median_us": 17419.41855289042,
+        "p90_us": 17467.435216531157,
+        "std_us": 108.40688676222447,
+        "n": 1000,
+        "cuda_graph": {
+          "mean_us": 2903.2935716677457,
+          "median_us": 2895.582001656294,
+          "p90_us": 2898.027957417071,
+          "std_us": 58.77178055060366,
+          "n": 1000,
+          "mismatch_vs_eager": 0
+        },
+        "amortized_us_b512": 235.31233118774253
+      }
+    },
+    "qecct": {
+      "cuda": {
+        "params": 3470465,
+        "epoch": 281,
+        "ckpt": "runs/qecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 2469.659010414034,
+        "median_us": 2468.200051225722,
+        "p90_us": 2481.9459533318877,
+        "std_us": 35.476698384628875,
+        "n": 1000,
+        "cuda_graph": {
+          "mean_us": 895.513879833743,
+          "median_us": 894.3720022216439,
+          "p90_us": 901.0809706524014,
+          "std_us": 3.211911620225247,
+          "n": 1000,
+          "mismatch_vs_eager": 0
+        },
+        "amortized_us_b512": 182.49440709041664
+      }
+    },
+    "crossqecct": {
+      "cuda": {
+        "params": 3472001,
+        "epoch": 281,
+        "ckpt": "runs/crossqecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 5569.598332978785,
+        "median_us": 5565.678933635354,
+        "p90_us": 5587.487039156258,
+        "std_us": 41.75452341832316,
+        "n": 1000,
+        "cuda_graph": {
+          "mean_us": 1571.5320967137814,
+          "median_us": 1571.4450273662806,
+          "p90_us": 1574.1229755803943,
+          "std_us": 1.9354654957291817,
+          "n": 1000,
+          "mismatch_vs_eager": 0
+        },
+        "amortized_us_b512": 205.832312531129
+      }
+    }
+  }
+}

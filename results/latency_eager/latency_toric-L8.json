@@ -1,0 +1,121 @@
+{
+  "code": "toric-L8",
+  "n_qubits": 128,
+  "noise": "depolarizing",
+  "err_types": "xz",
+  "p": 0.102941,
+  "n": 1000,
+  "warmup": 20,
+  "seed": 7,
+  "protocol": "Decoding latency per codeword at batch size 1, one protocol for every decoder.\n\nProtocol (identical for neural and classical decoders):\n  * N syndromes are sampled once (depolarizing noise, X/Z decoded jointly, fixed seed) and stored in memory,\n    in the decoder's input format (numpy uint8 for classical, torch tensors on the device for neural);\n  * the timed region is syndrome -> hard correction for ONE codeword: for separate CSS decoders both the\n    X and the Z decode, for the joint decoder the single 3n-column decode, for neural decoders the forward\n    pass plus the threshold (logits > 0) and, on GPU, a device synchronization;\n  * every decoder is constructed once and warmed up (20 codewords) before timing; N timed codewords follow;\n  * classical decoders run single-threaded on the CPU (OMP/MKL threads = 1); neural decoders are timed on\n    the GPU (fp32) and, for a like-for-like comparison, on one CPU thread as well;\n  * reported: mean, median, 90th percentile (us/codeword). The amortized throughput at batch 512 is also\n    recorded for the neural decoders.",
+  "hardware": {
+    "cpu": "AMD EPYC 7413 24-Core Processor",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.1",
+    "python": "3.11.5",
+    "omp_threads": "1"
+  },
+  "bp_settings": {
+    "max_iter": 100,
+    "bp_method": "minimum_sum",
+    "ms_scaling": 0.625,
+    "schedule_separate": "serial",
+    "schedule_joint": "serial",
+    "osd_method": "OSD_CS",
+    "osd_order": 10
+  },
+  "classical": {
+    "mwpm": {
+      "mean_us": 18.07425986044109,
+      "median_us": 16.421079635620117,
+      "p90_us": 23.15386664122343,
+      "std_us": 12.645629289434304,
+      "n": 1000
+    },
+    "bposd": {
+      "mean_us": 648.0740145780146,
+      "median_us": 838.2119704037905,
+      "p90_us": 862.3219560831785,
+      "std_us": 282.9756760456659,
+      "n": 1000
+    },
+    "bposd_corr": {
+      "mean_us": 1789.148413343355,
+      "median_us": 2212.8995042294264,
+      "p90_us": 2341.7680989950895,
+      "std_us": 882.8979158981557,
+      "n": 1000
+    }
+  },
+  "neural": {
+    "product": {
+      "cuda": {
+        "params": 1208580,
+        "epoch": 281,
+        "ckpt": "runs/product_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 18853.216799674556,
+        "median_us": 18844.255013391376,
+        "p90_us": 19855.870632454753,
+        "std_us": 780.5617088694938,
+        "n": 1000,
+        "amortized_us_b512": 240.67170152193285
+      },
+      "cpu": {
+        "params": 1208580,
+        "epoch": 281,
+        "ckpt": "runs/product_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 49109.74612738937,
+        "median_us": 49025.18796734512,
+        "p90_us": 49952.72941887379,
+        "std_us": 683.9761916586708,
+        "n": 1000
+      }
+    },
+    "qecct": {
+      "cuda": {
+        "params": 3470465,
+        "epoch": 281,
+        "ckpt": "runs/qecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 2669.0016218926758,
+        "median_us": 2643.0283905938268,
+        "p90_us": 2995.8358965814114,
+        "std_us": 199.3244368528382,
+        "n": 1000,
+        "amortized_us_b512": 182.78270235896343
+      },
+      "cpu": {
+        "params": 3470465,
+        "epoch": 281,
+        "ckpt": "runs/qecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 31208.96863960661,
+        "median_us": 31166.599015705287,
+        "p90_us": 31803.82635910064,
+        "std_us": 454.2065084110464,
+        "n": 1000
+      }
+    },
+    "crossqecct": {
+      "cuda": {
+        "params": 3472001,
+        "epoch": 281,
+        "ckpt": "runs/crossqecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 5983.182670082897,
+        "median_us": 5917.457980103791,
+        "p90_us": 6425.820174627006,
+        "std_us": 311.2109697050308,
+        "n": 1000,
+        "amortized_us_b512": 209.04294096908416
+      },
+      "cpu": {
+        "params": 3472001,
+        "epoch": 281,
+        "ckpt": "runs/crossqecct_toric-L8_depolarizing_xz_N6_d128_s42/best.pt",
+        "mean_us": 24994.657301343977,
+        "median_us": 24988.812976516783,
+        "p90_us": 25569.92918252945,
+        "std_us": 456.94758698976347,
+        "n": 1000
+      }
+    }
+  }
+}
