@@ -1,0 +1,275 @@
+{
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.1",
+    "python": "3.11.5"
+  },
+  "protocol": "Training cost of every neural decoder on every code, measured on ONE GPU in one run.\n\nFor each (code, model) the script builds the model exactly as train.py does (same args, batch size, loss, Adam,\nclipping), runs `--warmup` steps, then times `--steps` full training steps (sample -> forward -> loss -> backward\n-> optimizer) with CUDA synchronization, and reports: parameters, median step time, the implied time per epoch\n(1000 batches), training samples per second, and peak GPU memory. The global-attention baselines are attempted\non the large codes too; an out-of-memory or an instantiation failure is recorded as such, not invented.\nBatch sizes follow the paper's protocol: 128, except 64 (hgp-1600) and 32 (hgp-3600) with bf16 autocast, as in\nthe actual runs; a second fp32 pass at batch 128 is run for ProductQECCT on the large codes when it fits.\n\n",
+  "runs": {
+    "product|toric-L4|b128|fp32": {
+      "params": 1205252,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 61.407729517668486,
+      "s_per_epoch_1000": 61.407729517668486,
+      "samples_per_s": 2084.428149442837,
+      "peak_mem_gib": 0.9520959854125977,
+      "steps": 50
+    },
+    "qecct|toric-L4|b128|fp32": {
+      "params": 1342337,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 17.413027468137443,
+      "s_per_epoch_1000": 17.413027468137443,
+      "samples_per_s": 7350.8182442263915,
+      "peak_mem_gib": 0.6389927864074707,
+      "steps": 50
+    },
+    "crossqecct|toric-L4|b128|fp32": {
+      "params": 1343873,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 24.30296048987657,
+      "s_per_epoch_1000": 24.30296048987657,
+      "samples_per_s": 5266.848047311708,
+      "peak_mem_gib": 0.7003989219665527,
+      "steps": 50
+    },
+    "product|toric-L6|b128|fp32": {
+      "params": 1206852,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 67.54733237903565,
+      "s_per_epoch_1000": 67.54733237903565,
+      "samples_per_s": 1894.967506366347,
+      "peak_mem_gib": 2.142714500427246,
+      "steps": 50
+    },
+    "qecct|toric-L6|b128|fp32": {
+      "params": 1924417,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 41.11971508245915,
+      "s_per_epoch_1000": 41.11971508245915,
+      "samples_per_s": 3112.8620357246164,
+      "peak_mem_gib": 1.431093692779541,
+      "steps": 50
+    },
+    "crossqecct|toric-L6|b128|fp32": {
+      "params": 1925953,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 47.403561999090016,
+      "s_per_epoch_1000": 47.403561999090016,
+      "samples_per_s": 2700.219025786652,
+      "peak_mem_gib": 1.6765589714050293,
+      "steps": 50
+    },
+    "product|toric-L8|b128|fp32": {
+      "params": 1208580,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 95.37308942526579,
+      "s_per_epoch_1000": 95.37308942526579,
+      "samples_per_s": 1342.0976584836399,
+      "peak_mem_gib": 3.8173179626464844,
+      "steps": 50
+    },
+    "qecct|toric-L8|b128|fp32": {
+      "params": 3470465,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 75.83656313363463,
+      "s_per_epoch_1000": 75.83656313363463,
+      "samples_per_s": 1687.8402014928618,
+      "peak_mem_gib": 2.489865303039551,
+      "steps": 50
+    },
+    "crossqecct|toric-L8|b128|fp32": {
+      "params": 3472001,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 78.83297954685986,
+      "s_per_epoch_1000": 78.83297954685986,
+      "samples_per_s": 1623.6859336759471,
+      "peak_mem_gib": 3.2959585189819336,
+      "steps": 50
+    },
+    "product|toric-L10|b128|fp32": {
+      "params": 1210436,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 146.25745895318687,
+      "s_per_epoch_1000": 146.25745895318687,
+      "samples_per_s": 875.1690403767332,
+      "peak_mem_gib": 6.052168846130371,
+      "steps": 50
+    },
+    "qecct|toric-L10|b128|fp32": {
+      "params": 6711617,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 150.7269695866853,
+      "s_per_epoch_1000": 150.7269695866853,
+      "samples_per_s": 849.2176307332,
+      "peak_mem_gib": 3.9262561798095703,
+      "steps": 50
+    },
+    "crossqecct|toric-L10|b128|fp32": {
+      "params": 6713153,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 160.34108703024685,
+      "s_per_epoch_1000": 160.34108703024685,
+      "samples_per_s": 798.2981927511443,
+      "peak_mem_gib": 6.154856204986572,
+      "steps": 50
+    },
+    "product|hgp-400|b128|fp32": {
+      "params": 1214532,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 269.3998230388388,
+      "s_per_epoch_1000": 269.3998230388388,
+      "samples_per_s": 475.1302304365156,
+      "peak_mem_gib": 12.1924409866333,
+      "steps": 50
+    },
+    "qecct|hgp-400|b128|fp32": {
+      "params": 23034369,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 442.719990038313,
+      "s_per_epoch_1000": 442.719990038313,
+      "samples_per_s": 289.1217990606724,
+      "peak_mem_gib": 7.7692341804504395,
+      "steps": 50
+    },
+    "crossqecct|hgp-400|b128|fp32": {
+      "params": 23035905,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 408.5497308988124,
+      "s_per_epoch_1000": 408.5497308988124,
+      "samples_per_s": 313.303351634571,
+      "peak_mem_gib": 17.32547378540039,
+      "steps": 50
+    },
+    "product|hgp-asym|b128|fp32": {
+      "params": 1216534,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 331.2116959132254,
+      "s_per_epoch_1000": 331.2116959132254,
+      "samples_per_s": 386.4597826084466,
+      "peak_mem_gib": 15.344235897064209,
+      "steps": 50
+    },
+    "qecct|hgp-asym|b128|fp32": {
+      "params": 35271457,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 669.1517806611955,
+      "s_per_epoch_1000": 669.1517806611955,
+      "samples_per_s": 191.28694520325706,
+      "peak_mem_gib": 9.765810489654541,
+      "steps": 50
+    },
+    "crossqecct|hgp-asym|b128|fp32": {
+      "params": 35272993,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 594.4656615611166,
+      "s_per_epoch_1000": 594.4656615611166,
+      "samples_per_s": 215.31941754862893,
+      "peak_mem_gib": 25.0317702293396,
+      "steps": 50
+    },
+    "product|hgp-625|b128|fp32": {
+      "params": 1218536,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 407.83416654448956,
+      "s_per_epoch_1000": 407.83416654448956,
+      "samples_per_s": 313.8530571985239,
+      "peak_mem_gib": 19.3035831451416,
+      "steps": 50
+    },
+    "qecct|hgp-625|b128|fp32": {
+      "params": 54379317,
+      "batch_size": 128,
+      "amp": false,
+      "step_ms": 958.2202794263139,
+      "s_per_epoch_1000": 958.2202794263139,
+      "samples_per_s": 133.58097584475414,
+      "peak_mem_gib": 12.32802438735962,
+      "steps": 50
+    },
+    "crossqecct|hgp-625|b128|fp32": {
+      "error": "OOM",
+      "batch_size": 128,
+      "amp": false
+    },
+    "product|hgp-1600|b64|bf16": {
+      "params": 1232900,
+      "batch_size": 64,
+      "amp": true,
+      "step_ms": 258.57094558887184,
+      "s_per_epoch_1000": 258.57094558887184,
+      "samples_per_s": 247.51427448372365,
+      "peak_mem_gib": 17.782937049865723,
+      "steps": 50
+    },
+    "product|hgp-1600|b128|fp32": {
+      "error": "OOM",
+      "batch_size": 128,
+      "amp": false
+    },
+    "qecct|hgp-1600|b64|bf16": {
+      "params": 348765825,
+      "batch_size": 64,
+      "amp": true,
+      "step_ms": 1061.3840614678338,
+      "s_per_epoch_1000": 1061.3840614678338,
+      "samples_per_s": 60.29862546785528,
+      "peak_mem_gib": 14.20834732055664,
+      "steps": 50
+    },
+    "crossqecct|hgp-1600|b64|bf16": {
+      "error": "OOM",
+      "batch_size": 64,
+      "amp": true
+    },
+    "product|hgp-3600|b32|bf16": {
+      "params": 1257540,
+      "batch_size": 32,
+      "amp": true,
+      "step_ms": 329.07802902627736,
+      "s_per_epoch_1000": 329.07802902627736,
+      "samples_per_s": 97.24137492462236,
+      "peak_mem_gib": 22.473650455474854,
+      "steps": 50
+    },
+    "product|hgp-3600|b128|fp32": {
+      "error": "OOM",
+      "batch_size": 128,
+      "amp": false
+    },
+    "qecct|hgp-3600|b32|bf16": {
+      "params": 1758979585,
+      "batch_size": 32,
+      "amp": true,
+      "step_ms": 2838.1489254534245,
+      "s_per_epoch_1000": 2838.1489254534245,
+      "samples_per_s": 11.274954500454081,
+      "peak_mem_gib": 34.831899642944336,
+      "steps": 50
+    },
+    "crossqecct|hgp-3600|b32|bf16": {
+      "error": "OOM",
+      "batch_size": 32,
+      "amp": true
+    }
+  }
+}
