@@ -10,7 +10,8 @@ def build_model(args, code):
     if args.model == "product":
         return ProductQECCT(code, d_model=args.d_model, h=args.h, N_dec=args.N_dec,
                             share_processes=not args.no_share, d_g=args.d_g, N_g=args.N_g,
-                            no_g=bool(args.no_g), dropout=args.dropout, out_mix=not args.no_out_mix)
+                            no_g=bool(args.no_g), dropout=args.dropout, out_mix=not args.no_out_mix,
+                            out_mix_init=getattr(args, "out_mix_init", "zero"))
     if args.model == "qecct":
         return QECCT(code, err_types=args.err_types, d_model=args.d_model, h=args.h, N_dec=args.N_dec,
                      g_hidden_mult=args.g_hidden_mult, no_g=bool(args.no_g), no_mask=bool(args.no_mask),

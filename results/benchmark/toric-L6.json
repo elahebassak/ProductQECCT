@@ -3,7 +3,7 @@
   "n": 72,
   "k": 2,
   "hardware": {
-    "cpu": "AMD EPYC 7413 24-Core Processor",
+    "cpu": "AMD EPYC 7543 32-Core Processor",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "torch": "2.14.1",
     "python": "3.11.5",
@@ -11,7 +11,43 @@
     "precision": "fp32",
     "cpus_visible": 8
   },
-  "protocol": "Unified inference benchmark: latency, throughput and memory of every decoder on every code, one protocol.\n\nMeasurements (per code, per physical error rate p):\n  A. single-codeword latency (batch size 1), N timed codewords after warm-up; median, 95th percentile and mean.\n     * classical decoders (MWPM / BP / BP+OSD separate / BP+OSD joint): one CPU core, syndrome -> binary correction\n       (both CSS decodes for the separate decoders, the single 3n-column decode for the joint one);\n     * neural decoders: END-TO-END, syndrome in CPU memory -> binary correction in CPU memory (host->device copy,\n       forward pass, threshold, device->host copy), in eager PyTorch and with the same forward captured in a CUDA\n       graph (corrections verified identical on the first 50 codewords); plus the device-only time of the\n       graph-captured forward (input already on the GPU), labelled separately.\n  B. throughput: neural decoders at batch sizes B in --batches on the GPU (codewords/s and T(B)/B, inputs on the\n     device, 5 repetitions, median); classical decoders with W worker processes (--workers), codewords/s.\n  C. peak memory: neural, torch.cuda.max_memory_allocated at B=1 and at the largest feasible B (OOM -> recorded);\n     classical, max resident set size of the decoding process.\nEverything is written to results/benchmark/<code>.json and appended as flat rows to results/benchmark_inference.csv.\nDecoders are only benchmarked where the paper evaluated them (MWPM: toric; BP: HGP; joint BP+OSD and the\nglobal-attention neural baselines: toric and the mid-size HGP codes).\n\n",
+  "config": {
+    "timed_codewords": 1000,
+    "timed_codewords_large": 200,
+    "warmup": 20,
+    "batches": [
+      1,
+      8,
+      32,
+      128,
+      512
+    ],
+    "throughput_repetitions": 5,
+    "throughput_warmup": 3,
+    "classical_workers": [
+      1,
+      4,
+      8
+    ],
+    "classical_throughput_codewords": 2000,
+    "latency_process_pinned_to_cpu": 2,
+    "worker_cpu_ids": [
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11
+    ],
+    "worker_chunk": 4,
+    "omp_threads": 1,
+    "torch_threads": 1,
+    "precision": "fp32 (weights and activations); classical decoders in ldpc/pymatching native precision",
+    "timing": "time.perf_counter; GPU paths end with torch.cuda.synchronize()"
+  },
+  "protocol": "Unified inference benchmark: latency, throughput and memory of every decoder on every code, one protocol.\n\nMeasurements (per code, per physical error rate p):\n  A. single-codeword latency (batch size 1), N timed codewords after warm-up; median, 95th percentile and mean.\n     * classical decoders (MWPM / BP / BP+OSD separate / BP+OSD joint): one CPU core, syndrome -> binary correction\n       (both CSS decodes for the separate decoders, the single 3n-column decode for the joint one);\n     * neural decoders: END-TO-END, syndrome in CPU memory -> binary correction in CPU memory (host->device copy,\n       forward pass, threshold, device->host copy), in eager PyTorch and with the same forward captured in a CUDA\n       graph (corrections verified identical on the first 50 codewords); plus the device-only time of the\n       graph-captured forward (input already on the GPU), labelled separately.\n  B. throughput: neural decoders at batch sizes B in --batches on the GPU, in two forms: device-resident (inputs\n     already on the GPU; forward + threshold) and END-TO-END (pinned host buffers -> device -> forward -> threshold ->\n     host, synchronized); 5 repetitions each, median; classical decoders with W worker processes (--workers), each\n     pinned to its own CPU core, codewords/s.\n  CPU pinning: the measuring process is pinned to one core (os.sched_setaffinity) during every classical batch-1\n     timing loop and released afterwards; each throughput worker is pinned to its own core in its initializer and\n     codewords are scheduled dynamically (chunks of 4) so that heavy-tailed OSD times do not idle the other workers.\n     The core ids are recorded in the output. The CSV is rewritten after every code and existing per-code JSON\n     files are reused (--resume 1), so a run that hits its time limit is continued, not repeated.\n  C. peak memory: neural, torch.cuda.max_memory_allocated at B=1 and at the largest feasible B (OOM -> recorded);\n     classical, max resident set size of the decoding process.\nEverything is written to results/benchmark/<code>.json and appended as flat rows to results/benchmark_inference.csv.\nDecoders are only benchmarked where the paper evaluated them (MWPM: toric; BP: HGP; joint BP+OSD and the\nglobal-attention neural baselines: toric and the mid-size HGP codes).\n\n",
   "bp_settings": {
     "max_iter": 100,
     "bp_method": "minimum_sum",
@@ -26,87 +62,87 @@
       "classical": {
         "mwpm": {
           "batch1": {
-            "median_us": 11.932570487260818,
-            "p95_us": 17.056835349649187,
-            "mean_us": 12.513826601207256,
-            "p05_us": 9.978399612009525,
+            "median_us": 11.431984603404999,
+            "p95_us": 16.39183610677719,
+            "mean_us": 11.981361079961061,
+            "p05_us": 9.478069841861725,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 78489.740915271,
-              "amortized_us": 12.74051854852587,
+              "codewords_per_s": 17988.637988175615,
+              "amortized_us": 55.59064564295113,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 79366.50918100105,
-              "amortized_us": 12.599773006513715,
+              "codewords_per_s": 63372.10037603328,
+              "amortized_us": 15.779814682900906,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 76748.54478200898,
-              "amortized_us": 13.029563007876277,
+              "codewords_per_s": 41571.52494370984,
+              "amortized_us": 24.054927052929997,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1153.02734375
+          "peak_rss_mib": 1112.83984375
         },
         "bposd": {
           "batch1": {
-            "median_us": 225.59543140232563,
-            "p95_us": 448.96042672917247,
-            "mean_us": 160.9269524924457,
-            "p05_us": 17.412437591701746,
+            "median_us": 218.46801973879337,
+            "p95_us": 437.6320634037256,
+            "mean_us": 156.5052936784923,
+            "p05_us": 16.470393165946007,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 6004.964171807522,
-              "amortized_us": 166.5288869990036,
+              "codewords_per_s": 5837.573588340206,
+              "amortized_us": 171.30405036732554,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 23543.60718046896,
-              "amortized_us": 42.47437498997897,
+              "codewords_per_s": 16002.331238856266,
+              "amortized_us": 62.490894924849265,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 12064.6196284811,
-              "amortized_us": 82.88698946125805,
+              "codewords_per_s": 15696.861424292885,
+              "amortized_us": 63.70700313709676,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1154.52734375
+          "peak_rss_mib": 1112.83984375
         },
         "bposd_corr": {
           "batch1": {
-            "median_us": 50.214468501508236,
-            "p95_us": 1158.7821180000901,
-            "mean_us": 428.91762661747634,
-            "p05_us": 28.003007173538208,
+            "median_us": 48.19617606699467,
+            "p95_us": 1128.4005595371127,
+            "mean_us": 417.57600475102663,
+            "p05_us": 26.650680229067802,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 2402.38073055891,
-              "amortized_us": 416.25375498551875,
+              "codewords_per_s": 2424.695704878316,
+              "amortized_us": 412.42288588546216,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 9203.865371308148,
-              "amortized_us": 108.6500029778108,
+              "codewords_per_s": 8798.12538973611,
+              "amortized_us": 113.66057605482638,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 8821.726378886513,
-              "amortized_us": 113.35649702232331,
+              "codewords_per_s": 12300.795466280053,
+              "amortized_us": 81.2955554574728,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1154.90234375
+          "peak_rss_mib": 1112.83984375
         }
       },
       "neural": {
@@ -115,58 +151,73 @@
           "epoch": 268,
           "ckpt": "runs/product_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 16598.338494077325,
-            "p95_us": 16666.811052709818,
-            "mean_us": 16608.073238749057,
-            "p05_us": 16540.46446783468,
+            "median_us": 16179.925994947553,
+            "p95_us": 16361.456946469843,
+            "mean_us": 16192.62550259009,
+            "p05_us": 16087.871277704835,
             "n": 1000
           },
           "peak_mem_b1_mib": 86.7138671875,
           "e2e_graph": {
-            "median_us": 2823.470626026392,
-            "p95_us": 2825.9663726203144,
-            "mean_us": 2826.050794450566,
-            "p05_us": 2822.0847947523,
+            "median_us": 2822.4438428878784,
+            "p95_us": 2825.6519231945276,
+            "mean_us": 2822.373813483864,
+            "p05_us": 2814.6178694441915,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 2814.8749843239784,
-            "p95_us": 2816.9178403913975,
-            "mean_us": 2814.547629095614,
-            "p05_us": 2811.1377847380936,
+            "median_us": 2811.167621985078,
+            "p95_us": 2814.1458984464407,
+            "mean_us": 2811.4633597433567,
+            "p05_us": 2807.8760486096144,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 60.663547825640876,
-              "amortized_us": 16484.363935887814,
-              "batch_time_ms": 16.484363935887814,
-              "peak_mem_mib": 102.966796875
+              "codewords_per_s": 62.14669869592516,
+              "amortized_us": 16090.959310531616,
+              "batch_time_ms": 16.090959310531616,
+              "peak_mem_mib": 102.966796875,
+              "e2e_codewords_per_s": 62.41110412869962,
+              "e2e_amortized_us": 16022.789757698774,
+              "e2e_batch_time_ms": 16.022789757698774
             },
             "B8": {
-              "codewords_per_s": 488.2521304317806,
-              "amortized_us": 2048.122143605724,
-              "batch_time_ms": 16.384977148845792,
-              "peak_mem_mib": 107.369140625
+              "codewords_per_s": 497.94063702453917,
+              "amortized_us": 2008.2715200260282,
+              "batch_time_ms": 16.066172160208225,
+              "peak_mem_mib": 107.369140625,
+              "e2e_codewords_per_s": 496.1473542293245,
+              "e2e_amortized_us": 2015.5302481725812,
+              "e2e_batch_time_ms": 16.12424198538065
             },
             "B32": {
-              "codewords_per_s": 1958.8308802177055,
-              "amortized_us": 510.5085947434418,
-              "batch_time_ms": 16.336275031790137,
-              "peak_mem_mib": 122.22998046875
+              "codewords_per_s": 1999.9490910130155,
+              "amortized_us": 500.01272757072,
+              "batch_time_ms": 16.00040728226304,
+              "peak_mem_mib": 122.22998046875,
+              "e2e_codewords_per_s": 1993.9423597709897,
+              "e2e_amortized_us": 501.5190108679235,
+              "e2e_batch_time_ms": 16.048608347773552
             },
             "B128": {
-              "codewords_per_s": 5779.698696722478,
-              "amortized_us": 173.01939988101367,
-              "batch_time_ms": 22.14648318476975,
-              "peak_mem_mib": 181.6748046875
+              "codewords_per_s": 5838.337087224906,
+              "amortized_us": 171.28164836321957,
+              "batch_time_ms": 21.924050990492105,
+              "peak_mem_mib": 181.6748046875,
+              "e2e_codewords_per_s": 5832.299962427549,
+              "e2e_amortized_us": 171.4589452603832,
+              "e2e_batch_time_ms": 21.946744993329048
             },
             "B512": {
-              "codewords_per_s": 6801.277049054646,
-              "amortized_us": 147.03121087222826,
-              "batch_time_ms": 75.27997996658087,
-              "peak_mem_mib": 419.4541015625
+              "codewords_per_s": 6796.955630183972,
+              "amortized_us": 147.12469146616058,
+              "batch_time_ms": 75.32784203067422,
+              "peak_mem_mib": 419.4541015625,
+              "e2e_codewords_per_s": 6791.575490092694,
+              "e2e_amortized_us": 147.24124048370868,
+              "e2e_batch_time_ms": 75.38751512765884
             }
           }
         },
@@ -175,58 +226,73 @@
           "epoch": 291,
           "ckpt": "runs/qecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 2511.382452212274,
-            "p95_us": 2527.315018232912,
-            "mean_us": 2512.4554380308837,
-            "p05_us": 2496.438438538462,
+            "median_us": 2455.9509474784136,
+            "p95_us": 2475.029299966991,
+            "mean_us": 2459.241129923612,
+            "p05_us": 2439.2817402258515,
             "n": 1000
           },
           "peak_mem_b1_mib": 98.20166015625,
           "e2e_graph": {
-            "median_us": 732.7708881348372,
-            "p95_us": 735.1551204919815,
-            "mean_us": 732.9393564723432,
-            "p05_us": 731.2679663300514,
+            "median_us": 731.6526025533676,
+            "p95_us": 789.4327864050865,
+            "mean_us": 739.0688112936914,
+            "p05_us": 729.7889096662402,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 726.699479855597,
-            "p95_us": 732.1605575270951,
-            "mean_us": 726.9932362250984,
-            "p05_us": 723.7815880216658,
+            "median_us": 723.6173842102289,
+            "p95_us": 725.923664867878,
+            "mean_us": 723.7367164343596,
+            "p05_us": 720.9702394902706,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 399.5996061471634,
-              "amortized_us": 2502.5049690157175,
-              "batch_time_ms": 2.5025049690157175,
-              "peak_mem_mib": 114.45458984375
+              "codewords_per_s": 414.8800891781641,
+              "amortized_us": 2410.335000604391,
+              "batch_time_ms": 2.410335000604391,
+              "peak_mem_mib": 114.45458984375,
+              "e2e_codewords_per_s": 410.2301868295145,
+              "e2e_amortized_us": 2437.6558139920235,
+              "e2e_batch_time_ms": 2.4376558139920235
             },
             "B8": {
-              "codewords_per_s": 3188.5748639648577,
-              "amortized_us": 313.61973378807306,
-              "batch_time_ms": 2.5089578703045845,
-              "peak_mem_mib": 122.59130859375
+              "codewords_per_s": 3288.7742223990203,
+              "amortized_us": 304.0646552108228,
+              "batch_time_ms": 2.4325172416865826,
+              "peak_mem_mib": 122.59130859375,
+              "e2e_codewords_per_s": 3240.4997620534587,
+              "e2e_amortized_us": 308.59437538310885,
+              "e2e_batch_time_ms": 2.468755003064871
             },
             "B32": {
-              "codewords_per_s": 7763.773500125433,
-              "amortized_us": 128.80334543297067,
-              "batch_time_ms": 4.1217070538550615,
-              "peak_mem_mib": 151.490234375
+              "codewords_per_s": 7746.089191170022,
+              "amortized_us": 129.0974032599479,
+              "batch_time_ms": 4.131116904318333,
+              "peak_mem_mib": 151.490234375,
+              "e2e_codewords_per_s": 7691.675705200629,
+              "e2e_amortized_us": 130.0106814596802,
+              "e2e_batch_time_ms": 4.160341806709766
             },
             "B128": {
-              "codewords_per_s": 9625.56626118088,
-              "amortized_us": 103.8899918057723,
-              "batch_time_ms": 13.297918951138854,
-              "peak_mem_mib": 263.58935546875
+              "codewords_per_s": 9635.42418549847,
+              "amortized_us": 103.7837027979549,
+              "batch_time_ms": 13.284313958138227,
+              "peak_mem_mib": 263.58935546875,
+              "e2e_codewords_per_s": 9627.378828578501,
+              "e2e_amortized_us": 103.87043221271597,
+              "e2e_batch_time_ms": 13.295415323227644
             },
             "B512": {
-              "codewords_per_s": 10763.683994012676,
-              "amortized_us": 92.90499428971088,
-              "batch_time_ms": 47.56735707633197,
-              "peak_mem_mib": 708.48583984375
+              "codewords_per_s": 10754.791850037434,
+              "amortized_us": 92.98180884798057,
+              "batch_time_ms": 47.606686130166054,
+              "peak_mem_mib": 708.48583984375,
+              "e2e_codewords_per_s": 10743.66320407454,
+              "e2e_amortized_us": 93.07812251790892,
+              "e2e_batch_time_ms": 47.65599872916937
             }
           }
         },
@@ -235,58 +301,73 @@
           "epoch": 291,
           "ckpt": "runs/crossqecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 5530.155962333083,
-            "p95_us": 5554.352060426027,
-            "mean_us": 5530.904952203855,
-            "p05_us": 5507.948040030897,
+            "median_us": 5390.902515500784,
+            "p95_us": 5430.504167452455,
+            "mean_us": 5397.9304460808635,
+            "p05_us": 5360.249849036336,
             "n": 1000
           },
           "peak_mem_b1_mib": 106.33251953125,
           "e2e_graph": {
-            "median_us": 1375.667518004775,
-            "p95_us": 1382.2076609358191,
-            "mean_us": 1376.8895382527262,
-            "p05_us": 1371.9759415835142,
+            "median_us": 1380.0282031297684,
+            "p95_us": 1437.5173253938556,
+            "mean_us": 1385.1520381867886,
+            "p05_us": 1372.809731401503,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 1371.4850647374988,
-            "p95_us": 1375.983003526926,
-            "mean_us": 1371.8960238620639,
-            "p05_us": 1369.380857795477,
+            "median_us": 1372.1128925681114,
+            "p95_us": 1377.3847837001085,
+            "mean_us": 1372.7437695488334,
+            "p05_us": 1369.5974135771394,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 182.54560427687844,
-              "amortized_us": 5478.083156049252,
-              "batch_time_ms": 5.478083156049252,
-              "peak_mem_mib": 122.58544921875
+              "codewords_per_s": 186.63137732311122,
+              "amortized_us": 5358.155816793442,
+              "batch_time_ms": 5.358155816793442,
+              "peak_mem_mib": 122.58544921875,
+              "e2e_codewords_per_s": 186.60834836928697,
+              "e2e_amortized_us": 5358.817055821419,
+              "e2e_batch_time_ms": 5.358817055821419
             },
             "B8": {
-              "codewords_per_s": 1415.2323477458299,
-              "amortized_us": 706.5977551974356,
-              "batch_time_ms": 5.652782041579485,
-              "peak_mem_mib": 130.5390625
+              "codewords_per_s": 1466.2700012529108,
+              "amortized_us": 682.0026319473982,
+              "batch_time_ms": 5.4560210555791855,
+              "peak_mem_mib": 130.5390625,
+              "e2e_codewords_per_s": 1451.7543362829465,
+              "e2e_amortized_us": 688.8217758387327,
+              "e2e_batch_time_ms": 5.510574206709862
             },
             "B32": {
-              "codewords_per_s": 5658.040770396859,
-              "amortized_us": 176.7396242939867,
-              "batch_time_ms": 5.655667977407575,
-              "peak_mem_mib": 159.568359375
+              "codewords_per_s": 5829.998654135581,
+              "amortized_us": 171.52662621811032,
+              "batch_time_ms": 5.48885203897953,
+              "peak_mem_mib": 159.568359375,
+              "e2e_codewords_per_s": 5794.397228516678,
+              "e2e_amortized_us": 172.5805050227791,
+              "e2e_batch_time_ms": 5.522576160728931
             },
             "B128": {
-              "codewords_per_s": 7967.903289880953,
-              "amortized_us": 125.50353130791336,
-              "batch_time_ms": 16.06445200741291,
-              "peak_mem_mib": 268.6787109375
+              "codewords_per_s": 7982.596915949218,
+              "amortized_us": 125.27251601568423,
+              "batch_time_ms": 16.03488205000758,
+              "peak_mem_mib": 268.6787109375,
+              "e2e_codewords_per_s": 7972.126432832279,
+              "e2e_amortized_us": 125.43704724521376,
+              "e2e_batch_time_ms": 16.05594204738736
             },
             "B512": {
-              "codewords_per_s": 8916.140219439014,
-              "amortized_us": 112.15615450055338,
-              "batch_time_ms": 57.42395110428333,
-              "peak_mem_mib": 703.283203125
+              "codewords_per_s": 8929.854237536905,
+              "amortized_us": 111.98391075595282,
+              "batch_time_ms": 57.335762307047844,
+              "peak_mem_mib": 703.283203125,
+              "e2e_codewords_per_s": 8929.659439108967,
+              "e2e_amortized_us": 111.98635365872178,
+              "e2e_batch_time_ms": 57.33701307326555
             }
           }
         }
@@ -296,87 +377,87 @@
       "classical": {
         "mwpm": {
           "batch1": {
-            "median_us": 13.47600482404232,
-            "p95_us": 20.493031479418274,
-            "mean_us": 14.218287775292993,
-            "p05_us": 10.719499550759792,
+            "median_us": 13.043871149420738,
+            "p95_us": 19.720080308616158,
+            "mean_us": 13.781912624835968,
+            "p05_us": 10.27893740683794,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 71334.06421825367,
-              "amortized_us": 14.018547954037786,
+              "codewords_per_s": 12097.330005425927,
+              "amortized_us": 82.66286854632199,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 140054.01286905634,
-              "amortized_us": 7.140102447010577,
+              "codewords_per_s": 48292.832515493516,
+              "amortized_us": 20.707006566226482,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 69846.00847878456,
-              "amortized_us": 14.31721041444689,
+              "codewords_per_s": 51244.11084652086,
+              "amortized_us": 19.514437532052398,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1173.96875
+          "peak_rss_mib": 1121.83984375
         },
         "bposd": {
           "batch1": {
-            "median_us": 236.3249659538269,
-            "p95_us": 457.884615752846,
-            "mean_us": 250.61474088579416,
-            "p05_us": 18.05368810892105,
+            "median_us": 230.4555382579565,
+            "p95_us": 447.99160677939653,
+            "mean_us": 244.4516266696155,
+            "p05_us": 17.062737606465816,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 4238.086475275493,
-              "amortized_us": 235.95554404892027,
+              "codewords_per_s": 4093.235277552013,
+              "amortized_us": 244.30552660487592,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 15843.725362957797,
-              "amortized_us": 63.116468954831355,
+              "codewords_per_s": 12515.613517219625,
+              "amortized_us": 79.90019815042615,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 10819.889575270907,
-              "amortized_us": 92.42238500155509,
+              "codewords_per_s": 20273.419643279693,
+              "amortized_us": 49.32566964998841,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1178.09375
+          "peak_rss_mib": 1121.83984375
         },
         "bposd_corr": {
           "batch1": {
-            "median_us": 1107.7820090577006,
-            "p95_us": 1174.571120645851,
-            "mean_us": 707.1507403161377,
-            "p05_us": 29.18485552072525,
+            "median_us": 1074.2999147623777,
+            "p95_us": 1139.4038563594222,
+            "mean_us": 685.0020117126405,
+            "p05_us": 28.17101776599884,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 1527.4325893229118,
-              "amortized_us": 654.6933769714087,
+              "codewords_per_s": 1520.1372829126249,
+              "amortized_us": 657.8353226650506,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 5755.415872164205,
-              "amortized_us": 173.74939052388072,
+              "codewords_per_s": 5676.075632551146,
+              "amortized_us": 176.1780611705035,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 6889.801828893615,
-              "amortized_us": 145.14205558225513,
+              "codewords_per_s": 10162.00785731011,
+              "amortized_us": 98.40574953705072,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1179.96875
+          "peak_rss_mib": 1121.83984375
         }
       },
       "neural": {
@@ -385,58 +466,73 @@
           "epoch": 268,
           "ckpt": "runs/product_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 16611.072467640042,
-            "p95_us": 16721.64014307782,
-            "mean_us": 16626.348842633888,
-            "p05_us": 16555.125382728875,
+            "median_us": 16212.893882766366,
+            "p95_us": 16409.220499917865,
+            "mean_us": 16228.691221680492,
+            "p05_us": 16112.146573141217,
             "n": 1000
           },
           "peak_mem_b1_mib": 111.0888671875,
           "e2e_graph": {
-            "median_us": 2823.6900689080358,
-            "p95_us": 2826.9170550629497,
-            "mean_us": 2823.812874732539,
-            "p05_us": 2822.145982645452,
+            "median_us": 2847.756491973996,
+            "p95_us": 2856.4390260726213,
+            "mean_us": 2850.4852009937167,
+            "p05_us": 2846.338297240436,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 2814.7080447524786,
-            "p95_us": 2817.391196731478,
-            "mean_us": 2814.6330129820853,
-            "p05_us": 2810.7449179515243,
+            "median_us": 2841.5194246917963,
+            "p95_us": 2845.397708006203,
+            "mean_us": 2845.669552218169,
+            "p05_us": 2837.6318514347076,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 60.39907507006873,
-              "amortized_us": 16556.544927880168,
-              "batch_time_ms": 16.556544927880168,
-              "peak_mem_mib": 127.341796875
+              "codewords_per_s": 61.985533058139524,
+              "amortized_us": 16132.79664888978,
+              "batch_time_ms": 16.13279664888978,
+              "peak_mem_mib": 127.341796875,
+              "e2e_codewords_per_s": 62.1930189448184,
+              "e2e_amortized_us": 16078.975051641464,
+              "e2e_batch_time_ms": 16.078975051641464
             },
             "B8": {
-              "codewords_per_s": 486.3810274849132,
-              "amortized_us": 2056.0012490022928,
-              "batch_time_ms": 16.448009992018342,
-              "peak_mem_mib": 131.744140625
+              "codewords_per_s": 499.00334169223544,
+              "amortized_us": 2003.9945957250893,
+              "batch_time_ms": 16.031956765800714,
+              "peak_mem_mib": 131.744140625,
+              "e2e_codewords_per_s": 496.4404309713685,
+              "e2e_amortized_us": 2014.340367168188,
+              "e2e_batch_time_ms": 16.114722937345505
             },
             "B32": {
-              "codewords_per_s": 1962.1022359841354,
-              "amortized_us": 509.6574386698194,
-              "batch_time_ms": 16.30903803743422,
-              "peak_mem_mib": 146.60498046875
+              "codewords_per_s": 2018.2074931633874,
+              "amortized_us": 495.48919196240604,
+              "batch_time_ms": 15.855654142796993,
+              "peak_mem_mib": 146.60498046875,
+              "e2e_codewords_per_s": 2001.4981273966753,
+              "e2e_amortized_us": 499.62574848905206,
+              "e2e_batch_time_ms": 15.988023951649666
             },
             "B128": {
-              "codewords_per_s": 5760.372061173865,
-              "amortized_us": 173.59989760734607,
-              "batch_time_ms": 22.220786893740296,
-              "peak_mem_mib": 206.0498046875
+              "codewords_per_s": 5753.594594259125,
+              "amortized_us": 173.8043902150821,
+              "batch_time_ms": 22.246961947530508,
+              "peak_mem_mib": 206.0498046875,
+              "e2e_codewords_per_s": 5757.512596204688,
+              "e2e_amortized_us": 173.68611588608474,
+              "e2e_batch_time_ms": 22.231822833418846
             },
             "B512": {
-              "codewords_per_s": 6789.424048942813,
-              "amortized_us": 147.28789847140433,
-              "batch_time_ms": 75.41140401735902,
-              "peak_mem_mib": 443.8291015625
+              "codewords_per_s": 6764.61321744809,
+              "amortized_us": 147.8281119489111,
+              "batch_time_ms": 75.68799331784248,
+              "peak_mem_mib": 443.8291015625,
+              "e2e_codewords_per_s": 6764.249699646189,
+              "e2e_amortized_us": 147.8360563851311,
+              "e2e_batch_time_ms": 75.69206086918712
             }
           }
         },
@@ -445,58 +541,73 @@
           "epoch": 291,
           "ckpt": "runs/qecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 2512.629609555006,
-            "p95_us": 2527.8750341385603,
-            "mean_us": 2514.1862710006535,
-            "p05_us": 2497.744921129197,
+            "median_us": 2457.102993503213,
+            "p95_us": 2475.269208662212,
+            "mean_us": 2460.560369770974,
+            "p05_us": 2440.612274222076,
             "n": 1000
           },
           "peak_mem_b1_mib": 122.57666015625,
           "e2e_graph": {
-            "median_us": 732.701038941741,
-            "p95_us": 738.297903444618,
-            "mean_us": 733.9518018998206,
-            "p05_us": 731.1473367735744,
+            "median_us": 740.20866304636,
+            "p95_us": 798.4899682924151,
+            "mean_us": 746.4141738601029,
+            "p05_us": 732.493051327765,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 726.1979626491666,
-            "p95_us": 728.5839645192027,
-            "mean_us": 726.2152747716755,
-            "p05_us": 723.3190815895796,
+            "median_us": 732.0130243897438,
+            "p95_us": 734.6701109781861,
+            "mean_us": 732.4241045862436,
+            "p05_us": 729.5384770259261,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 403.5286141077684,
-              "amortized_us": 2478.1390093266964,
-              "batch_time_ms": 2.4781390093266964,
-              "peak_mem_mib": 138.82958984375
+              "codewords_per_s": 412.1391591990065,
+              "amortized_us": 2426.3649247586727,
+              "batch_time_ms": 2.4263649247586727,
+              "peak_mem_mib": 138.82958984375,
+              "e2e_codewords_per_s": 407.5134182523756,
+              "e2e_amortized_us": 2453.9069272577763,
+              "e2e_batch_time_ms": 2.4539069272577763
             },
             "B8": {
-              "codewords_per_s": 3205.652213195035,
-              "amortized_us": 311.9489992968738,
-              "batch_time_ms": 2.4955919943749905,
-              "peak_mem_mib": 146.96630859375
+              "codewords_per_s": 3304.781925821508,
+              "amortized_us": 302.59182676672935,
+              "batch_time_ms": 2.420734614133835,
+              "peak_mem_mib": 146.96630859375,
+              "e2e_codewords_per_s": 3238.2379599020906,
+              "e2e_amortized_us": 308.8099183514714,
+              "e2e_batch_time_ms": 2.4704793468117714
             },
             "B32": {
-              "codewords_per_s": 7752.300464848262,
-              "amortized_us": 128.99396824650466,
-              "batch_time_ms": 4.127806983888149,
-              "peak_mem_mib": 175.865234375
+              "codewords_per_s": 7723.2559139214545,
+              "amortized_us": 129.4790708925575,
+              "batch_time_ms": 4.14333026856184,
+              "peak_mem_mib": 175.865234375,
+              "e2e_codewords_per_s": 7634.259816769703,
+              "e2e_amortized_us": 130.98846829961985,
+              "e2e_batch_time_ms": 4.191630985587835
             },
             "B128": {
-              "codewords_per_s": 9632.797842836804,
-              "amortized_us": 103.81199899711646,
-              "batch_time_ms": 13.287935871630907,
-              "peak_mem_mib": 287.96435546875
+              "codewords_per_s": 9539.21264471687,
+              "amortized_us": 104.8304548021406,
+              "batch_time_ms": 13.418298214673996,
+              "peak_mem_mib": 287.96435546875,
+              "e2e_codewords_per_s": 9619.839745716246,
+              "e2e_amortized_us": 103.95183562650345,
+              "e2e_batch_time_ms": 13.305834960192442
             },
             "B512": {
-              "codewords_per_s": 10777.64363724227,
-              "amortized_us": 92.78465995521401,
-              "batch_time_ms": 47.50574589706957,
-              "peak_mem_mib": 732.86083984375
+              "codewords_per_s": 10785.593822187058,
+              "amortized_us": 92.71626731788274,
+              "batch_time_ms": 47.47072886675596,
+              "peak_mem_mib": 732.86083984375,
+              "e2e_codewords_per_s": 10776.461972110497,
+              "e2e_amortized_us": 92.7948340176954,
+              "e2e_batch_time_ms": 47.51095501706004
             }
           }
         },
@@ -505,58 +616,73 @@
           "epoch": 291,
           "ckpt": "runs/crossqecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 5535.455071367323,
-            "p95_us": 5560.045538004488,
-            "mean_us": 5538.465536432341,
-            "p05_us": 5514.51948704198,
+            "median_us": 5372.266983613372,
+            "p95_us": 5415.177182294428,
+            "mean_us": 5377.314667217433,
+            "p05_us": 5339.144868776202,
             "n": 1000
           },
           "peak_mem_b1_mib": 130.70751953125,
           "e2e_graph": {
-            "median_us": 1380.3956098854542,
-            "p95_us": 1381.7135244607925,
-            "mean_us": 1380.32679236494,
-            "p05_us": 1372.575992718339,
+            "median_us": 1395.82809060812,
+            "p95_us": 1403.0212070792913,
+            "mean_us": 1403.1356102786958,
+            "p05_us": 1387.891173362732,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 1373.2074294239283,
-            "p95_us": 1378.579461015761,
-            "mean_us": 1373.936293181032,
-            "p05_us": 1370.7424281165004,
+            "median_us": 1387.3765710741282,
+            "p95_us": 1393.2940317317843,
+            "mean_us": 1388.62737827003,
+            "p05_us": 1385.2478004992008,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 182.06310376421195,
-              "amortized_us": 5492.601078003645,
-              "batch_time_ms": 5.492601078003645,
-              "peak_mem_mib": 146.96044921875
+              "codewords_per_s": 187.20263848328008,
+              "amortized_us": 5341.805052012205,
+              "batch_time_ms": 5.341805052012205,
+              "peak_mem_mib": 146.96044921875,
+              "e2e_codewords_per_s": 187.02867635205345,
+              "e2e_amortized_us": 5346.773657947779,
+              "e2e_batch_time_ms": 5.346773657947779
             },
             "B8": {
-              "codewords_per_s": 1411.6719606000834,
-              "amortized_us": 708.3798700477928,
-              "batch_time_ms": 5.667038960382342,
-              "peak_mem_mib": 154.9140625
+              "codewords_per_s": 1462.1272278248164,
+              "amortized_us": 683.9350098744035,
+              "batch_time_ms": 5.471480078995228,
+              "peak_mem_mib": 154.9140625,
+              "e2e_codewords_per_s": 1451.9762945739199,
+              "e2e_amortized_us": 688.7164781801403,
+              "e2e_batch_time_ms": 5.509731825441122
             },
             "B32": {
-              "codewords_per_s": 5666.633248448632,
-              "amortized_us": 176.4716289471835,
-              "batch_time_ms": 5.647092126309872,
-              "peak_mem_mib": 183.943359375
+              "codewords_per_s": 5821.1473368852885,
+              "amortized_us": 171.78744019474834,
+              "batch_time_ms": 5.497198086231947,
+              "peak_mem_mib": 183.943359375,
+              "e2e_codewords_per_s": 5779.330069960534,
+              "e2e_amortized_us": 173.03043568972498,
+              "e2e_batch_time_ms": 5.536973942071199
             },
             "B128": {
-              "codewords_per_s": 7963.199556249875,
-              "amortized_us": 125.57766422105487,
-              "batch_time_ms": 16.073941020295024,
-              "peak_mem_mib": 293.0537109375
+              "codewords_per_s": 7878.128452876608,
+              "amortized_us": 126.93370081251487,
+              "batch_time_ms": 16.247513704001904,
+              "peak_mem_mib": 293.0537109375,
+              "e2e_codewords_per_s": 7820.619516935933,
+              "e2e_amortized_us": 127.86710794898681,
+              "e2e_batch_time_ms": 16.366989817470312
             },
             "B512": {
-              "codewords_per_s": 8879.605391246883,
-              "amortized_us": 112.61761710557039,
-              "batch_time_ms": 57.66021995805204,
-              "peak_mem_mib": 727.658203125
+              "codewords_per_s": 8871.402356815002,
+              "amortized_us": 112.72175015619723,
+              "batch_time_ms": 57.71353607997298,
+              "peak_mem_mib": 727.658203125,
+              "e2e_codewords_per_s": 8877.394258381728,
+              "e2e_amortized_us": 112.64566728641512,
+              "e2e_batch_time_ms": 57.67458165064454
             }
           }
         }
@@ -566,87 +692,87 @@
       "classical": {
         "mwpm": {
           "batch1": {
-            "median_us": 16.516074538230896,
-            "p95_us": 24.2705806158483,
-            "mean_us": 17.0982473064214,
-            "p05_us": 12.201117351651192,
+            "median_us": 15.990110114216805,
+            "p95_us": 23.766467347741127,
+            "mean_us": 16.590700950473547,
+            "p05_us": 11.720601469278336,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 57561.51543134459,
-              "amortized_us": 17.372718430124223,
+              "codewords_per_s": 32846.25192503827,
+              "amortized_us": 30.444873962551355,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 112750.32507846347,
-              "amortized_us": 8.869154029525816,
+              "codewords_per_s": 69384.52350829369,
+              "amortized_us": 14.412435935810208,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 79106.33611766426,
-              "amortized_us": 12.641212437301874,
+              "codewords_per_s": 41538.598864247724,
+              "amortized_us": 24.073994485661387,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1182.515625
+          "peak_rss_mib": 1122.125
         },
         "bposd": {
           "batch1": {
-            "median_us": 440.6000953167677,
-            "p95_us": 456.96315355598927,
-            "mean_us": 346.6412299312651,
-            "p05_us": 22.86586677655578,
+            "median_us": 427.5685641914606,
+            "p95_us": 441.6020819917321,
+            "mean_us": 335.8353585936129,
+            "p05_us": 21.62335440516472,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 2920.9359438542137,
-              "amortized_us": 342.3560184892267,
+              "codewords_per_s": 2936.89326109687,
+              "amortized_us": 340.4958611354232,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 11079.396527426536,
-              "amortized_us": 90.25762346573174,
+              "codewords_per_s": 9268.816827127077,
+              "amortized_us": 107.88863548077643,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 10125.970211781058,
-              "amortized_us": 98.75596896745265,
+              "codewords_per_s": 17885.334303970947,
+              "amortized_us": 55.91173097491264,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1182.515625
+          "peak_rss_mib": 1122.125
         },
         "bposd_corr": {
           "batch1": {
-            "median_us": 1158.0026475712657,
-            "p95_us": 1207.5587175786495,
-            "mean_us": 1007.2090299800038,
-            "p05_us": 50.470116548240185,
+            "median_us": 1122.466754168272,
+            "p95_us": 1172.5650867447257,
+            "mean_us": 976.4699460938573,
+            "p05_us": 48.36441949009895,
             "n": 1000,
-            "hardware": "cpu, 1 core"
+            "hardware": "cpu, 1 core (pinned to cpu 2)"
           },
           "throughput": {
             "workers1": {
-              "codewords_per_s": 1018.634207657954,
-              "amortized_us": 981.7066739778967,
+              "codewords_per_s": 1039.6561190485354,
+              "amortized_us": 961.856503970921,
               "n": 2000
             },
             "workers4": {
-              "codewords_per_s": 4033.332152076075,
-              "amortized_us": 247.9339569108561,
+              "codewords_per_s": 3853.017676459174,
+              "amortized_us": 259.5368316397071,
               "n": 2000
             },
             "workers8": {
-              "codewords_per_s": 6394.560591397049,
-              "amortized_us": 156.38291102368385,
+              "codewords_per_s": 7529.973200647615,
+              "amortized_us": 132.80259747989476,
               "n": 2000
             }
           },
-          "peak_rss_mib": 1182.515625
+          "peak_rss_mib": 1122.125
         }
       },
       "neural": {
@@ -655,58 +781,73 @@
           "epoch": 268,
           "ckpt": "runs/product_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 16584.377619437873,
-            "p95_us": 16657.19774318859,
-            "mean_us": 16596.795747289434,
-            "p05_us": 16525.89647565037,
+            "median_us": 16233.567846938968,
+            "p95_us": 16429.49015367776,
+            "mean_us": 16247.80842475593,
+            "p05_us": 16132.325492799282,
             "n": 1000
           },
           "peak_mem_b1_mib": 135.4638671875,
           "e2e_graph": {
-            "median_us": 2823.510905727744,
-            "p95_us": 2824.9646071344614,
-            "mean_us": 2823.3820092864335,
-            "p05_us": 2821.0732736624777,
+            "median_us": 2848.101779818535,
+            "p95_us": 2856.357954442501,
+            "mean_us": 2850.4880033433437,
+            "p05_us": 2846.6591611504555,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 2814.6940749138594,
-            "p95_us": 2817.1116136945784,
-            "mean_us": 2814.525724388659,
-            "p05_us": 2811.5020133554935,
+            "median_us": 2841.715468093753,
+            "p95_us": 2846.275921911001,
+            "mean_us": 2845.9405223838985,
+            "p05_us": 2838.453743606806,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 60.66494535106153,
-              "amortized_us": 16483.984189108014,
-              "batch_time_ms": 16.483984189108014,
-              "peak_mem_mib": 151.716796875
+              "codewords_per_s": 62.06481569817409,
+              "amortized_us": 16112.188342958689,
+              "batch_time_ms": 16.11218834295869,
+              "peak_mem_mib": 151.716796875,
+              "e2e_codewords_per_s": 61.677073958741616,
+              "e2e_amortized_us": 16213.479917496443,
+              "e2e_batch_time_ms": 16.213479917496443
             },
             "B8": {
-              "codewords_per_s": 488.2885510583465,
-              "amortized_us": 2047.9693775996566,
-              "batch_time_ms": 16.383755020797253,
-              "peak_mem_mib": 156.119140625
+              "codewords_per_s": 494.12192295309296,
+              "amortized_us": 2023.792010731995,
+              "batch_time_ms": 16.19033608585596,
+              "peak_mem_mib": 156.119140625,
+              "e2e_codewords_per_s": 495.0053403357625,
+              "e2e_amortized_us": 2020.1802253723145,
+              "e2e_batch_time_ms": 16.161441802978516
             },
             "B32": {
-              "codewords_per_s": 1967.5249048547587,
-              "amortized_us": 508.2527786726132,
-              "batch_time_ms": 16.264088917523623,
-              "peak_mem_mib": 170.97998046875
+              "codewords_per_s": 2005.309580077623,
+              "amortized_us": 498.6761196050793,
+              "batch_time_ms": 15.957635827362537,
+              "peak_mem_mib": 170.97998046875,
+              "e2e_codewords_per_s": 1988.1658311889698,
+              "e2e_amortized_us": 502.9761523474008,
+              "e2e_batch_time_ms": 16.095236875116825
             },
             "B128": {
-              "codewords_per_s": 5764.494771184063,
-              "amortized_us": 173.47574066661764,
-              "batch_time_ms": 22.204894805327058,
-              "peak_mem_mib": 230.4248046875
+              "codewords_per_s": 5784.532376487625,
+              "amortized_us": 172.87482114625163,
+              "batch_time_ms": 22.12797710672021,
+              "peak_mem_mib": 230.4248046875,
+              "e2e_codewords_per_s": 5772.277446728874,
+              "e2e_amortized_us": 173.2418459141627,
+              "e2e_batch_time_ms": 22.174956277012825
             },
             "B512": {
-              "codewords_per_s": 6793.020754235174,
-              "amortized_us": 147.2099138482008,
-              "batch_time_ms": 75.37147589027882,
-              "peak_mem_mib": 468.2041015625
+              "codewords_per_s": 6792.59735788611,
+              "amortized_us": 147.219089740247,
+              "batch_time_ms": 75.37617394700646,
+              "peak_mem_mib": 468.2041015625,
+              "e2e_codewords_per_s": 6783.947159046247,
+              "e2e_amortized_us": 147.40680853719823,
+              "e2e_batch_time_ms": 75.4722859710455
             }
           }
         },
@@ -715,58 +856,73 @@
           "epoch": 291,
           "ckpt": "runs/qecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 2507.3299184441566,
-            "p95_us": 2523.7826397642493,
-            "mean_us": 2508.663328597322,
-            "p05_us": 2493.572444655001,
+            "median_us": 2451.3176176697016,
+            "p95_us": 2473.395923152566,
+            "mean_us": 2457.825779914856,
+            "p05_us": 2434.579166583717,
             "n": 1000
           },
           "peak_mem_b1_mib": 146.95166015625,
           "e2e_graph": {
-            "median_us": 732.3999889194965,
-            "p95_us": 738.3621414192021,
-            "mean_us": 735.4083778336644,
-            "p05_us": 730.8565196581185,
+            "median_us": 731.8679708987474,
+            "p95_us": 781.6572207957506,
+            "mean_us": 742.0788304880261,
+            "p05_us": 729.9901451915503,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 727.4110103026032,
-            "p95_us": 729.8055803403258,
-            "mean_us": 727.4434310384095,
-            "p05_us": 724.7844710946083,
+            "median_us": 725.1999340951443,
+            "p95_us": 728.0978839844465,
+            "mean_us": 725.4921980202198,
+            "p05_us": 722.2043117508292,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 403.0364968983314,
-              "amortized_us": 2481.164876371622,
-              "batch_time_ms": 2.481164876371622,
-              "peak_mem_mib": 163.20458984375
+              "codewords_per_s": 409.1822234264371,
+              "amortized_us": 2443.8989348709583,
+              "batch_time_ms": 2.4438989348709583,
+              "peak_mem_mib": 163.20458984375,
+              "e2e_codewords_per_s": 408.62964799546364,
+              "e2e_amortized_us": 2447.2037330269814,
+              "e2e_batch_time_ms": 2.4472037330269814
             },
             "B8": {
-              "codewords_per_s": 3228.789213431452,
-              "amortized_us": 309.71362139098346,
-              "batch_time_ms": 2.4777089711278677,
-              "peak_mem_mib": 171.34130859375
+              "codewords_per_s": 3305.999777930571,
+              "amortized_us": 302.48035909608006,
+              "batch_time_ms": 2.4198428727686405,
+              "peak_mem_mib": 171.34130859375,
+              "e2e_codewords_per_s": 3249.8497422989512,
+              "e2e_amortized_us": 307.70653393119574,
+              "e2e_batch_time_ms": 2.461652271449566
             },
             "B32": {
-              "codewords_per_s": 7756.853824125884,
-              "amortized_us": 128.91824735561386,
-              "batch_time_ms": 4.125383915379643,
-              "peak_mem_mib": 200.240234375
+              "codewords_per_s": 7744.475087044303,
+              "amortized_us": 129.12430975120515,
+              "batch_time_ms": 4.131977912038565,
+              "peak_mem_mib": 200.240234375,
+              "e2e_codewords_per_s": 7663.714359860299,
+              "e2e_amortized_us": 130.48503024037927,
+              "e2e_batch_time_ms": 4.175520967692137
             },
             "B128": {
-              "codewords_per_s": 9609.665945464276,
-              "amortized_us": 104.06188994238619,
-              "batch_time_ms": 13.319921912625432,
-              "peak_mem_mib": 312.33935546875
+              "codewords_per_s": 9639.334948995614,
+              "amortized_us": 103.74159683124162,
+              "batch_time_ms": 13.278924394398928,
+              "peak_mem_mib": 312.33935546875,
+              "e2e_codewords_per_s": 9623.731127542052,
+              "e2e_amortized_us": 103.90980241936632,
+              "e2e_batch_time_ms": 13.300454709678888
             },
             "B512": {
-              "codewords_per_s": 10739.870265653717,
-              "amortized_us": 93.1109943849151,
-              "batch_time_ms": 47.67282912507653,
-              "peak_mem_mib": 757.23583984375
+              "codewords_per_s": 10721.431789470633,
+              "amortized_us": 93.27112456958275,
+              "batch_time_ms": 47.75481577962637,
+              "peak_mem_mib": 757.23583984375,
+              "e2e_codewords_per_s": 10716.934870283767,
+              "e2e_amortized_us": 93.31026194558945,
+              "e2e_batch_time_ms": 47.774854116141796
             }
           }
         },
@@ -775,58 +931,73 @@
           "epoch": 291,
           "ckpt": "runs/crossqecct_toric-L6_depolarizing_xz_N6_d128_s42/best.pt",
           "e2e_eager": {
-            "median_us": 5545.580526813865,
-            "p95_us": 5584.954866208136,
-            "mean_us": 5549.614713061601,
-            "p05_us": 5520.432500634342,
+            "median_us": 5379.696376621723,
+            "p95_us": 5434.3565832823515,
+            "mean_us": 5389.215035364032,
+            "p05_us": 5343.423876911402,
             "n": 1000
           },
           "peak_mem_b1_mib": 155.08251953125,
           "e2e_graph": {
-            "median_us": 1380.4314658045769,
-            "p95_us": 1390.6244304962452,
-            "mean_us": 1394.0739033278078,
-            "p05_us": 1372.836495283991,
+            "median_us": 1379.6081766486168,
+            "p95_us": 1716.028619557619,
+            "mean_us": 1398.3904477208853,
+            "p05_us": 1377.9126573354006,
             "n": 1000,
             "mismatch_vs_eager": 0
           },
           "device_graph": {
-            "median_us": 1373.1580693274736,
-            "p95_us": 1378.4675626084208,
-            "mean_us": 1373.6515727359802,
-            "p05_us": 1370.6985977478325,
+            "median_us": 1372.0430433750153,
+            "p95_us": 1377.032184973359,
+            "mean_us": 1372.5673309527338,
+            "p05_us": 1369.4972498342395,
             "n": 1000
           },
           "throughput": {
             "B1": {
-              "codewords_per_s": 182.9514487458359,
-              "amortized_us": 5465.931026265025,
-              "batch_time_ms": 5.465931026265025,
-              "peak_mem_mib": 171.33544921875
+              "codewords_per_s": 186.89206511604107,
+              "amortized_us": 5350.681953132153,
+              "batch_time_ms": 5.350681953132153,
+              "peak_mem_mib": 171.33544921875,
+              "e2e_codewords_per_s": 184.8348895875323,
+              "e2e_amortized_us": 5410.233978182077,
+              "e2e_batch_time_ms": 5.410233978182077
             },
             "B8": {
-              "codewords_per_s": 1417.3450684018578,
-              "amortized_us": 705.5444875732064,
-              "batch_time_ms": 5.644355900585651,
-              "peak_mem_mib": 179.2890625
+              "codewords_per_s": 1450.9894745874742,
+              "amortized_us": 689.1848752275109,
+              "batch_time_ms": 5.513479001820087,
+              "peak_mem_mib": 179.2890625,
+              "e2e_codewords_per_s": 1454.753615869298,
+              "e2e_amortized_us": 687.4016253277659,
+              "e2e_batch_time_ms": 5.4992130026221275
             },
             "B32": {
-              "codewords_per_s": 5660.0052709612255,
-              "amortized_us": 176.67828069534153,
-              "batch_time_ms": 5.653704982250929,
-              "peak_mem_mib": 208.318359375
+              "codewords_per_s": 5834.939969456336,
+              "amortized_us": 171.38136900030077,
+              "batch_time_ms": 5.4842038080096245,
+              "peak_mem_mib": 208.318359375,
+              "e2e_codewords_per_s": 5755.814152458707,
+              "e2e_amortized_us": 173.73736773151904,
+              "e2e_batch_time_ms": 5.559595767408609
             },
             "B128": {
-              "codewords_per_s": 7964.6790378108835,
-              "amortized_us": 125.5543375009438,
-              "batch_time_ms": 16.070955200120807,
-              "peak_mem_mib": 317.4287109375
+              "codewords_per_s": 7989.49530740012,
+              "amortized_us": 125.16435162979178,
+              "batch_time_ms": 16.021037008613348,
+              "peak_mem_mib": 317.4287109375,
+              "e2e_codewords_per_s": 7970.1921284996815,
+              "e2e_amortized_us": 125.4674898518715,
+              "e2e_batch_time_ms": 16.059838701039553
             },
             "B512": {
-              "codewords_per_s": 8874.578480855067,
-              "amortized_us": 112.68140815445804,
-              "batch_time_ms": 57.69288097508252,
-              "peak_mem_mib": 752.033203125
+              "codewords_per_s": 8865.05127743796,
+              "amortized_us": 112.80250600975705,
+              "batch_time_ms": 57.75488307699561,
+              "peak_mem_mib": 752.033203125,
+              "e2e_codewords_per_s": 8879.865459839353,
+              "e2e_amortized_us": 112.61431882303441,
+              "e2e_batch_time_ms": 57.65853123739362
             }
           }
         }

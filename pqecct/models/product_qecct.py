@@ -144,7 +144,7 @@ class GridEncoder(nn.Module):
 
 class ProductQECCT(nn.Module):
     def __init__(self, code, d_model=128, h=8, N_dec=6, d_ff=None, share_processes=True,
-                 d_g=32, N_g=1, no_g=False, dropout=0.0, out_mix=True):
+                 d_g=32, N_g=1, no_g=False, dropout=0.0, out_mix=True, out_mix_init="zero"):
         super().__init__()
         assert code.is_hgp(), "ProductQECCT requires an HGP (grid-structured) code"
         d_ff = d_ff or 4 * d_model
@@ -169,9 +169,15 @@ class ProductQECCT(nn.Module):
         if out_mix:
             R, C = self.enc.R, self.enc.C
             # factorized output mixing  G + A G B^T  (O(R^2 + C^2) params instead of O(n^2)).
-            # A, B start at zero so the head is the plain per-cell readout at init and mixing is learned.
+            # out_mix_init="zero" (default, the configuration of all runs in the paper): BOTH factors start at zero.
+            #   This gives both a zero gradient (dL/dA ~ G B^T = 0, dL/dB ~ A^T G = 0), so the term stays identically
+            #   zero and the head is the plain per-cell readout; the released checkpoints contain A = B = 0.
+            # out_mix_init="identity": B starts at the identity, A at zero, so the mixing is trainable.
             self.A = nn.Parameter(torch.zeros(2, R, R))
-            self.Bm = nn.Parameter(torch.zeros(2, C, C))
+            if out_mix_init == "identity":
+                self.Bm = nn.Parameter(torch.eye(C).unsqueeze(0).repeat(2, 1, 1))
+            else:
+                self.Bm = nn.Parameter(torch.zeros(2, C, C))
 
     def count_features(self, s_x, s_z):
         c_x = (s_x @ self.HxT.T) / self.deg_x   # (B, n): fraction of violated X-checks on each qubit

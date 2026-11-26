@@ -59,7 +59,9 @@ def get_args(argv=None):
     p.add_argument("--d_g", type=int, default=32, help="[product] width of factorized noise estimator")
     p.add_argument("--N_g", type=int, default=1, help="[product] layers of factorized noise estimator")
     p.add_argument("--no_share", action="store_true", help="[product] do not share parameters across processes A-D")
-    p.add_argument("--no_out_mix", action="store_true", help="[product] disable factorized output mixing")
+    p.add_argument("--no_out_mix", action="store_true", help="[product] remove the factorized output-mixing parameters")
+    p.add_argument("--out_mix_init", default="zero", choices=["zero", "identity"],
+                   help="[product] zero (paper): both factors at zero, the mixing stays inert; identity: trainable mixing")
     p.add_argument("--g_hidden_mult", type=int, default=5, help="[qecct/crossqecct] g_omega hidden width multiplier")
     p.add_argument("--no_g", type=int, default=0, help="ablation: no initial noise estimator")
     p.add_argument("--no_mask", type=int, default=0, help="[qecct] ablation: no attention mask")

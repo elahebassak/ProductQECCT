@@ -9,8 +9,15 @@ Measurements (per code, per physical error rate p):
        forward pass, threshold, device->host copy), in eager PyTorch and with the same forward captured in a CUDA
        graph (corrections verified identical on the first 50 codewords); plus the device-only time of the
        graph-captured forward (input already on the GPU), labelled separately.
-  B. throughput: neural decoders at batch sizes B in --batches on the GPU (codewords/s and T(B)/B, inputs on the
-     device, 5 repetitions, median); classical decoders with W worker processes (--workers), codewords/s.
+  B. throughput: neural decoders at batch sizes B in --batches on the GPU, in two forms: device-resident (inputs
+     already on the GPU; forward + threshold) and END-TO-END (pinned host buffers -> device -> forward -> threshold ->
+     host, synchronized); 5 repetitions each, median; classical decoders with W worker processes (--workers), each
+     pinned to its own CPU core, codewords/s.
+  CPU pinning: the measuring process is pinned to one core (os.sched_setaffinity) during every classical batch-1
+     timing loop and released afterwards; each throughput worker is pinned to its own core in its initializer and
+     codewords are scheduled dynamically (chunks of 4) so that heavy-tailed OSD times do not idle the other workers.
+     The core ids are recorded in the output. The CSV is rewritten after every code and existing per-code JSON
+     files are reused (--resume 1), so a run that hits its time limit is continued, not repeated.
   C. peak memory: neural, torch.cuda.max_memory_allocated at B=1 and at the largest feasible B (OOM -> recorded);
      classical, max resident set size of the decoding process.
 Everything is written to results/benchmark/<code>.json and appended as flat rows to results/benchmark_inference.csv.
@@ -39,6 +46,22 @@ BEST_SEP_SCHEDULE = {"toric-L4": "serial", "toric-L6": "serial", "toric-L8": "se
                      "hgp-400": "parallel", "hgp-asym": "parallel", "hgp-625": "parallel",
                      "hgp-1600": "parallel", "hgp-3600": "parallel"}
 LARGE = ("hgp-1600", "hgp-3600")
+
+
+def pin_one_core(args):
+    if not args.pin or not args.cpu_ids:
+        return None
+    try:
+        os.sched_setaffinity(0, {args.cpu_ids[0]}); return args.cpu_ids[0]
+    except Exception:
+        return None
+
+
+def unpin(args):
+    try:
+        os.sched_setaffinity(0, set(args.cpu_ids))
+    except Exception:
+        pass
 
 
 def pct(ts):
@@ -85,7 +108,14 @@ def make_classical(kind, code, p, args):
 _W = {}
 
 
-def _worker_init(kind, code_name, p, args_dict):
+def _worker_init(kind, code_name, p, args_dict, counter, cpus):
+    with counter.get_lock():
+        i = counter.value; counter.value += 1
+    if cpus:
+        try:
+            os.sched_setaffinity(0, {cpus[i % len(cpus)]})
+        except Exception:
+            pass
     _W["decode"] = make_classical(kind, get_code(code_name), p, argparse.Namespace(**args_dict))
 
 
@@ -101,8 +131,10 @@ def bench_classical(kind, code, p, s_x, s_z, args):
     out = {}
     decode = make_classical(kind, code, p, args)
     N = s_x.shape[0]
+    pinned = pin_one_core(args)
     out["batch1"] = time_loop(lambda i: decode(s_x[i], s_z[i]), N, args.warmup)
-    out["batch1"]["hardware"] = "cpu, 1 core"
+    unpin(args)
+    out["batch1"]["hardware"] = f"cpu, 1 core (pinned to cpu {pinned})"
     # throughput with W worker processes
     out["throughput"] = {}
     for W in args.workers:
@@ -111,11 +143,14 @@ def bench_classical(kind, code, p, s_x, s_z, args):
         sampler = NoiseSampler(code, "depolarizing", "xz", device="cpu")
         _, _, tx, tz = sampler.sample_batch_numpy(p, M, rng)
         tx = np.asarray(tx, dtype=np.uint8); tz = np.asarray(tz, dtype=np.uint8)
-        chunks = [(tx[i::W], tz[i::W]) for i in range(W)]
+        cpus = args.cpu_ids if args.pin else []
+        CH = 4
+        chunks = [(tx[i:i + CH], tz[i:i + CH]) for i in range(0, M, CH)]
         ctx = get_context("spawn")
-        with ctx.Pool(W, initializer=_worker_init, initargs=(kind, args.code, p, vars(args))) as pool:
-            pool.map(_worker_chunk, [(c[0][:8], c[1][:8]) for c in chunks])      # warm-up
-            t = time.perf_counter(); done = sum(pool.map(_worker_chunk, chunks)); T = time.perf_counter() - t
+        counter = ctx.Value("i", 0)
+        with ctx.Pool(W, initializer=_worker_init, initargs=(kind, args.code, p, vars(args), counter, cpus)) as pool:
+            list(pool.imap_unordered(_worker_chunk, chunks[:2 * W]))                     # warm-up
+            t = time.perf_counter(); done = sum(pool.imap_unordered(_worker_chunk, chunks)); T = time.perf_counter() - t
         out["throughput"][f"workers{W}"] = dict(codewords_per_s=done / T, amortized_us=T / done * 1e6, n=done)
     out["peak_rss_mib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
     return out
@@ -204,6 +239,21 @@ def bench_neural(model_name, code, p, s_x, s_z, args):
                 T = float(np.median(ts))
                 out["throughput"][f"B{B}"] = dict(codewords_per_s=B / T, amortized_us=T / B * 1e6, batch_time_ms=T * 1e3,
                                                   peak_mem_mib=torch.cuda.max_memory_allocated() / 2**20)
+                # end-to-end: pinned host buffers -> device -> forward -> threshold -> pinned host buffer, synchronized
+                hx = torch.from_numpy(sx_np[:B]).pin_memory(); hz = torch.from_numpy(sz_np[:B]).pin_memory()
+                hout = torch.empty((B, 2 * code.n), dtype=torch.uint8).pin_memory()
+
+                def e2e_batch():
+                    x = hx.to(device, non_blocking=True); z = hz.to(device, non_blocking=True)
+                    logits, _ = model(x, z)
+                    hout.copy_((logits > 0).to(torch.uint8), non_blocking=True); torch.cuda.synchronize()
+                for _ in range(3):
+                    e2e_batch()
+                ts = []
+                for _ in range(5):
+                    t = time.perf_counter(); e2e_batch(); ts.append(time.perf_counter() - t)
+                T2 = float(np.median(ts))
+                out["throughput"][f"B{B}"].update(e2e_codewords_per_s=B / T2, e2e_amortized_us=T2 / B * 1e6, e2e_batch_time_ms=T2 * 1e3)
             except torch.cuda.OutOfMemoryError:
                 out["throughput"][f"B{B}"] = dict(error="OOM"); torch.cuda.empty_cache(); break
     del model; torch.cuda.empty_cache()
@@ -227,6 +277,8 @@ def flat_rows(code, n, p, name, kind, r):
         for k, v in r.get("throughput", {}).items():
             if "codewords_per_s" in v:
                 rows.append(dict(base, measurement=f"throughput_gpu_{k}", codewords_per_s=v["codewords_per_s"], amortized_us=v["amortized_us"], value=v["peak_mem_mib"]))
+                if "e2e_codewords_per_s" in v:
+                    rows.append(dict(base, measurement=f"throughput_gpu_e2e_{k}", codewords_per_s=v["e2e_codewords_per_s"], amortized_us=v["e2e_amortized_us"]))
         rows.append(dict(base, measurement="params", value=r["params"]))
         rows.append(dict(base, measurement="peak_mem_b1_mib", value=r["peak_mem_b1_mib"]))
     return rows
@@ -245,17 +297,53 @@ def main():
     ap.add_argument("--osd_order", type=int, default=10)
     ap.add_argument("--out_dir", default="results/benchmark"); ap.add_argument("--csv", default="results/benchmark_inference.csv")
     ap.add_argument("--only", default="", help="comma list to restrict decoders, e.g. product,bposd")
+    ap.add_argument("--pin", type=int, default=1, help="pin the measuring process to one CPU core and each worker to its own core")
+    ap.add_argument("--resume", type=int, default=1, help="reuse results/benchmark/<code>.json when it exists")
     args = ap.parse_args()
     args.batches = [int(b) for b in args.batches.split(",")]; args.workers = [int(w) for w in args.workers.split(",")]
+    args.throughput_n_default = args.throughput_n
+    import torch; torch.set_num_threads(1)
     import torch
+    all_cpus = sorted(os.sched_getaffinity(0))
+    args.cpu_ids = all_cpus
+    pinned = all_cpus[0] if args.pin and all_cpus else None
     hw = dict(cpu=open("/proc/cpuinfo").read().split("model name")[1].split(":")[1].split("\n")[0].strip(),
               gpu=torch.cuda.get_device_name(0) if torch.cuda.is_available() else None, torch=torch.__version__,
               python=platform.python_version(), omp_threads=os.environ.get("OMP_NUM_THREADS"), precision="fp32",
-              cpus_visible=len(os.sched_getaffinity(0)))
+              cpus_visible=len(all_cpus))
+    config = dict(timed_codewords=args.n, timed_codewords_large=args.large_n, warmup=args.warmup, batches=args.batches,
+                  throughput_repetitions=5, throughput_warmup=3, classical_workers=args.workers, classical_throughput_codewords=args.throughput_n,
+                  latency_process_pinned_to_cpu=pinned, worker_cpu_ids=all_cpus, worker_chunk=4, omp_threads=1, torch_threads=1,
+                  precision="fp32 (weights and activations); classical decoders in ldpc/pymatching native precision",
+                  timing="time.perf_counter; GPU paths end with torch.cuda.synchronize()")
     os.makedirs(args.out_dir, exist_ok=True)
     all_rows = []
+    stamp = lambda: time.strftime("%H:%M:%S")
+
+    def write_csv():
+        cols = ["code", "n", "p", "decoder", "kind", "measurement", "median_us", "p95_us", "mean_us", "codewords_per_s", "amortized_us", "value"]
+        with open(args.csv, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=cols); w.writeheader()
+            for r in all_rows:
+                w.writerow({c: r.get(c, "") for c in cols})
+
+    def rows_from(res):
+        rows = []
+        for p_str, R in res["per_p"].items():
+            for kind, r in R["classical"].items():
+                if "batch1" in r:
+                    rows += flat_rows(res["code"], res["n"], float(p_str), kind, "classical", r)
+            for m, r in R["neural"].items():
+                if "e2e_eager" in r:
+                    rows += flat_rows(res["code"], res["n"], float(p_str), m, "neural", r)
+        return rows
+
     for code_name in args.codes.split(","):
         args.code = code_name
+        jpath = os.path.join(args.out_dir, f"{code_name}.json")
+        if args.resume and os.path.exists(jpath):
+            all_rows += rows_from(json.load(open(jpath))); write_csv()
+            print(f"[{stamp()}] {code_name}: reusing {jpath}", flush=True); continue
         code = get_code(code_name)
         fam = "toric" if code_name.startswith("toric") else "hgp"
         classical = (["mwpm", "bposd", "bposd_corr"] if fam == "toric" else
@@ -263,12 +351,12 @@ def main():
         neural = ["product"] if code_name in LARGE else ["product", "qecct", "crossqecct"]
         if args.only:
             keep = args.only.split(","); classical = [c for c in classical if c in keep]; neural = [m for m in neural if m in keep]
-        res = dict(code=code_name, n=code.n, k=code.k if hasattr(code, "k") else None, hardware=hw, protocol=__doc__.split("Example")[0],
+        res = dict(code=code_name, n=code.n, k=code.k if hasattr(code, "k") else None, hardware=hw, config=config, protocol=__doc__.split("Example")[0],
                    bp_settings=dict(max_iter=args.max_iter, bp_method=args.bp_method, ms_scaling=args.ms_scaling,
                                     schedule_separate=BEST_SEP_SCHEDULE.get(code_name), schedule_joint="serial",
                                     osd_method=args.osd_method, osd_order=args.osd_order), per_p={})
         N = args.large_n if code_name in LARGE else args.n
-        args.throughput_n = min(args.throughput_n, 2 * N)
+        args.throughput_n = 4 * N if code_name in LARGE else args.throughput_n_default
         for p in P_POINTS[fam]:
             rng = np.random.default_rng(args.seed)
             sampler = NoiseSampler(code, "depolarizing", "xz", device="cpu")
@@ -276,7 +364,7 @@ def main():
             s_x = np.asarray(s_x, dtype=np.uint8); s_z = np.asarray(s_z, dtype=np.uint8)
             R = res["per_p"][str(p)] = dict(classical={}, neural={})
             for kind in classical:
-                print(f"[{code_name} p={p}] classical {kind}", flush=True)
+                print(f"[{stamp()}] [{code_name} p={p}] classical {kind}", flush=True)
                 try:
                     R["classical"][kind] = r = bench_classical(kind, code, p, s_x, s_z, args)
                     print(f"   median {r['batch1']['median_us']:.1f} us  p95 {r['batch1']['p95_us']:.1f}  "
@@ -286,7 +374,7 @@ def main():
                     R["classical"][kind] = dict(error=repr(e)); traceback.print_exc()
             if torch.cuda.is_available():
                 for m in neural:
-                    print(f"[{code_name} p={p}] neural {m}", flush=True)
+                    print(f"[{stamp()}] [{code_name} p={p}] neural {m}", flush=True)
                     try:
                         r = bench_neural(m, code, p, s_x, s_z, args)
                         if r is None:
@@ -295,18 +383,14 @@ def main():
                         g = r.get("e2e_graph", {})
                         print(f"   e2e eager median {r['e2e_eager']['median_us']:.1f} us; e2e graph {g.get('median_us', float('nan')):.1f} us "
                               f"(mismatch {g.get('mismatch_vs_eager', '?')}); device graph {r.get('device_graph', {}).get('median_us', float('nan')):.1f} us; "
-                              + "  ".join(f"{k}:{v.get('codewords_per_s', 0):.0f}/s" for k, v in r["throughput"].items()), flush=True)
+                              + "  ".join(f"{k}:{v.get('codewords_per_s', 0):.0f}/s(e2e {v.get('e2e_codewords_per_s', 0):.0f})" for k, v in r["throughput"].items()), flush=True)
                         all_rows += flat_rows(code_name, code.n, p, m, "neural", r)
                     except Exception as e:
                         R["neural"][m] = dict(error=repr(e)); traceback.print_exc()
-        with open(os.path.join(args.out_dir, f"{code_name}.json"), "w") as f:
+        with open(jpath, "w") as f:
             json.dump(res, f, indent=2)
-        print(f"wrote {args.out_dir}/{code_name}.json", flush=True)
-    cols = ["code", "n", "p", "decoder", "kind", "measurement", "median_us", "p95_us", "mean_us", "codewords_per_s", "amortized_us", "value"]
-    with open(args.csv, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols); w.writeheader()
-        for r in all_rows:
-            w.writerow({c: r.get(c, "") for c in cols})
+        write_csv()
+        print(f"[{stamp()}] wrote {jpath}; csv has {len(all_rows)} rows", flush=True)
     print(f"wrote {args.csv} ({len(all_rows)} rows)")
 
 

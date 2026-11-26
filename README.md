@@ -12,8 +12,10 @@ ProductQECCT exploits this: instead of global attention over every qubit and sta
 masked cross-attention processes along the rows and columns of the grid. The result is a decoder with
 **1.2 M parameters independent of the code size** that has the **lowest logical error rate of all neural decoders
 in every setting we tested** (toric codes L = 4–10, HGP codes with 400–3600 qubits), beats a correlation-aware
-BP+OSD on mid-size HGP codes under depolarizing noise, and trains at 1600 and 3600 qubits where global-attention
-transformers cannot be instantiated.
+BP+OSD on mid-size HGP codes under depolarizing noise, and trains at 1600 and 3600 qubits in 22–27 A100-hours, where
+QECCT would need 349 M / 1.76 B parameters and 88 / 236 A100-hours and CrossQECCT does not fit in 40 GB
+(`results/benchmark_training.csv`). Inference latency, throughput and memory of every decoder on every code, measured
+with one protocol, are in `results/benchmark_inference.csv`.
 
 Trained checkpoints (all 56 runs): **Zenodo DOI [10.5281/zenodo.24324614](https://doi.org/10.5281/zenodo.24324614)** · complete results: [`results/`](results/)
 
@@ -33,7 +35,7 @@ Trained checkpoints (all 56 runs): **Zenodo DOI [10.5281/zenodo.24324614](https:
 | `evaluate.py` | re-evaluate a checkpoint (more shots, finer grid, latency) |
 | `eval_classical.py` | MWPM, BP, BP+OSD (separate CSS) and joint X/Y/Z BP+OSD on the same noise and metrics |
 | `collect_results.py`, `report.py` | gather result files, print the paper's tables |
-| `tools/` | `audit_runs.py` (release gate), `aggregate_results.py`, `export_run_metadata.py`, `export_checkpoints.py`, `zenodo_upload.py`, `make_results_xlsx.py` |
+| `tools/` | `audit_runs.py` (release gate), `aggregate_results.py`, `export_run_metadata.py`, `export_checkpoints.py`, `zenodo_upload.py`, `make_results_xlsx.py`, `measure_latency.py`, `benchmark_inference.py` (latency, throughput and memory of every decoder on every code, one protocol), `benchmark_training_step.py` (training step time of every neural decoder on every code on one GPU) |
 | `slurm/` | cluster scripts: environment setup, job generation, chained submission, cross-cluster resume |
 | `tests/test_all.py` | correctness tests (CSS commutation, logical operators, grid adjacency ⇔ parity-check matrices, soft parity, metrics) |
 | `results/` | every final result: `all_results.csv` / `.json`, `report_final.txt`, the Excel workbook, per-run metadata |
@@ -103,7 +105,7 @@ model = build_model(args, code).eval(); model.load_state_dict(ck["model"])
 Every number in the paper is in `results/all_results.csv` (one row per decoder × code × noise × p) and in
 `results/ProductQECCT_all_results.xlsx` (sheet *Paper tables* reproduces Tables E1–E4 with ratio formulas).
 `python report.py` prints the tables from `results/`; `python tools/make_results_xlsx.py results/all_results.csv out.xlsx`
-rebuilds the workbook; `python docs/make_paper_figures.py` regenerates the figures.
+rebuilds the workbook; `python docs/make_paper_figures.py` and `python docs/make_benchmark_figures.py` regenerate the figures and the cost tables.
 
 To re-run the experiments on a SLURM cluster:
 
@@ -133,6 +135,11 @@ logical-class error rate) and **LER_strict** (logical flip *or* syndrome-inconsi
 * **Checkpoint selection under loss warm-up.** With `--ler_warmup_epochs > 0` the raw training loss is lowest in the
   first epochs (the logical-loss term is not yet switched on), so "lowest training loss" selected an untrained
   checkpoint in our first large-code runs. `train.py` now selects on the loss re-weighted with the final weights.
+* **An inert head in the reported runs.** The factorized output mixing `G + A G B^T` of ProductQECCT was initialized
+  with *both* factors at zero in the paper's runs, which gives both a zero gradient, so the mixing never trained and the
+  head was the plain per-cell linear readout in all 56 runs (the released checkpoints contain `A = B = 0`). The default
+  (`--out_mix_init zero`) keeps that configuration so that every command in this README reproduces the paper's runs;
+  `--out_mix_init identity` makes the mixing trainable (not evaluated in the paper).
 * **No silent partial results.** A chained job that runs out of time before the last epoch writes
   `results_partial_epoch{N}.json`, never `results_final.json`, and `tools/audit_runs.py` flags it. Run the audit before
   trusting a results directory.
